@@ -1,0 +1,56 @@
+для синхры класса надо разобрать что тут как....что на данный момент знаю:
+есть методы работы с анимациями и костями, значит данные о анимации и костях скрыты гдето в этом классе....осталось понять в каких дебрях...разбирать буду р1 рендер, меньше лишней хрени, только основная куча бреда
+
+IRender_Visual ftable: 10097D1C
+
+IRender_Visual + 0xB0: CKinematicsAnimated (ftable: 10097E04)
+IRender_Visual + 0x54: CKinematics (ftable: 10097D6C)
+IRender_Visual + 0x4: visual type
+
+IRender_Visual + 0x80: класс связанный с костями, назовём CBones
+
+IRender_Visual + 0xBC: shared_motions *
+*(IRender_Visual + 0xBC) + 0x10: shared_motions *
+*(IRender_Visual + 0xBC) + 0x20: shared_motions *
+...
+
+shared_motions:
+0x0: motions_value
+
+pMotions + 0x48: 
+
+IRender_Visual + 0x32: pMotions + 0x48
+
+CBones: адрес массива костей (CBoneData)
+
+для создарния используется CModelPool::Instance_Create(int visual_type);
+потом вызывается метод 0x1C: CKinematicsAnimated::Load(unknown,IReader* data,unknown)
+
+методы:
+IRender_Visual->0x4 - IRender_Visual::BoundingBox() - _box3<float>
+
+10073D70 (CKinematics::Load) -> 1006EFE0 - создание CBoneData
+
+CBoneData + 0x4: unsigned short SelfId
+CBoneData + 0x6: unsigned short ParentId
+CBoneData + 0x8: shared_str name of bone
+CBoneData + 0x48: _matrix<float> bind_transform
+CBoneData + 0x18C: float Mass
+CBoneData + 0x190: _vector3<float> center_of_mass
+
+CBoneData за время работы не меняется (просто статическая информация для обработки физики и т.д....)
+
+CKinematics + 0x30: LL_BoneCount() (1006F080)
+
+(*(_DWORD *)(*(_DWORD *)(IRender_Visual + 0x80) + 4) - **(_DWORD **)(IRender_Visual + 0x80)) >> 2 - количество костей
+
+помучив указатели хранящиеся в IRender_Visual выявил путём использования одного указателя двумя сталкерами что анимация (либо положение костей) синхронизируется указателем по смещению 0xB8 => капаем по этому смещению
+
+при применении анимаций движения, ударов вызывается функция CKinematicsAnimated::PlayCycle (CKinematicsAnimated + 0x78), значит ставим на данное смещение вызов нашей функции, выполняем наши действия и вызываем настоящую функцию, всё просто и понятно, должно получиться как надо :)
+CKinematicsAnimated::PlayCycle(MotionID,int,void (*)(CBlend*),void*)
+
+motionID - строка текста (название анимации)
+
+узнал что для бота не действует PlayCycle на стороне дедика...проверим клиент
+
+засинхронизировал анимации...применяется анимация на сервере => применяется у клиента.Теперь надо повернуть модель в нужную сторону (коего х*я он лунной походкой ходит)

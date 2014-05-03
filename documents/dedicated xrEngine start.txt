@@ -1,0 +1,39 @@
+cmdline: -i -nosound -fsltx ../fsgame.ltx -start server(mp_lost_village/dm/ver=1.0/public=0/hname=MAESTRO/maxplayers=32/portsv=5446/portgs=-1) client(localhost)
+
+43acc0
+441E8E - выбор не той ветви... причина? -> 441EC5 -> 41E970 (вызываемая командой функция) ->
+
+C9E4D60
+
+420090 xrSecondaryThread__loop
+
+36988E0 sub_36988E0 proc near 3460000
+
+IGame_Persistent::Start -> 0x1022FAE0 -> IGame_Persistent::OnGameStart() -> 0x10230B30
+
+1022FAE0 jmp 1022FD20
+
+sub_1024B7C0(int this,client_params,server_params)
+
+запуск самой игры: 1024B7C0 ; int __stdcall CreateGame(int, char *Src)
+
+после инициализации вызывается 1024A9D0
+
+И так итог:
+при обработке командной строки вызывается функция cmd_start(обработка команды старт), в ней парсинг параметров, далее в поток обработки событий добавляется событие KERNEL:start, вторичный поток X-Ray обрабатывает циклично все OnFrame и среди них обработчик событий (ака CEvent::OnFrame примерно, точно не проверял), тот проверяет очередь событий и т.к. в ней есть событие KERNEL:start выполняет событие, вызвав CApplication::OnEvent и тот хер знает какой магией понимает что нужно создать игру и бля создаёт её начав с CApplication::LoadBegin(void) потом IGame_Persistent::Start(char* Src) далее наш желаемый IGame_Level::Create(char *Src) и завершает дело CApplication::LoadEnd(void) ну а прекрасный бля распрекрасный IGame_Level::Create(char *Src) проходит как инициализация основных классов (особенно интересно - различный класс в зависимости от параметра single и ещё связано с параметром alife) под классы только выделяется память и записываются главные указатели, и главное в очередь на загрузку вписываются все созданные классы. CRenderDevice::on_idle(void) обрабатывает очередь загрузки и по очереди аккуратно как были вписаны так и запускает классы... а тот вызывается из CRenderDevice::message_loop(void) а это просто напросто зацикленная функция в основном потоке окна, обрабатывающая сообщения системы...
+
+Your banny wrote!!!!read fast for understand my feels!
+
+this work was complited 15 may 2011...БЛЯЯЯ Я ЗНАЮ КАК ЗАПУСКАЕТСЯ ЁБАНАЯ ИГРААААА
+
+XP + 1000
+level up! you are -5 level!enjoy!
+
+запуск dedicated, создание классов (Create_Step_1):
+прыжок с AA1D на AA4F
+далее с AA65 на AA69
+next from AABD to AACF
+next AAE5 to AB09
+and AB14 - AB18
+andd AB21 - AB25
+anddd AB38 to AB60

@@ -1,0 +1,321 @@
+int Client_Update_sync<eax>(int a1<ecx>, int a2<ebp>)
+{
+  v2 = a1;
+  v3 = *(_DWORD *)(a1 + 0x48574) == 0;
+  *(_DWORD *)(a1 + 0x48604) = 0;
+  *(_DWORD *)(a1 + 0x48608) = 0;
+  if ( v3 )
+  {
+    if ( *(_DWORD *)(a1 + 296296) )
+    {
+      if ( *(_DWORD *)(a1 + 296300) )
+        sub_10259E00(a1, a1, a2);
+    }
+  }
+  v5 = v2 + 296092;
+  xrCriticalSection__Enter(v2 + 296092);
+  v6 = v2 + 0x40110;
+  for ( packet_id = (*(int (__thiscall **)(int))(*(_DWORD *)(v2 + 0x40110) + 0xC))(v2 + 0x40110);
+        packet_id;
+        packet_id = (*(int (__thiscall **)(int))(*(_DWORD *)(v2 + 0x40110) + 0xC))(v2 + 0x40110) )
+  {
+    if ( sub_1023A550(v2) )
+      sub_102597F0(v2, packet_id);
+    ++*(_DWORD *)(v2 + 0x48604);
+    *(_DWORD *)(v2 + 0x48608) += *(_DWORD *)(packet_id + 0x4004);
+    NET_Packet__r_begin(packet_id, &v49);
+    switch ( (unsigned __int16)v49 )
+    {
+      case 1u:
+        if ( *(_DWORD *)(v2 + 0x400FC) )
+          goto LABEL_100;
+        v7 = (int)"true";
+        if ( !*(_DWORD *)(v2 + 296828) )
+          v7 = (int)"false";
+        v8 = (int)"true";
+        if ( !*(_BYTE *)(v2 + 296837) )
+          v8 = (int)"false";
+        Msg("! Unconventional M_SPAWN received : map_data[%s] | bReady[%s] | deny_m_spawn[%s]", v8, "false", v7);
+        break;
+      case 0x14u:
+        NET_Packet__NET_Packet(&v61);
+        while ( !NET_Packet__r_eof(packet_id) )
+        {
+          v63 = (unsigned __int8)NET_Packet__r_u8(packet_id);
+          NET_Packet__r(packet_id, &v62, v63);
+          v9 = *(void **)(v2 + 296700);
+          v64 = *(_DWORD *)(packet_id + 16396);
+          sub_10239A50(v9, (int)&v61);
+          if ( dword_1064593C )
+            sub_10233D50((void *)v2);
+        }
+        break;
+      case 0u:
+        (*(void (__stdcall **)(int))(**(_DWORD **)(v2 + 0x486F0) + 0x44))(packet_id);
+        break;
+      case 0xBu:
+        CObjectList__net_Import(v2 + 0x4C, packet_id);
+        if ( sub_10232650(SLODWORD(g_pGameLevel)) )
+        {
+          v10 = IPureClient__timeServer(v6);
+          sub_10232900(v2, v10);
+        }
+        memcpy(&v56, (const void *)(LODWORD(g_pGameLevel) + 0x484D4), 0x80u);
+        v11 = IPureClient__timeServer(LODWORD(g_pGameLevel) + 0x40110);
+        if ( (unsigned int)(v57 + v11) >= *(_DWORD *)(packet_id + 0x400C) )
+          v12 = v57 - *(_DWORD *)(packet_id + 0x400C) + IPureClient__timeServer(LODWORD(g_pGameLevel) + 0x40110);
+        else
+          v12 = v57;
+        v13 = physics_world();
+        v14 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v13 + 20))(v13, v12);
+        sub_10232510(v2, v14);
+        break;
+      case 0x32u:
+        LOBYTE(v50) = NET_Packet__r_u8(packet_id);
+        CLevel__ProcessCompressedUpdate((void *)v2, packet_id, v50);
+        break;
+      case 0xAu:
+        if ( !sub_10232650(SLODWORD(g_pGameLevel)) )
+        {
+          NET_Packet__r_u16(packet_id, &v44);
+          v42 = NET_Packet__r_u32(packet_id);
+          if ( v44 != -1 )
+          {
+            actor_class = *(_DWORD *)(v2 + 4 * v44 + 0x4C);// CActorMP address
+            if ( actor_class )
+            {
+              v16 = ConvertActorTo(actor_class);
+              v17 = v16;
+              if ( v16 )
+              {
+                (*(void (__thiscall **)(int, int))(*(_DWORD *)v16 + 0x3C))(v16, packet_id);// 0x1025D820 function
+                v18 = IPureClient__timeServer(v6);
+                sub_10232900(v2, v18);
+                if ( *(_DWORD *)(v2 + 0x4869C) != *(_DWORD *)(v2 + 0x486A0)
+                  || *(_DWORD *)(v2 + 0x486A8) != *(_DWORD *)(v2 + 0x486AC) )
+                {
+                  if ( sub_10047470(v17) )
+                  {
+                    if ( (unsigned int)(v42 + IPureClient__timeServer(LODWORD(g_pGameLevel) + 0x40110)) >= *(_DWORD *)(packet_id + 16396) )
+                      v19 = v42
+                          - *(_DWORD *)(packet_id + 16396)
+                          + IPureClient__timeServer(LODWORD(g_pGameLevel) + 0x40110);
+                    else
+                      v19 = v42;
+                    v20 = physics_world();
+                    v21 = (*(int (__thiscall **)(int, int))(*(_DWORD *)v20 + 20))(v20, v19);
+                    sub_10232510(v2, v21);
+                    v22 = physics_world();
+                    v23 = *(_DWORD *)v17 + 292;
+                    v24 = (*(int (__thiscall **)(int))(*(_DWORD *)v22 + 24))(v22);
+                    (*(void (__thiscall **)(int, unsigned int))v23)(v17, *(_DWORD *)v24 - v21);
+                    sub_10233470((void *)v2, v17);
+                  }
+                }
+              }
+            }
+          }
+        }
+        break;
+      case 0x25u:
+        BYTE3(v45) = NET_Packet__r_u8(packet_id);
+        v41 = 0;
+        if ( BYTE3(v45) )
+        {
+          do
+          {
+            v25 = NET_Packet__r_u16(packet_id);
+            NET_Packet__r_vec3(packet_id, &v51);
+            if ( v25 == -1 )
+              break;
+            if ( !*(_DWORD *)(v2 + 4 * v25 + 76) )
+              break;
+            v26 = ConvertActorTo(*(_DWORD *)(v2 + 4 * v25 + 76));
+            if ( !v26 )
+              break;
+            v27 = sub_103460E0(v26);
+            if ( !v27 )
+              break;
+            (*(void (__thiscall **)(int, char *))(*(_DWORD *)(v27 + 0xE8) + 0x164))(v27 + 0xE8, &v51);
+            v28 = (unsigned __int8)(v41++ + 1) < BYTE3(v45);
+          }
+          while ( v28 );
+        }
+        break;
+      case 9u:
+        NET_Packet__r_u16(packet_id, &v44);
+        if ( v44 != -1 )
+        {
+          v29 = *(_DWORD *)(v2 + 4 * v44 + 76);
+          if ( v29 )
+            (*(void (__stdcall **)(int))(*(_DWORD *)v29 + 64))(packet_id);
+        }
+        break;
+      case 2u:
+        CLevel__InitializeClientGame((void *)v2, packet_id);
+        break;
+      case 3u:
+        (*(void (__stdcall **)(int))(**(_DWORD **)(v2 + 296688) + 0x40))(packet_id);
+        break;
+      case 4u:
+        *(_DWORD *)(v2 + 296696) = 1;
+        if ( sub_10232200(v2) )
+        {
+          if ( !*(_DWORD *)(v2 + 296320) )
+            sub_1025A2F0(v2);
+        }
+        break;
+      case 7u:
+        NET_Packet__r_stringZ(packet_id, &v54);
+        Msg("- %s", &v54);
+        break;
+      case 0xDu:
+      case 0xEu:
+      case 0xFu:
+        if ( (_WORD)v49 != 14 )
+          goto LABEL_63;
+        NET_Packet__r_stringZ_s(packet_id, &v54, 256);
+        v30 = &v54;
+        do
+          v31 = *v30++;
+        while ( v31 );
+        if ( v30 == &v55 || !*(_DWORD *)(sub_10039B90() + 20) )
+          goto LABEL_63;
+        sub_100ADEB0((int)&v52, v2, packet_id, (int)NET_Packet__r_stringZ, &v54);
+        if ( v53 == *(_BYTE *)(*(_DWORD *)(sub_10039B90() + 8) + 36) )
+        {
+          v32 = xr_strdup(&v54);
+          CEventAPI__Defer((char *)Engine + 36, "Game:QuickLoad", v32, 0, 0, 0);
+          sub_100AE423(&v52);
+        }
+        else
+        {
+          sub_100AE423(&v52);
+LABEL_63:
+          sub_102322D0(v2, v2, packet_id, (int)NET_Packet__r_stringZ);
+        }
+        break;
+      case 0x10u:
+        sub_10238D40((void *)v2);
+        break;
+      case 0x15u:
+        sub_10236900((void *)v2, packet_id);
+        break;
+      case 0x1Eu:
+        sub_1023B6A0((void *)v2, (int)NET_Packet__r_stringZ);
+        sub_10238910((void *)v2);
+        break;
+      case 0x17u:
+        sub_10239210(v2, packet_id);
+        break;
+      case 0x19u:
+        if ( *(_DWORD *)(v2 + 296688) )
+          (*(void (__stdcall **)(int))(**(_DWORD **)(LODWORD(g_pGameLevel) + 296688) + 108))(packet_id);
+        break;
+      case 0x1Au:
+        if ( *(_DWORD *)(v2 + 296688) )
+          (*(void (__stdcall **)(int))(**(_DWORD **)(LODWORD(g_pGameLevel) + 296688) + 112))(packet_id);
+        break;
+      case 0x28u:
+      case 0x29u:
+        (*(void (__stdcall **)(int, int))(**(_DWORD **)(LODWORD(g_pGameLevel) + 296688) + 116))(v49, packet_id);
+        break;
+      case 0x2Bu:
+        sub_102558C0(v2 + 296836, packet_id);
+        break;
+      case 0x2Cu:
+        sub_10255AE0((void *)v2);
+        break;
+      case 0x1Bu:
+        Msg("- M_CHANGE_LEVEL_GAME Received");
+        if ( sub_10232650(SLODWORD(g_pGameLevel)) )
+        {
+          sub_102322D0(v2, v2, packet_id, (int)NET_Packet__r_stringZ);
+        }
+        else
+        {
+          v33 = *(_DWORD *)(v2 + 296876);
+          if ( v33 )
+            v34 = (const char *)(v33 + 16);
+          else
+            v34 = 0;
+          v35 = strchr(v34, 47);
+          if ( v35 )
+            ++v35;
+          v43 = strchr(v35, 47);
+          v48 = 0;
+          v47 = 0;
+          v46 = 0;
+          NET_Packet__r_stringZ(packet_id, &v48);
+          NET_Packet__r_stringZ(packet_id, &v47);
+          NET_Packet__r_stringZ(packet_id, &v46);
+          DstBuf = 0;
+          memset(&Dst, 0, 0xFFFu);
+          if ( v47 )
+            v36 = v47 + 16;
+          else
+            v36 = 0;
+          if ( v46 )
+            v37 = v46 + 16;
+          else
+            v37 = 0;
+          if ( v48 )
+            v38 = v48 + 16;
+          else
+            v38 = 0;
+          sub_1023A610(&DstBuf, "%s/%s/%s%s", v38, v37, off_10634868, v36);
+          if ( v43 )
+          {
+            v39 = sub_1023A580(v43, &v60, 0x1000u);
+            sub_1005A2D0(&DstBuf, 4096, v39);
+          }
+          sub_1004DFB0((void *)(v2 + 296876), (int)&DstBuf);
+          sub_102322D0(v2, v2, packet_id, (int)NET_Packet__r_stringZ);
+          sub_100011D0(&v46);
+          sub_100011D0(&v47);
+          sub_100011D0(&v48);
+        }
+        break;
+      case 0x27u:
+        sub_10238AE0((void *)v2, packet_id);
+        break;
+      case 0x20u:
+        if ( *(_DWORD *)(v2 + 296688) )
+        {
+          if ( sub_102326C0() != 1 )
+            sub_1035B150(*(void **)(*(_DWORD *)(LODWORD(g_pGameLevel) + 296688) + 196), packet_id);
+        }
+        break;
+      case 0x21u:
+        Msg("--- CL: On Update Request");
+        goto LABEL_99;
+      case 0x13u:
+LABEL_99:
+        if ( *(_DWORD *)(v2 + 0x486F0) )
+          goto LABEL_100;
+        break;
+      case 8u:
+      case 0x24u:
+      case 0x2Du:
+LABEL_100:
+        sub_10239A50(*(void **)(v2 + 0x486FC), packet_id);
+        if ( dword_1064593C )
+          sub_10233D50((void *)v2);
+        break;
+      case 0x2Fu:
+        sub_1024A510((void *)v2, packet_id);
+        break;
+      case 0x30u:
+        sub_1024A640((void *)v2, packet_id);
+        break;
+      default:
+        break;
+    }
+    v5 = v2 + 296092;
+    INetQueue__Release(v2 + 296092);
+    v6 = v2 + 0x40110;
+  }
+  result = xrCriticalSection__Leave(v5);
+  if ( dword_1064593C )
+    result = sub_1023B550(v2);
+  return result;

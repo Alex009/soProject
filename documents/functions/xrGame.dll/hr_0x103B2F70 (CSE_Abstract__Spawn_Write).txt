@@ -1,0 +1,68 @@
+int __stdcall CSE_Abstract__Spawn_Write(int a1, int a2, int a3)
+{
+  int v3; // eax@1
+  int v4; // esi@1
+  int v5; // ebx@6
+  int v6; // eax@6
+  int v7; // eax@8
+  int v8; // ebx@8
+  int v9; // eax@12
+  int v11; // [sp+5Ch] [bp-10h]@4
+
+  v4 = a2;
+  NET_Packet__w_begin(a2, 1);
+  NET_Packet__w_stringZ(v4, a1 + 60);
+  v3 = *(_DWORD *)(a1 + 32);
+  if ( !v3 )
+    v3 = (int)Src;
+  NET_Packet__w_stringZ(v4, v3);
+  NET_Packet__w_u8(v4);
+  NET_Packet__w_u8(v4);
+  NET_Packet__w_vec3(v4, a1 + 84);
+  NET_Packet__w_vec3(v4, a1 + 96);
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 48));
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 50));
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 52));
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 54));
+  *(_WORD *)(a1 + 67) |= 0x20u;
+  if ( a3 )
+    v11 = *(_WORD *)(a1 + 67) | 1;
+  else
+    v11 = *(_WORD *)(a1 + 67) & 0xFFF6;
+  NET_Packet__w_u16(v4, v11);
+  NET_Packet__w_u16(v4, 128);
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 64));
+  LOWORD(v6) = sub_103B2DC0();
+  NET_Packet__w_u16(v4, v6);
+  v5 = (unsigned __int16)(*(_WORD *)(a1 + 144) - *(_WORD *)(a1 + 140));
+  NET_Packet__w_u16(v4, v5);
+  if ( (_WORD)v5 )
+    NET_Packet__w(v4, *(_DWORD *)(a1 + 140), (unsigned __int16)v5);
+  NET_Packet__w_u16(v4, *(_WORD *)(a1 + 134));
+  v8 = NET_Packet__w_tell(v4);
+  NET_Packet__w_u16(v4, 0);
+  (*(void (__thiscall **)(int, int))(*(_DWORD *)(a1 + 8) + 4))(a1 + 8, v4);
+  v7 = (unsigned __int16)(NET_Packet__w_tell(v4) - (_WORD)v8);
+  a2 = v7;
+  if ( !byte_106491FF )
+  {
+    if ( *(_DWORD *)(a1 + 112) != 1411391520 || *(_DWORD *)(a1 + 116) != 1397769539 )
+    {
+      if ( (_WORD)v7 <= 2u )
+      {
+        v9 = (*(int (__stdcall **)(int, _DWORD, signed int, _DWORD, char *))(*(_DWORD *)a1 + 16))(
+               a1,
+               "D:\\prog_repository\\sources\\trunk\\xrServerEntities\\xrServer_Object_Base.cpp",
+               241,
+               "CSE_Abstract::Spawn_Write",
+               &byte_106491FF);
+        xrDebug__fail(
+          Debug,
+          "(m_tClassID == CLSID_SPECTATOR) || (size > sizeof(size))",
+          "object isn't successfully saved, get your backup :(",
+          v9);
+      }
+    }
+  }
+  return NET_Packet__w_seek(v4, v8);
+}

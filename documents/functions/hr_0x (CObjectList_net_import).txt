@@ -1,0 +1,100 @@
+int __userpurge CObjectList__net_Import<eax>(int a1<ecx>, int a2<esi>, int a3, unsigned __int8 a4)
+{
+  int result; // eax@3
+  int v5; // esi@6
+  int v6; // edx@7
+  int v7; // ebp@7
+  int v8; // esi@8
+  int v9; // ST0C_4@10
+  int v10; // [sp-8h] [bp-18h]@4
+  int v11; // [sp+8h] [bp-8h]@5
+  int v12; // [sp+Ch] [bp-4h]@1
+  void *v13; // [sp+10h] [bp+0h]@6
+
+  v12 = a1;
+  if ( dword_4949BC )
+    Msg("---- net_import --- ");
+  result = NET_Packet__r_eof(a3);
+  if ( !result )
+  {
+    v10 = a2;
+    do
+    {
+      NET_Packet__r_u16(a3, &v11, v10);
+      NET_Packet__r_u8(a3, &a4);
+      if ( (_WORD)v12 != -1 && (v5 = *((_DWORD *)v13 + (unsigned __int16)v12)) != 0 )
+      {
+        v7 = NET_Packet__r_tell(a3, (unsigned __int16)v12);
+        v10 = a3;
+        (*(void (__thiscall **)(int))(*(_DWORD *)v5 + 60))(v5);
+        if ( dword_4949BC )
+        {
+          v8 = *(_DWORD *)(v5 + 172);
+          if ( v8 )
+            ++*(_DWORD *)v8;
+          v9 = NET_Packet__r_tell(a3, v6) - v7;
+          Msg("* %s : %d - %d");
+          if ( v8 )
+            --*(_DWORD *)v8;
+        }
+      }
+      else
+      {
+        v10 = a4;
+        NET_Packet__r_advance(a3);
+      }
+      result = NET_Packet__r_eof(a3);
+    }
+    while ( !result );
+  }
+  if ( dword_4949BC )
+    result = Msg("------------------- ");
+  return result;
+}
+
+call:
+push net_packet&
+lea ecx,[GameLevel + 0x4C]
+call net_import
+
+CObjectList::net_import(net_packet* np)
+{
+	var1; // 0x8 - 0x4  = 0x4
+	var2; // 0x18 - 0x8 = 0x10
+	var3; // 0x14 + 0x8 = 0x1C // first arg
+	var4; // 0x14 - 0x4 = 0x10 => &var4 = &var2
+	var5; // 0x14 - wtf?
+	var6; // 0x18 + 0x4 = 0x1C // first arg
+
+	var1 = this;
+	if(GameLevel != 0)
+	{
+		Msg("---- net_import ---");
+	}
+	if(!np->r_eof())
+	{
+		do
+		{
+			np->r_u16(&var2);
+			np->r_u8(&np); 
+			if((var2 != -1) && (var5[var2]))
+			{
+				np->r_tell(); // return by eax?
+				var5[var2]->0x3C(np);
+				if(GameLevel != 0)
+				{
+					if(var5[var2]->0xAC) var5[var2]++;
+					np->r_tell();
+					Msg("* %s : %d - %d",var5[var2]->0x10,(byte)np,[...]);
+					if(var5[var2]->0xAC) var5[var2]--;
+				}
+			}
+			else np->r_advance(&np);
+		}
+		while(!np->r_eof());
+	}
+	if(GameLevel != 0)
+	{
+		Msg("--------------------");
+	}
+}

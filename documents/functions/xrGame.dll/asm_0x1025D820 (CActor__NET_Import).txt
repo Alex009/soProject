@@ -1,0 +1,273 @@
+.text:1025D820 CActorMP__net_Import proc near          ; DATA XREF: .rdata:10545B78o
+.text:1025D820
+.text:1025D820 var_84          = dword ptr -84h
+.text:1025D820 var_74          = dword ptr -74h
+.text:1025D820 var_70          = dword ptr -70h
+.text:1025D820 var_6C          = dword ptr -6Ch
+.text:1025D820 var_68          = dword ptr -68h
+.text:1025D820 var_64          = dword ptr -64h
+.text:1025D820 var_60          = dword ptr -60h
+.text:1025D820 var_5C          = dword ptr -5Ch
+.text:1025D820 var_58          = dword ptr -58h
+.text:1025D820 var_54          = dword ptr -54h
+.text:1025D820 var_50          = dword ptr -50h
+.text:1025D820 var_4C          = dword ptr -4Ch
+.text:1025D820 var_48          = dword ptr -48h
+.text:1025D820 var_44          = dword ptr -44h
+.text:1025D820 var_40          = dword ptr -40h
+.text:1025D820 var_3C          = dword ptr -3Ch
+.text:1025D820 var_38          = dword ptr -38h
+.text:1025D820 var_34          = dword ptr -34h
+.text:1025D820 var_24          = dword ptr -24h
+.text:1025D820 var_20          = byte ptr -20h
+.text:1025D820 var_1C          = dword ptr -1Ch
+.text:1025D820 var_18          = dword ptr -18h
+.text:1025D820 var_4           = byte ptr -4
+.text:1025D820 arg_0           = dword ptr  4
+.text:1025D820
+.text:1025D820                 sub     esp, 74h
+.text:1025D823                 xorps   xmm0, xmm0
+.text:1025D826                 mov     eax, [esp+74h+arg_0]
+.text:1025D82A                 push    ebx
+.text:1025D82B                 push    esi
+.text:1025D82C                 mov     esi, ecx        ; class - CActorMP
+.text:1025D82E                 push    edi
+.text:1025D82F                 lea     ebx, [esi+9D0h] ; ebx = esi + 0x9D0 = CActorMP + 0x9D0
+.text:1025D835                 push    eax
+.text:1025D836                 mov     ecx, ebx        ; 0x14F08F18
+.text:1025D838                 movss   [esp+84h+var_60], xmm0
+.text:1025D83E                 movss   [esp+84h+var_64], xmm0
+.text:1025D844                 movss   [esp+84h+var_68], xmm0
+.text:1025D84A                 mov     [esp+84h+var_70], 0
+.text:1025D852                 movss   [esp+84h+var_5C], xmm0
+.text:1025D858                 movss   [esp+84h+var_58], xmm0
+.text:1025D85E                 movss   [esp+84h+var_54], xmm0
+.text:1025D864                 movss   [esp+84h+var_50], xmm0
+.text:1025D86A                 movss   [esp+84h+var_4C], xmm0
+.text:1025D870                 movss   [esp+84h+var_48], xmm0
+.text:1025D876                 movss   [esp+84h+var_44], xmm0
+.text:1025D87C                 movss   [esp+84h+var_40], xmm0
+.text:1025D882                 movss   [esp+84h+var_3C], xmm0
+.text:1025D888                 call    Read_Actor_Sync_Packet
+.text:1025D88D                 cmp     byte_10645F58, 0
+.text:1025D894                 jnz     short loc_1025D8D1
+.text:1025D896                 lea     ecx, [esi+0A1Ch] ; CActorMP + 0xA1C
+.text:1025D89C                 push    ecx
+.text:1025D89D                 call    ds:?valid_pos@@YA_NABU?$_vector3@M@@@Z ; valid_pos(_vector3<float> const &)
+.text:1025D8A3                 add     esp, 4
+.text:1025D8A6                 test    al, al
+.text:1025D8A8                 jnz     short loc_1025D8D1
+.text:1025D8AA                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:1025D8B0                 push    offset byte_10645F58
+.text:1025D8B5                 push    offset aCactormpNet_im ; "CActorMP::net_Import"
+.text:1025D8BA                 push    10h
+.text:1025D8BC                 push    offset asc_10545F98 ; "D:\\prog_repository\\sources\\trunk\\xrGame"...
+.text:1025D8C1                 push    offset aImportedBadPos ; "imported bad position"
+.text:1025D8C6                 push    offset aValid_posM_sta ; "valid_pos(m_state_holder.state().positi"...
+.text:1025D8CB                 call    ds:?fail@xrDebug@@QAEXPBD00H0AA_N@Z ; xrDebug::fail(char const *,char const *,char const *,int,char const *,bool &)
+.text:1025D8D1
+.text:1025D8D1 loc_1025D8D1:                           ; CODE XREF: CActorMP__net_Import+74j
+.text:1025D8D1                                         ; CActorMP__net_Import+88j
+.text:1025D8D1                 mov     edx, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1025D8D7                 mov     ecx, [edx]
+.text:1025D8D9                 call    IsServer
+.text:1025D8DE                 test    al, al
+.text:1025D8E0                 jz      short loc_1025D948
+.text:1025D8E2                 mov     eax, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1025D8E7                 mov     ecx, [eax]
+.text:1025D8E9                 mov     edi, [ecx+486F0h]
+.text:1025D8EF                 lea     ecx, [esi+2C8h]
+.text:1025D8F5                 call    sub_102B0A30
+.text:1025D8FA                 movzx   edx, ax
+.text:1025D8FD                 push    edx
+.text:1025D8FE                 mov     ecx, edi
+.text:1025D900                 call    sub_10356480
+.text:1025D905                 movss   xmm0, dword ptr [esi+0A48h]
+.text:1025D90D                 mov     edx, [esi+200h]
+.text:1025D913                 comiss  xmm0, dword ptr [edx+4]
+.text:1025D917                 movss   [esp+80h+var_74], xmm0
+.text:1025D91D                 jbe     short loc_1025D926
+.text:1025D91F                 movss   dword ptr [edx+4], xmm0
+.text:1025D924                 jmp     short loc_1025D948
+.text:1025D926 ; ---------------------------------------------------------------------------
+.text:1025D926
+.text:1025D926 loc_1025D926:                           ; CODE XREF: CActorMP__net_Import+FDj
+.text:1025D926                 test    eax, eax
+.text:1025D928                 jz      short loc_1025D93D
+.text:1025D92A                 push    20h
+.text:1025D92C                 mov     ecx, eax
+.text:1025D92E                 call    sub_1034CA60
+.text:1025D933                 test    al, al
+.text:1025D935                 jnz     short loc_1025D948
+.text:1025D937                 movss   xmm0, [esp+80h+var_74]
+.text:1025D93D
+.text:1025D93D loc_1025D93D:                           ; CODE XREF: CActorMP__net_Import+108j
+.text:1025D93D                 mov     eax, [esi+200h]
+.text:1025D943                 movss   dword ptr [eax+4], xmm0
+.text:1025D948
+.text:1025D948 loc_1025D948:                           ; CODE XREF: CActorMP__net_Import+C0j
+.text:1025D948                                         ; CActorMP__net_Import+104j ...
+.text:1025D948                 cmp     dword ptr [esi+1ECh], 0
+.text:1025D94F                 jnz     loc_1025DBD4
+.text:1025D955                 mov     ecx, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1025D95B                 mov     ecx, [ecx]
+.text:1025D95D                 call    IsServer
+.text:1025D962                 test    al, al
+.text:1025D964                 jz      short loc_1025D98A
+.text:1025D966                 mov     edx, [esi]
+.text:1025D968                 movss   xmm0, dword ptr [esi+0A4Ch]
+.text:1025D970                 mulss   xmm0, ds:dword_1053218C
+.text:1025D978                 mov     eax, [edx+22Ch]
+.text:1025D97E                 push    ecx
+.text:1025D97F                 mov     ecx, esi
+.text:1025D981                 movss   [esp+84h+var_84], xmm0
+.text:1025D986                 call    eax
+.text:1025D988                 fstp    st
+.text:1025D98A
+.text:1025D98A loc_1025D98A:                           ; CODE XREF: CActorMP__net_Import+144j
+.text:1025D98A                 movzx   ecx, byte ptr [esi+0A50h] ; CActorMP + 0xA50 = 0x24
+.text:1025D991                 mov     edx, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1025D997                 and     ecx, 0Fh        ; 0x4
+.text:1025D99A                 mov     edi, ecx
+.text:1025D99C                 mov     ecx, [edx]
+.text:1025D99E                 call    IsServer
+.text:1025D9A3                 test    al, al
+.text:1025D9A5                 jz      short loc_1025D9BB
+.text:1025D9A7                 mov     eax, [esi+2E4h]
+.text:1025D9AD                 cmp     [eax+40h], di
+.text:1025D9B1                 jz      short loc_1025D9BB
+.text:1025D9B3                 mov     [eax+42h], di
+.text:1025D9B7                 mov     [eax+40h], di
+.text:1025D9BB
+.text:1025D9BB loc_1025D9BB:                           ; CODE XREF: CActorMP__net_Import+185j
+.text:1025D9BB                                         ; CActorMP__net_Import+191j
+.text:1025D9BB                 mov     eax, [esi+0A50h] ; CActorMP + 0xA50 = 0x480024
+.text:1025D9C1                 mov     ecx, [esi+0A44h] ; CActorMP + 0xA44 = 0x000C67F0
+.text:1025D9C7                 movss   xmm0, dword ptr [esi+0A34h]
+.text:1025D9CF                 mov     edx, [esi+0A1Ch] ; CActorMP + 0xA1C = 0x42DD00F4
+.text:1025D9D5                 movss   xmm1, dword ptr [esi+0A38h]
+.text:1025D9DD                 movss   xmm2, dword ptr [esi+0A3Ch]
+.text:1025D9E5                 shr     eax, 4          ; CActorMP + 0xA50 >> 4
+.text:1025D9E8                 and     eax, 7FFFh      ; CActorMP + 0xA50 & 0x7FF = 2
+.text:1025D9ED                 mov     [esp+80h+var_38], eax ; var_38 = CActorMP + 0xA50
+.text:1025D9F1                 mov     eax, [esi+0A20h]
+.text:1025D9F7                 mov     [esp+80h+var_70], ecx
+.text:1025D9FB                 mov     ecx, [esi+0A24h]
+.text:1025DA01                 movss   [esp+80h+var_6C], xmm0
+.text:1025DA07                 movss   xmm0, dword ptr [esi+0A40h]
+.text:1025DA0F                 comiss  xmm0, ds:dword_10545F74
+.text:1025DA16                 mov     [esp+80h+var_5C], edx
+.text:1025DA1A                 mov     [esp+80h+var_58], eax
+.text:1025DA1E                 mov     [esp+80h+var_54], ecx
+.text:1025DA22                 movss   [esp+80h+var_68], xmm1
+.text:1025DA28                 movss   [esp+80h+var_64], xmm2
+.text:1025DA2E                 movss   [esp+80h+var_60], xmm0
+.text:1025DA34                 jbe     short loc_1025DA44
+.text:1025DA36                 subss   xmm0, ds:dword_10545F78
+.text:1025DA3E                 movss   [esp+80h+var_60], xmm0
+.text:1025DA44
+.text:1025DA44 loc_1025DA44:                           ; CODE XREF: CActorMP__net_Import+214j
+.text:1025DA44                 mov     edx, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1025DA4A                 mov     ecx, [edx]
+.text:1025DA4C                 cmp     dword ptr [ecx+48574h], 0
+.text:1025DA53                 jnz     short loc_1025DA5E
+.text:1025DA55                 cmp     dword ptr [ecx+48568h], 0
+.text:1025DA5C                 jnz     short loc_1025DA88
+.text:1025DA5E
+.text:1025DA5E loc_1025DA5E:                           ; CODE XREF: CActorMP__net_Import+233j
+.text:1025DA5E                 call    IsValidGameLevel
+.text:1025DA63                 test    al, al
+.text:1025DA65                 jnz     short loc_1025DA76
+.text:1025DA67                 mov     eax, [esi+0A4h]
+.text:1025DA6D                 shr     eax, 1Bh
+.text:1025DA70                 not     eax
+.text:1025DA72                 test    al, 1
+.text:1025DA74                 jz      short loc_1025DAD0
+.text:1025DA76
+.text:1025DA76 loc_1025DA76:                           ; CODE XREF: CActorMP__net_Import+245j
+.text:1025DA76                 movss   xmm1, [esp+80h+var_68]
+.text:1025DA7C                 movss   xmm2, [esp+80h+var_64]
+.text:1025DA82                 movss   xmm0, [esp+80h+var_60]
+.text:1025DA88
+.text:1025DA88 loc_1025DA88:                           ; CODE XREF: CActorMP__net_Import+23Cj
+.text:1025DA88                 movss   dword ptr [esi+4E8h], xmm0
+.text:1025DA90                 movss   xmm0, dword ptr ds:off_1050E9CC
+.text:1025DA98                 movss   dword ptr [esi+4E0h], xmm1
+.text:1025DAA0                 movss   dword ptr [esi+4E4h], xmm2
+.text:1025DAA8                 mov     ecx, [esi+520h]
+.text:1025DAAE                 mov     edx, [esi+ecx*4+514h]
+.text:1025DAB5                 subss   xmm0, xmm1
+.text:1025DAB9                 movss   dword ptr [edx+14h], xmm0
+.text:1025DABE                 mov     eax, [esi+520h]
+.text:1025DAC4                 mov     ecx, [esi+eax*4+514h]
+.text:1025DACB                 movss   dword ptr [ecx+18h], xmm2
+.text:1025DAD0
+.text:1025DAD0 loc_1025DAD0:                           ; CODE XREF: CActorMP__net_Import+254j
+.text:1025DAD0                 mov     edx, [esi+0A28h]
+.text:1025DAD6                 mov     ecx, [esi+0A30h]
+.text:1025DADC                 mov     eax, [esi+0A2Ch]
+.text:1025DAE2                 mov     [esp+80h+var_50], edx
+.text:1025DAE6                 lea     edx, [esp+80h+var_70]
+.text:1025DAEA                 mov     [esp+80h+var_48], ecx
+.text:1025DAEE                 lea     edi, [esi-8]
+.text:1025DAF1                 push    edx
+.text:1025DAF2                 mov     ecx, edi
+.text:1025DAF4                 mov     [esp+84h+var_4C], eax
+.text:1025DAF8                 call    sub_1025D6C0
+.text:1025DAFD                 lea     ecx, [esi+914h]
+.text:1025DB03                 call    sub_104D3BB0
+.text:1025DB08                 mov     eax, [esi+0A50h]
+.text:1025DB0E                 mov     ecx, [esi+9E0h]
+.text:1025DB14                 mov     edx, [esi+9E4h]
+.text:1025DB1A                 shr     eax, 13h
+.text:1025DB1D                 and     al, 1
+.text:1025DB1F                 mov     [esp+80h+var_60], ecx
+.text:1025DB23                 mov     ecx, [esi+9ECh]
+.text:1025DB29                 mov     [esp+80h+var_5C], edx
+.text:1025DB2D                 mov     edx, [esi+9F0h]
+.text:1025DB33                 mov     [esp+80h+var_4], al
+.text:1025DB37                 mov     eax, [esi+9E8h]
+.text:1025DB3D                 mov     [esp+80h+var_6C], ecx
+.text:1025DB41                 mov     ecx, [esi+9F8h]
+.text:1025DB47                 mov     [esp+80h+var_68], edx
+.text:1025DB4B                 mov     edx, [esi+9FCh]
+.text:1025DB51                 mov     [esp+80h+var_58], eax
+.text:1025DB55                 mov     eax, [esi+9F4h]
+.text:1025DB5B                 mov     [esp+80h+var_54], ecx
+.text:1025DB5F                 mov     ecx, [esi+0A04h]
+.text:1025DB65                 mov     [esp+80h+var_50], edx
+.text:1025DB69                 mov     edx, [esi+0A08h]
+.text:1025DB6F                 mov     [esp+80h+var_64], eax
+.text:1025DB73                 mov     eax, [esi+0A00h]
+.text:1025DB79                 mov     [esp+80h+var_48], ecx
+.text:1025DB7D                 mov     ecx, [esi+0A10h]
+.text:1025DB83                 mov     [esp+80h+var_44], edx
+.text:1025DB87                 mov     edx, [esi+0A14h]
+.text:1025DB8D                 mov     [esp+80h+var_4C], eax
+.text:1025DB91                 mov     eax, [esi+0A0Ch]
+.text:1025DB97                 mov     [esp+80h+var_3C], ecx
+.text:1025DB9B                 mov     ecx, [ebx]
+.text:1025DB9D                 mov     [esp+80h+var_38], edx
+.text:1025DBA1                 mov     edx, [ebx+4]
+.text:1025DBA4                 mov     [esp+80h+var_40], eax
+.text:1025DBA8                 mov     eax, [esi+0A18h]
+.text:1025DBAE                 mov     [esp+80h+var_24], ecx
+.text:1025DBB2                 mov     ecx, [ebx+0Ch]
+.text:1025DBB5                 mov     dword ptr [esp+80h+var_20], edx
+.text:1025DBB9                 mov     [esp+80h+var_34], eax
+.text:1025DBBD                 mov     eax, [ebx+8]
+.text:1025DBC0                 lea     edx, [esp+80h+var_70] ; give stack addr
+.text:1025DBC4                 mov     [esp+80h+var_18], ecx
+.text:1025DBC8                 push    edx
+.text:1025DBC9                 mov     ecx, edi        ; CActorMP - 0x8
+.text:1025DBCB                 mov     [esp+84h+var_1C], eax
+.text:1025DBCF                 call    Client_Apply_Actor_Sync_Packet
+.text:1025DBD4
+.text:1025DBD4 loc_1025DBD4:                           ; CODE XREF: CActorMP__net_Import+12Fj
+.text:1025DBD4                 pop     edi
+.text:1025DBD5                 pop     esi
+.text:1025DBD6                 pop     ebx
+.text:1025DBD7                 add     esp, 74h
+.text:1025DBDA                 retn    4
+.text:1025DBDA CActorMP__net_Import endp
+

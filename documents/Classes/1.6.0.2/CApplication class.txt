@@ -1,0 +1,6 @@
+0x0: ftable
+
+0x1834 - pointer on vector of locations (this + 8 * locationid = location dir)
+0x1838 -
+0x183C -
+0x1840 - current location id

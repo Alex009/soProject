@@ -1,0 +1,208 @@
+.text:1038F3B0 game_sv_mp__SpawnPlayer proc near       ; CODE XREF: sub_1037E160+4Cp
+.text:1038F3B0                                         ; sub_1037F880+35p ...
+.text:1038F3B0
+.text:1038F3B0 var_20          = dword ptr -20h
+.text:1038F3B0 var_1C          = dword ptr -1Ch
+.text:1038F3B0 var_18          = dword ptr -18h
+.text:1038F3B0 var_14          = dword ptr -14h
+.text:1038F3B0 var_10          = dword ptr -10h
+.text:1038F3B0 var_C           = dword ptr -0Ch
+.text:1038F3B0 var_8           = dword ptr -8
+.text:1038F3B0 var_4           = dword ptr -4
+.text:1038F3B0 arg_0           = dword ptr  4
+.text:1038F3B0 arg_4           = dword ptr  8
+.text:1038F3B0
+.text:1038F3B0                 sub     esp, 1Ch
+.text:1038F3B3                 mov     eax, [esp+1Ch+arg_0]
+.text:1038F3B7                 push    ebx
+.text:1038F3B8                 push    ebp
+.text:1038F3B9                 push    esi
+.text:1038F3BA                 push    edi
+.text:1038F3BB                 mov     esi, ecx
+.text:1038F3BD                 mov     ecx, [esi+98h]
+.text:1038F3C3                 push    0
+.text:1038F3C5                 push    eax
+.text:1038F3C6                 call    ds:?ID_to_client@IPureServer@@IAEPAVIClient@@VClientID@@_N@Z ; IPureServer::ID_to_client(ClientID,bool)
+.text:1038F3CC                 mov     ebx, [eax+8170h]
+.text:1038F3D2                 push    4
+.text:1038F3D4                 mov     ecx, ebx
+.text:1038F3D6                 mov     [esp+30h+var_1C], eax
+.text:1038F3DA                 mov     dword ptr [eax+8168h], 1
+.text:1038F3E4                 call    sub_1034CA80
+.text:1038F3E9                 mov     ecx, [esp+2Ch+arg_4]
+.text:1038F3ED                 push    ecx
+.text:1038F3EE                 mov     ecx, esi
+.text:1038F3F0                 call    sub_10374870
+.text:1038F3F5                 mov     edx, [esi]
+.text:1038F3F7                 mov     edx, [edx+0A4h]
+.text:1038F3FD                 mov     edi, eax
+.text:1038F3FF                 mov     eax, [esp+2Ch+arg_0]
+.text:1038F403                 mov     ebp, [edi]
+.text:1038F405                 push    eax
+.text:1038F406                 mov     ecx, esi
+.text:1038F408                 call    edx
+.text:1038F40A                 push    eax
+.text:1038F40B                 mov     eax, [ebp+14h]
+.text:1038F40E                 push    edi
+.text:1038F40F                 call    eax
+.text:1038F411                 push    0
+.text:1038F413                 push    offset off_10613270
+.text:1038F418                 push    offset off_10611C00
+.text:1038F41D                 push    0
+.text:1038F41F                 push    edi
+.text:1038F420                 mov     word ptr [edi+43h], 9
+.text:1038F426                 call    __RTDynamicCast
+.text:1038F42B                 push    0
+.text:1038F42D                 push    offset off_1062C5C4
+.text:1038F432                 push    offset off_10611C00
+.text:1038F437                 push    0
+.text:1038F439                 push    edi
+.text:1038F43A                 mov     ebp, eax
+.text:1038F43C                 call    __RTDynamicCast
+.text:1038F441                 add     esp, 28h
+.text:1038F444                 cmp     byte_10648FEE, 0
+.text:1038F44B                 jnz     short loc_1038F48D
+.text:1038F44D                 test    ebp, ebp
+.text:1038F44F                 jnz     short loc_1038F495
+.text:1038F451                 test    eax, eax
+.text:1038F453                 jnz     loc_1038F570
+.text:1038F459                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:1038F45F                 push    offset byte_10648FEE
+.text:1038F464                 push    offset aGame_sv_mpSpaw ; "game_sv_mp::SpawnPlayer"
+.text:1038F469                 push    236h
+.text:1038F46E                 push    offset asc_10581CB0 ; "D:\\prog_repository\\sources\\trunk\\xrGame"...
+.text:1038F473                 push    offset aRespawnedClien ; "Respawned Client is not Actor nor Spect"...
+.text:1038F478                 push    offset aPaPs    ; "pA || pS"
+.text:1038F47D                 call    ds:?fail@xrDebug@@QAEXPBD00H0AA_N@Z ; xrDebug::fail(char const *,char const *,char const *,int,char const *,bool &)
+.text:1038F483                 mov     eax, offset aSpectator ; "spectator"
+.text:1038F488                 jmp     loc_1038F511
+.text:1038F48D ; ---------------------------------------------------------------------------
+.text:1038F48D
+.text:1038F48D loc_1038F48D:                           ; CODE XREF: game_sv_mp__SpawnPlayer+9Bj
+.text:1038F48D                 test    ebp, ebp
+.text:1038F48F                 jz      loc_1038F56C
+.text:1038F495
+.text:1038F495 loc_1038F495:                           ; CODE XREF: game_sv_mp__SpawnPlayer+9Fj
+.text:1038F495                 mov     cl, [ebx+4]
+.text:1038F498                 mov     [ebp+0E6h], cl
+.text:1038F49E                 mov     edx, [esi]
+.text:1038F4A0                 mov     eax, [edx+0B4h]
+.text:1038F4A6                 push    ebx
+.text:1038F4A7                 push    ebp
+.text:1038F4A8                 mov     ecx, esi
+.text:1038F4AA                 call    eax
+.text:1038F4AC                 movsx   ax, byte ptr [ebx+29h]
+.text:1038F4B1                 movzx   cx, byte ptr [ebp+0E6h]
+.text:1038F4B9                 mov     edx, [esi]
+.text:1038F4BB                 mov     edx, [edx+160h]
+.text:1038F4C1                 push    eax
+.text:1038F4C2                 push    ecx
+.text:1038F4C3                 push    edi
+.text:1038F4C4                 mov     ecx, esi
+.text:1038F4C6                 call    edx
+.text:1038F4C8                 push    4
+.text:1038F4CA                 mov     ecx, ebx
+.text:1038F4CC                 call    sub_1034CA90
+.text:1038F4D1                 cmp     dword ptr [ebx+2Ah], 0
+.text:1038F4D5                 jnz     short loc_1038F4E5
+.text:1038F4D7                 mov     ecx, [esp+2Ch+arg_0]
+.text:1038F4DB                 mov     eax, [esi]
+.text:1038F4DD                 mov     edx, [eax+5Ch]
+.text:1038F4E0                 push    ecx
+.text:1038F4E1                 mov     ecx, esi
+.text:1038F4E3                 call    edx
+.text:1038F4E5
+.text:1038F4E5 loc_1038F4E5:                           ; CODE XREF: game_sv_mp__SpawnPlayer+125j
+.text:1038F4E5                 mov     eax, ds:?Device@@3VCRenderDevice@@A ; CRenderDevice Device
+.text:1038F4EA                 mov     ecx, [eax+28h]
+.text:1038F4ED                 mov     [ebx+2Ah], ecx
+.text:1038F4F0                 mov     edx, ds:?g_pGameLevel@@3PAVIGame_Level@@A ; IGame_Level * g_pGameLevel
+.text:1038F4F6                 mov     eax, [edx]
+.text:1038F4F8                 mov     ecx, [eax+486F0h]
+.text:1038F4FE                 mov     ecx, [ecx+0C4h]
+.text:1038F504                 mov     edx, [ecx]
+.text:1038F506                 mov     eax, [edx+4]
+.text:1038F509                 push    ebx
+.text:1038F50A                 call    eax
+.text:1038F50C                 mov     eax, offset aActor ; "actor"
+.text:1038F511
+.text:1038F511 loc_1038F511:                           ; CODE XREF: game_sv_mp__SpawnPlayer+D8j
+.text:1038F511                                         ; game_sv_mp__SpawnPlayer+1EDj ...
+.text:1038F511                 movzx   ecx, word ptr [edi+32h]
+.text:1038F515                 mov     edx, [esi]
+.text:1038F517                 mov     ebp, [esp+2Ch+arg_0]
+.text:1038F51B                 push    eax
+.text:1038F51C                 mov     eax, [edx+0A4h]
+.text:1038F522                 push    ecx
+.text:1038F523                 push    ebp
+.text:1038F524                 mov     ecx, esi
+.text:1038F526                 call    eax
+.text:1038F528                 push    eax
+.text:1038F529                 push    offset aSDRespawnedAsS ; "* %s [%d] respawned as %s"
+.text:1038F52E                 call    ds:?Msg@@YAXPBDZZ ; Msg(char const *,...)
+.text:1038F534                 add     esp, 10h
+.text:1038F537                 push    ebp
+.text:1038F538                 push    edi
+.text:1038F539                 mov     ecx, esi
+.text:1038F53B                 call    sub_103755E0
+.text:1038F540                 mov     ecx, [esp+30h+var_20]
+.text:1038F544                 mov     edx, [ecx+815Ch]
+.text:1038F54A                 movzx   eax, word ptr [edx+32h]
+.text:1038F54E                 push    eax
+.text:1038F54F                 mov     ecx, ebx
+.text:1038F551                 call    sub_1034D530
+.text:1038F556                 mov     edx, [esi]
+.text:1038F558                 mov     eax, [edx+0B0h]
+.text:1038F55E                 mov     ecx, esi
+.text:1038F560                 call    eax
+.text:1038F562                 pop     edi
+.text:1038F563                 pop     esi
+.text:1038F564                 pop     ebp
+.text:1038F565                 pop     ebx
+.text:1038F566                 add     esp, 1Ch
+.text:1038F569                 retn    8
+.text:1038F56C ; ---------------------------------------------------------------------------
+.text:1038F56C
+.text:1038F56C loc_1038F56C:                           ; CODE XREF: game_sv_mp__SpawnPlayer+DFj
+.text:1038F56C                 test    eax, eax
+.text:1038F56E                 jz      short loc_1038F5E4
+.text:1038F570
+.text:1038F570 loc_1038F570:                           ; CODE XREF: game_sv_mp__SpawnPlayer+A3j
+.text:1038F570                 mov     eax, [esp+2Ch+arg_0]
+.text:1038F574                 lea     ecx, [esp+2Ch+var_18]
+.text:1038F578                 push    ecx
+.text:1038F579                 lea     edx, [esp+30h+var_C]
+.text:1038F57D                 push    edx
+.text:1038F57E                 push    eax
+.text:1038F57F                 mov     ecx, esi
+.text:1038F581                 call    sub_1038DCE0
+.text:1038F586                 test    al, al
+.text:1038F588                 jnz     short loc_1038F5A2
+.text:1038F58A                 mov     edx, [esi]
+.text:1038F58C                 mov     eax, [edx+0B4h]
+.text:1038F592                 push    ebx
+.text:1038F593                 push    edi
+.text:1038F594                 mov     ecx, esi
+.text:1038F596                 call    eax
+.text:1038F598                 mov     eax, offset aSpectator ; "spectator"
+.text:1038F59D                 jmp     loc_1038F511
+.text:1038F5A2 ; ---------------------------------------------------------------------------
+.text:1038F5A2
+.text:1038F5A2 loc_1038F5A2:                           ; CODE XREF: game_sv_mp__SpawnPlayer+1D8j
+.text:1038F5A2                 movss   xmm0, [esp+2Ch+var_18]
+.text:1038F5A8                 movss   dword ptr [edi+60h], xmm0
+.text:1038F5AD                 movss   xmm0, [esp+2Ch+var_14]
+.text:1038F5B3                 movss   dword ptr [edi+64h], xmm0
+.text:1038F5B8                 movss   xmm0, [esp+2Ch+var_10]
+.text:1038F5BE                 movss   dword ptr [edi+68h], xmm0
+.text:1038F5C3                 movss   xmm0, [esp+2Ch+var_C]
+.text:1038F5C9                 movss   dword ptr [edi+54h], xmm0
+.text:1038F5CE                 movss   xmm0, [esp+2Ch+var_8]
+.text:1038F5D4                 movss   dword ptr [edi+58h], xmm0
+.text:1038F5D9                 movss   xmm0, [esp+2Ch+var_4]
+.text:1038F5DF                 movss   dword ptr [edi+5Ch], xmm0
+.text:1038F5E4
+.text:1038F5E4 loc_1038F5E4:                           ; CODE XREF: game_sv_mp__SpawnPlayer+1BEj
+.text:1038F5E4                 mov     eax, offset aSpectator ; "spectator"
+.text:1038F5E9                 jmp     loc_1038F511
+.text:1038F5E9 game_sv_mp__SpawnPlayer endp

@@ -1,0 +1,144 @@
+.text:10099410 lua_alife__create proc near             ; DATA XREF: lua_register_class_alife_simulator+14Fo
+.text:10099410
+.text:10099410 var_4018        = byte ptr -4018h
+.text:10099410 var_4014        = byte ptr -4014h
+.text:10099410 arg_0           = dword ptr  4
+.text:10099410 arg_4           = dword ptr  8
+.text:10099410 arg_8           = dword ptr  0Ch
+.text:10099410 arg_C           = dword ptr  10h
+.text:10099410 arg_10          = dword ptr  14h
+.text:10099410 arg_14          = dword ptr  18h
+.text:10099410
+.text:10099410                 mov     eax, 4018h
+.text:10099415                 call    __alloca_probe
+.text:1009941A                 push    ebx
+.text:1009941B                 mov     ebx, [esp+401Ch+arg_14]
+.text:10099422                 cmp     bx, 0FFFFh
+.text:10099427                 jnz     short loc_1009946E
+.text:10099429                 push    1
+.text:1009942B                 push    0FFFFh
+.text:10099430
+.text:10099430 loc_10099430:                           ; CODE XREF: lua_alife__create+ABj
+.text:10099430                 mov     eax, [esp+4024h+arg_10]
+.text:10099437                 mov     ecx, [esp+4024h+arg_C]
+.text:1009943E                 mov     edx, [esp+4024h+arg_8]
+.text:10099445                 push    eax
+.text:10099446                 mov     eax, [esp+4028h+arg_4]
+.text:1009944D                 push    ecx
+.text:1009944E                 push    edx
+.text:1009944F                 push    eax
+.text:10099450                 mov     eax, [esp+4034h+arg_0]
+.text:10099457                 mov     ecx, [eax+0Ch]
+.text:1009945A                 mov     edx, [ecx+4]
+.text:1009945D                 lea     ecx, [edx+eax+0Ch]
+.text:10099461                 call    sub_1009F0D0
+.text:10099466                 pop     ebx
+.text:10099467                 add     esp, 4018h
+.text:1009946D                 retn
+.text:1009946E ; ---------------------------------------------------------------------------
+.text:1009946E
+.text:1009946E loc_1009946E:                           ; CODE XREF: lua_alife__create+17j
+.text:1009946E                 call    sub_10039B90
+.text:10099473                 mov     eax, [eax+14h]
+.text:10099476                 mov     edx, [eax+0Ch]
+.text:10099479                 push    1
+.text:1009947B                 lea     ecx, [esp+4020h+arg_14]
+.text:10099482                 push    ecx
+.text:10099483                 mov     ecx, [edx+4]
+.text:10099486                 mov     ecx, [ecx+eax+20h]
+.text:1009948A                 call    sub_1005B040
+.text:1009948F                 test    eax, eax
+.text:10099491                 jnz     short loc_100994AF
+.text:10099493                 movzx   edx, bx
+.text:10099496                 push    edx
+.text:10099497                 push    offset aInvalidParentI ; "! invalid parent id [%d] specified"
+.text:1009949C                 call    ds:?Msg@@YAXPBDZZ ; Msg(char const *,...)
+.text:100994A2                 add     esp, 8
+.text:100994A5                 xor     eax, eax
+.text:100994A7                 pop     ebx
+.text:100994A8                 add     esp, 4018h
+.text:100994AE                 retn
+.text:100994AF ; ---------------------------------------------------------------------------
+.text:100994AF
+.text:100994AF loc_100994AF:                           ; CODE XREF: lua_alife__create+81j
+.text:100994AF                 cmp     byte ptr [eax+0A4h], 0
+.text:100994B6                 jnz     short loc_100994C0
+.text:100994B8                 push    1
+.text:100994BA                 push    ebx
+.text:100994BB                 jmp     loc_10099430
+.text:100994C0 ; ---------------------------------------------------------------------------
+.text:100994C0
+.text:100994C0 loc_100994C0:                           ; CODE XREF: lua_alife__create+A6j
+.text:100994C0                 push    esi
+.text:100994C1                 push    edi
+.text:100994C2                 lea     ecx, [esp+4024h+var_4014]
+.text:100994C6                 call    ds:??0NET_Packet@@QAE@XZ ; NET_Packet::NET_Packet(void)
+.text:100994CC                 push    1
+.text:100994CE                 lea     ecx, [esp+4028h+var_4014]
+.text:100994D2                 call    ds:?w_begin@NET_Packet@@QAEXG@Z ; NET_Packet::w_begin(ushort)
+.text:100994D8                 mov     edi, [esp+4024h+arg_4]
+.text:100994DF                 push    edi
+.text:100994E0                 lea     ecx, [esp+4028h+var_4014]
+.text:100994E4                 call    ds:?w_stringZ@NET_Packet@@QAEXPBD@Z ; NET_Packet::w_stringZ(char const *)
+.text:100994EA                 mov     eax, [esp+4024h+arg_10]
+.text:100994F1                 mov     esi, [esp+4024h+arg_0]
+.text:100994F8                 mov     ecx, [esp+4024h+arg_C]
+.text:100994FF                 mov     edx, [esp+4024h+arg_8]
+.text:10099506                 push    0
+.text:10099508                 push    ebx
+.text:10099509                 push    eax
+.text:1009950A                 mov     eax, [esi+0Ch]
+.text:1009950D                 push    ecx
+.text:1009950E                 mov     ecx, [eax+4]
+.text:10099511                 push    edx
+.text:10099512                 push    edi
+.text:10099513                 lea     ecx, [ecx+esi+0Ch]
+.text:10099517                 call    sub_1009F0D0
+.text:1009951C                 mov     edi, eax
+.text:1009951E                 mov     edx, [edi]
+.text:10099520                 mov     ecx, [edx]
+.text:10099522                 push    0
+.text:10099524                 lea     eax, [esp+4028h+var_4014]
+.text:10099528                 push    eax
+.text:10099529                 push    edi
+.text:1009952A                 call    ecx
+.text:1009952C                 movzx   edx, word ptr [edi+32h]
+.text:10099530                 mov     eax, [esi+0Ch]
+.text:10099533                 mov     ecx, [eax+4]
+.text:10099536                 mov     ecx, [ecx+esi+10h]
+.text:1009953A                 push    0
+.text:1009953C                 push    edx
+.text:1009953D                 call    sub_10098300
+.text:10099542                 push    edi
+.text:10099543                 call    __RTCastToVoid
+.text:10099548                 mov     edx, [edi+8]
+.text:1009954B                 lea     ecx, [edi+8]
+.text:1009954E                 add     esp, 4
+.text:10099551                 mov     ebx, eax
+.text:10099553                 mov     eax, [edx+14h]
+.text:10099556                 push    0
+.text:10099558                 call    eax
+.text:1009955A                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:10099560                 push    ebx
+.text:10099561                 call    ds:?mem_free@xrMemory@@QAEXPAX@Z ; xrMemory::mem_free(void *)
+.text:10099567                 lea     ecx, [esp+4024h+var_4018]
+.text:1009956B                 push    ecx
+.text:1009956C                 lea     ecx, [esp+4028h+var_4014]
+.text:10099570                 mov     edi, 0FFFFh
+.text:10099575                 call    ds:?r_begin@NET_Packet@@QAEIAAG@Z ; NET_Packet::r_begin(ushort &)
+.text:1009957B                 mov     edx, [esi+0Ch]
+.text:1009957E                 mov     eax, [edx+4]
+.text:10099581                 mov     esi, [eax+esi+10h]
+.text:10099585                 push    0
+.text:10099587                 push    0
+.text:10099589                 push    edi
+.text:1009958A                 lea     ecx, [esp+4030h+var_4014]
+.text:1009958E                 push    ecx
+.text:1009958F                 mov     ecx, esi
+.text:10099591                 call    sub_10435E20
+.text:10099596                 pop     edi
+.text:10099597                 pop     esi
+.text:10099598                 pop     ebx
+.text:10099599                 add     esp, 4018h
+.text:1009959F                 retn
+.text:1009959F lua_alife__create endp

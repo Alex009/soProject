@@ -1,0 +1,2205 @@
+int __thiscall xrFactory__initialize(void *this)
+{
+  int v1; // ebx@1
+  void *v2; // esi@1
+  int v3; // eax@4
+  int v4; // ebx@4
+  int v5; // eax@7
+  int v6; // ebx@7
+  int v7; // ebx@10
+  int v8; // eax@13
+  int v9; // ebx@13
+  int v10; // eax@16
+  int v11; // ebx@16
+  int v12; // ebx@19
+  int v13; // eax@22
+  int v14; // ebx@22
+  int v15; // eax@25
+  int v16; // ebx@25
+  int v17; // ebx@28
+  int v18; // eax@31
+  int v19; // ebx@31
+  int v20; // eax@34
+  int v21; // ebx@34
+  int v22; // ebx@37
+  int v23; // eax@40
+  int v24; // ebx@40
+  int v25; // eax@43
+  int v26; // ebx@43
+  int v27; // ebx@46
+  int v28; // eax@49
+  int v29; // ebx@49
+  int v30; // eax@52
+  int v31; // ebx@52
+  int v32; // ebx@55
+  int v33; // eax@58
+  int v34; // ebx@58
+  int v35; // eax@61
+  int v36; // ebx@61
+  int v37; // ebx@64
+  int v38; // eax@67
+  int v39; // ebx@67
+  int v40; // eax@70
+  int v41; // ebx@70
+  int v42; // ebx@73
+  int v43; // eax@76
+  int v44; // ebx@76
+  int v45; // eax@79
+  int v46; // ebx@79
+  int v47; // ebx@82
+  int v48; // eax@85
+  int v49; // ebx@85
+  int v50; // eax@88
+  int v51; // ebx@88
+  int v52; // ebx@91
+  int v53; // eax@94
+  int v54; // ebx@94
+  int v55; // eax@97
+  int v56; // ebx@97
+  int v57; // ebx@100
+  int v58; // eax@103
+  int v59; // ebx@103
+  int v60; // eax@106
+  int v61; // ebx@106
+  int v62; // ebx@109
+  int v63; // eax@112
+  int v64; // ebx@112
+  int v65; // eax@115
+  int v66; // ebx@115
+  int v67; // ebx@118
+  int v68; // eax@121
+  int v69; // ebx@121
+  int v70; // eax@124
+  int v71; // ebx@124
+  int v72; // ebx@127
+  int v73; // eax@130
+  int v74; // ebx@130
+  int v75; // eax@133
+  int v76; // ebx@133
+  int v77; // ebx@136
+  int v78; // eax@139
+  int v79; // ebx@139
+  int v80; // eax@142
+  int v81; // ebx@142
+  int v82; // ebx@145
+  int v83; // eax@148
+  int v84; // ebx@148
+  int v85; // eax@151
+  int v86; // ebx@151
+  int v87; // ebx@154
+  int v88; // eax@157
+  int v89; // ebx@157
+  int v90; // eax@160
+  int v91; // ebx@160
+  int v92; // ebx@163
+  int v93; // eax@166
+  int v94; // ebx@166
+  int v95; // eax@169
+  int v96; // ebx@169
+  int v97; // ebx@172
+  int v98; // eax@175
+  int v99; // ebx@175
+  int v100; // eax@178
+  int v101; // ebx@178
+  int v102; // ebx@181
+  int v103; // eax@184
+  int v104; // ebx@184
+  int v105; // eax@187
+  int v106; // ebx@187
+  int v107; // ebx@190
+  int v108; // eax@193
+  int v109; // ebx@193
+  int v110; // eax@196
+  int v111; // ebx@196
+  int v112; // ebx@199
+  int v113; // eax@202
+  int v114; // ebx@202
+  int v115; // eax@205
+  int v116; // ebx@205
+  int v117; // ebx@208
+  int v118; // eax@211
+  int v119; // ebx@211
+  int v120; // eax@214
+  int v121; // ebx@214
+  int v122; // ebx@217
+  int v123; // eax@220
+  int v124; // ebx@220
+  int v125; // eax@223
+  int v126; // ebx@223
+  int v127; // ebx@226
+  int v128; // eax@229
+  int v129; // ebx@229
+  int v130; // eax@232
+  int v131; // ebx@232
+  int v132; // ebx@235
+  int v133; // eax@238
+  int v134; // ebx@238
+  int v135; // eax@241
+  int v136; // ebx@241
+  int v137; // ebx@244
+  int v138; // eax@247
+  int v139; // ebx@247
+  int v140; // eax@250
+  int v141; // ebx@250
+  int v142; // ebx@253
+  int v143; // eax@256
+  int v144; // ebx@256
+  int v145; // eax@259
+  int v146; // ebx@259
+  int v147; // ebx@262
+  int v148; // eax@265
+  int v149; // ebx@265
+  int v150; // eax@268
+  int v151; // ebx@268
+  int v152; // ebx@271
+  int v153; // eax@274
+  int v154; // ebx@274
+  int v155; // eax@277
+  int v156; // ebx@277
+  int v157; // ebx@280
+  int v158; // eax@283
+  int v159; // ebx@283
+  int v160; // eax@286
+  int v161; // ebx@286
+  int v162; // ebx@289
+  int v163; // eax@292
+  int v164; // ebx@292
+  int v165; // eax@295
+  int v166; // ebx@295
+  int v167; // ebx@298
+  int v168; // eax@301
+  int v169; // ebx@301
+  int v170; // eax@304
+  int v171; // ebx@304
+  int v172; // ebx@307
+  int v173; // eax@310
+  int v174; // ebx@310
+  int v175; // eax@313
+  int v176; // ebx@313
+  int v177; // ebx@316
+  int v178; // eax@319
+  int v179; // ebx@319
+  int v180; // eax@322
+  int v181; // ebx@322
+  int v182; // ebx@325
+  int v183; // eax@328
+  int v184; // ebx@328
+  int v185; // eax@331
+  int v186; // ebx@331
+  int v187; // ebx@334
+  int v188; // eax@337
+  int v189; // ebx@337
+  int v190; // eax@340
+  int v191; // ebx@340
+  int v192; // ebx@343
+  int v193; // eax@346
+  int v194; // ebx@346
+  int v195; // eax@349
+  int v196; // ebx@349
+  int v197; // ebx@352
+  int v198; // eax@355
+  int v199; // ebx@355
+  int v200; // eax@358
+  int v201; // ebx@358
+  int v202; // ebx@361
+  int v203; // eax@364
+  int v204; // ebx@364
+  int v205; // eax@367
+  int v206; // ebx@367
+  int v207; // ebx@370
+  int v208; // eax@373
+  int v209; // ebx@373
+  int v210; // eax@376
+  int v211; // ebx@376
+  int v212; // ebx@379
+  int v213; // eax@382
+  int v214; // ebx@382
+  int v215; // eax@385
+  int v216; // ebx@385
+  int v217; // ebx@388
+  int v218; // eax@391
+  int v219; // ebx@391
+  int v220; // eax@394
+  int v221; // ebx@394
+  int v222; // ebx@397
+  int v223; // eax@400
+  int v224; // ebx@400
+  int v225; // eax@403
+  int v226; // ebx@403
+  int v227; // ebx@406
+  int v228; // eax@409
+  int v229; // ebx@409
+  int v230; // eax@412
+  int v231; // ebx@412
+  int v232; // ebx@415
+  int v233; // eax@418
+  int v234; // ebx@418
+  int v235; // eax@421
+  int v236; // ebx@421
+  int v237; // ebx@424
+  int v238; // eax@427
+  int v239; // ebx@427
+  int v240; // eax@430
+  int v241; // ebp@430
+  __int64 v242; // qax@430
+  int result; // eax@433
+  int v244; // eax@434
+  int v245; // ebp@434
+  int v246; // eax@437
+  int v247; // ebp@437
+  int v248; // ebp@440
+  int v249; // eax@443
+  int v250; // ebp@443
+  int v251; // eax@446
+  int v252; // ebp@446
+  int v253; // edi@449
+  unsigned __int64 v254; // [sp+2C4h] [bp-8h]@1
+
+  v2 = this;
+  v254 = 0x475F4C4556454C20ui64;
+  v1 = xrMemory__mem_alloc(Memory, 24);
+  if ( v1 )
+  {
+    xrFactory__register(v1, (int)&v254, (int)"level");
+    *(_DWORD *)v1 = &off_10574F78;
+  }
+  else
+  {
+    v1 = 0;
+  }
+  sub_10341BF0((int)v2, v1);
+  v254 = 5142917558144551251i64;
+  v3 = xrMemory__mem_alloc(Memory, 24);
+  v4 = v3;
+  if ( v3 )
+  {
+    xrFactory__register(v3, (int)&v254, (int)"game");
+    *(_DWORD *)v4 = &off_10575054;
+  }
+  else
+  {
+    v4 = 0;
+  }
+  sub_10341BF0((int)v2, v4);
+  v254 = 5212147319860774738i64;
+  v5 = xrMemory__mem_alloc(Memory, 24);
+  v6 = v5;
+  if ( v5 )
+  {
+    xrFactory__register(v5, (int)&v254, (int)"hud_manager");
+    *(_DWORD *)v6 = &off_1057509C;
+  }
+  else
+  {
+    v6 = 0;
+  }
+  sub_10341BF0((int)v2, v6);
+  v254 = 6005091964461926220i64;
+  v7 = xrMemory__mem_alloc(Memory, 24);
+  if ( v7 )
+  {
+    xrFactory__register(v7, (int)&v254, (int)"game_sv_single");
+    *(_DWORD *)v7 = &off_105750E0;
+  }
+  else
+  {
+    v7 = 0;
+  }
+  sub_10341BF0((int)v2, v7);
+  v254 = 6005091900101500960i64;
+  v8 = xrMemory__mem_alloc(Memory, 24);
+  v9 = v8;
+  if ( v8 )
+  {
+    xrFactory__register(v8, (int)&v254, (int)"game_sv_deathmatch");
+    *(_DWORD *)v9 = &off_10575128;
+  }
+  else
+  {
+    v9 = 0;
+  }
+  sub_10341BF0((int)v2, v9);
+  v254 = 6005091968672931872i64;
+  v10 = xrMemory__mem_alloc(Memory, 24);
+  v11 = v10;
+  if ( v10 )
+  {
+    xrFactory__register(v10, (int)&v254, (int)"game_sv_team_deathmatch");
+    *(_DWORD *)v11 = &off_10575174;
+  }
+  else
+  {
+    v11 = 0;
+  }
+  sub_10341BF0((int)v2, v11);
+  v254 = 6005091887136198228i64;
+  v12 = xrMemory__mem_alloc(Memory, 24);
+  if ( v12 )
+  {
+    xrFactory__register(v12, (int)&v254, (int)"game_sv_artefact_hunt");
+    *(_DWORD *)v12 = &off_105754C8;
+  }
+  else
+  {
+    v12 = 0;
+  }
+  sub_10341BF0((int)v2, v12);
+  v254 = 6005091895926136864i64;
+  v13 = xrMemory__mem_alloc(Memory, 24);
+  v14 = v13;
+  if ( v13 )
+  {
+    xrFactory__register(v13, (int)&v254, (int)"game_sv_capture_the_artefact");
+    *(_DWORD *)v14 = &off_10575514;
+  }
+  else
+  {
+    v14 = 0;
+  }
+  sub_10341BF0((int)v2, v14);
+  v254 = 4849355710087972684i64;
+  v15 = xrMemory__mem_alloc(Memory, 24);
+  v16 = v15;
+  if ( v15 )
+  {
+    xrFactory__register(v15, (int)&v254, (int)"game_cl_single");
+    *(_DWORD *)v16 = &off_1057556C;
+  }
+  else
+  {
+    v16 = 0;
+  }
+  sub_10341BF0((int)v2, v16);
+  v254 = 4849355645727547424i64;
+  v17 = xrMemory__mem_alloc(Memory, 24);
+  if ( v17 )
+  {
+    xrFactory__register(v17, (int)&v254, (int)"game_cl_deathmatch");
+    *(_DWORD *)v17 = &off_105755B4;
+  }
+  else
+  {
+    v17 = 0;
+  }
+  sub_10341BF0((int)v2, v17);
+  v254 = 4849355714298978336i64;
+  v18 = xrMemory__mem_alloc(Memory, 24);
+  v19 = v18;
+  if ( v18 )
+  {
+    xrFactory__register(v18, (int)&v254, (int)"game_cl_team_deathmatch");
+    *(_DWORD *)v19 = &off_10575600;
+  }
+  else
+  {
+    v19 = 0;
+  }
+  sub_10341BF0((int)v2, v19);
+  v254 = 4849355632762244692i64;
+  v20 = xrMemory__mem_alloc(Memory, 24);
+  v21 = v20;
+  if ( v20 )
+  {
+    xrFactory__register(v20, (int)&v254, (int)"game_cl_artefact_hunt");
+    *(_DWORD *)v21 = &off_10575650;
+  }
+  else
+  {
+    v21 = 0;
+  }
+  sub_10341BF0((int)v2, v21);
+  v254 = 4849355641552183328i64;
+  v22 = xrMemory__mem_alloc(Memory, 24);
+  if ( v22 )
+  {
+    xrFactory__register(v22, (int)&v254, (int)"game_cl_capture_the_artefact");
+    *(_DWORD *)v22 = &off_1057569C;
+  }
+  else
+  {
+    v22 = 0;
+  }
+  sub_10341BF0((int)v2, v22);
+  v254 = 6145547977840543564i64;
+  v23 = xrMemory__mem_alloc(Memory, 24);
+  v24 = v23;
+  if ( v23 )
+  {
+    xrFactory__register(v23, (int)&v254, (int)"game_ui_single");
+    *(_DWORD *)v24 = &off_105756F4;
+  }
+  else
+  {
+    v24 = 0;
+  }
+  sub_10341BF0((int)v2, v24);
+  v254 = 6145547913480118304i64;
+  v25 = xrMemory__mem_alloc(Memory, 24);
+  v26 = v25;
+  if ( v25 )
+  {
+    xrFactory__register(v25, (int)&v254, (int)"game_ui_deathmatch");
+    *(_DWORD *)v26 = &off_10575734;
+  }
+  else
+  {
+    v26 = 0;
+  }
+  sub_10341BF0((int)v2, v26);
+  v254 = 6145547982051549216i64;
+  v27 = xrMemory__mem_alloc(Memory, 24);
+  if ( v27 )
+  {
+    xrFactory__register(v27, (int)&v254, (int)"game_ui_team_deathmatch");
+    *(_DWORD *)v27 = &off_10575774;
+  }
+  else
+  {
+    v27 = 0;
+  }
+  sub_10341BF0((int)v2, v27);
+  v254 = 6145547900514815572i64;
+  v28 = xrMemory__mem_alloc(Memory, 24);
+  v29 = v28;
+  if ( v28 )
+  {
+    xrFactory__register(v28, (int)&v254, (int)"game_ui_artefact_hunt");
+    *(_DWORD *)v29 = &off_105757B8;
+  }
+  else
+  {
+    v29 = 0;
+  }
+  sub_10341BF0((int)v2, v29);
+  v254 = 6145547909304754208i64;
+  v30 = xrMemory__mem_alloc(Memory, 24);
+  v31 = v30;
+  if ( v30 )
+  {
+    xrFactory__register(v30, (int)&v254, (int)"game_ui_capture_the_artefact");
+    *(_DWORD *)v31 = &off_105757FC;
+  }
+  else
+  {
+    v31 = 0;
+  }
+  sub_10341BF0((int)v2, v31);
+  v254 = 5719361809216918048i64;
+  v32 = xrMemory__mem_alloc(Memory, 24);
+  if ( v32 )
+  {
+    xrFactory__register(v32, (int)&v254, (int)"actor");
+    *(_DWORD *)v32 = &off_10574E90;
+  }
+  else
+  {
+    v32 = 0;
+  }
+  sub_10341BF0((int)v2, v32);
+  v254 = 4704396041297157959i64;
+  v33 = xrMemory__mem_alloc(Memory, 24);
+  v34 = v33;
+  if ( v33 )
+  {
+    xrFactory__register(v33, (int)&v254, (int)"flesh_group");
+    *(_DWORD *)v34 = &off_10575840;
+  }
+  else
+  {
+    v34 = 0;
+  }
+  sub_10341BF0((int)v2, v34);
+  v254 = 4704396045692522568i64;
+  v35 = xrMemory__mem_alloc(Memory, 24);
+  v36 = v35;
+  if ( v35 )
+  {
+    xrFactory__register(v35, (int)&v254, (int)"graph_point");
+    *(_DWORD *)v36 = &off_10575B40;
+  }
+  else
+  {
+    v36 = 0;
+  }
+  sub_10341BF0((int)v2, v36);
+  v254 = 5714609771265810247i64;
+  v37 = xrMemory__mem_alloc(Memory, 24);
+  if ( v37 )
+  {
+    xrFactory__register(v37, (int)&v254, (int)"online_offline_group");
+    *(_DWORD *)v37 = &off_10575B8C;
+  }
+  else
+  {
+    v37 = 0;
+  }
+  sub_10341BF0((int)v2, v37);
+  v254 = 6003374458761388064i64;
+  v38 = xrMemory__mem_alloc(Memory, 24);
+  v39 = v38;
+  if ( v38 )
+  {
+    xrFactory__register(v38, (int)&v254, (int)"spectator");
+    *(_DWORD *)v39 = &off_10575BE4;
+  }
+  else
+  {
+    v39 = 0;
+  }
+  sub_10341BF0((int)v2, v39);
+  v254 = 4704396041297154888i64;
+  v40 = xrMemory__mem_alloc(Memory, 24);
+  v41 = v40;
+  if ( v40 )
+  {
+    xrFactory__register(v40, (int)&v254, (int)"flesh");
+    *(_DWORD *)v41 = &off_10575C44;
+  }
+  else
+  {
+    v41 = 0;
+  }
+  sub_10341BF0((int)v2, v41);
+  v254 = 4704396049837278546i64;
+  v42 = xrMemory__mem_alloc(Memory, 24);
+  if ( v42 )
+  {
+    xrFactory__register(v42, (int)&v254, (int)"chimera");
+    *(_DWORD *)v42 = &off_10575CA8;
+  }
+  else
+  {
+    v42 = 0;
+  }
+  sub_10341BF0((int)v2, v42);
+  v254 = 4704396032757686098i64;
+  v43 = xrMemory__mem_alloc(Memory, 24);
+  v44 = v43;
+  if ( v43 )
+  {
+    xrFactory__register(v43, (int)&v254, (int)"dog_red");
+    *(_DWORD *)v44 = &off_10575D08;
+  }
+  else
+  {
+    v44 = 0;
+  }
+  sub_10341BF0((int)v2, v44);
+  v254 = 4704396097266393120i64;
+  v45 = xrMemory__mem_alloc(Memory, 24);
+  v46 = v45;
+  if ( v45 )
+  {
+    xrFactory__register(v45, (int)&v254, (int)"stalker");
+    *(_DWORD *)v46 = &off_10575D68;
+  }
+  else
+  {
+    v46 = 0;
+  }
+  sub_10341BF0((int)v2, v46);
+  v254 = 4704396024117940036i64;
+  v47 = xrMemory__mem_alloc(Memory, 24);
+  if ( v47 )
+  {
+    xrFactory__register(v47, (int)&v254, (int)"bloodsucker");
+    *(_DWORD *)v47 = &off_10575DCC;
+  }
+  else
+  {
+    v47 = 0;
+  }
+  sub_10341BF0((int)v2, v47);
+  v254 = 4704396024167354912i64;
+  v48 = xrMemory__mem_alloc(Memory, 24);
+  v49 = v48;
+  if ( v48 )
+  {
+    xrFactory__register(v48, (int)&v254, (int)"boar");
+    *(_DWORD *)v49 = &off_10575E38;
+  }
+  else
+  {
+    v49 = 0;
+  }
+  sub_10341BF0((int)v2, v49);
+  v254 = 4704396032757686082i64;
+  v50 = xrMemory__mem_alloc(Memory, 24);
+  v51 = v50;
+  if ( v50 )
+  {
+    xrFactory__register(v50, (int)&v254, (int)"dog_black");
+    *(_DWORD *)v51 = &off_10575E98;
+  }
+  else
+  {
+    v51 = 0;
+  }
+  sub_10341BF0((int)v2, v51);
+  v254 = 4704396032757686096i64;
+  v52 = xrMemory__mem_alloc(Memory, 24);
+  if ( v52 )
+  {
+    xrFactory__register(v52, (int)&v254, (int)"psy_dog");
+    *(_DWORD *)v52 = &off_10575EFC;
+  }
+  else
+  {
+    v52 = 0;
+  }
+  sub_10341BF0((int)v2, v52);
+  v254 = 4704396032757686086i64;
+  v53 = xrMemory__mem_alloc(Memory, 24);
+  v54 = v53;
+  if ( v53 )
+  {
+    xrFactory__register(v53, (int)&v254, (int)"psy_dog_phantom");
+    *(_DWORD *)v54 = &off_10575F60;
+  }
+  else
+  {
+    v54 = 0;
+  }
+  sub_10341BF0((int)v2, v54);
+  v254 = 4704396024269129042i64;
+  v55 = xrMemory__mem_alloc(Memory, 24);
+  v56 = v55;
+  if ( v55 )
+  {
+    xrFactory__register(v55, (int)&v254, (int)"burer");
+    *(_DWORD *)v56 = &off_10575FC8;
+  }
+  else
+  {
+    v56 = 0;
+  }
+  sub_10341BF0((int)v2, v56);
+  v254 = 4704396045541527124i64;
+  v57 = xrMemory__mem_alloc(Memory, 24);
+  if ( v57 )
+  {
+    xrFactory__register(v57, (int)&v254, (int)"pseudo_gigant");
+    *(_DWORD *)v57 = &off_10576024;
+  }
+  else
+  {
+    v57 = 0;
+  }
+  sub_10341BF0((int)v2, v57);
+  v254 = 4704396028463174738i64;
+  v58 = xrMemory__mem_alloc(Memory, 24);
+  v59 = v58;
+  if ( v58 )
+  {
+    xrFactory__register(v58, (int)&v254, (int)"controller");
+    *(_DWORD *)v59 = &off_1057608C;
+  }
+  else
+  {
+    v59 = 0;
+  }
+  sub_10341BF0((int)v2, v59);
+  v254 = 4704396084297618514i64;
+  v60 = xrMemory__mem_alloc(Memory, 24);
+  v61 = v60;
+  if ( v60 )
+  {
+    xrFactory__register(v60, (int)&v254, (int)"poltergeist");
+    *(_DWORD *)v61 = &off_105760F4;
+  }
+  else
+  {
+    v61 = 0;
+  }
+  sub_10341BF0((int)v2, v61);
+  v254 = 4704396127247343648i64;
+  v62 = xrMemory__mem_alloc(Memory, 24);
+  if ( v62 )
+  {
+    xrFactory__register(v62, (int)&v254, (int)"zombie");
+    *(_DWORD *)v62 = &off_1057615C;
+  }
+  else
+  {
+    v62 = 0;
+  }
+  sub_10341BF0((int)v2, v62);
+  v254 = 4704396041397551956i64;
+  v63 = xrMemory__mem_alloc(Memory, 24);
+  v64 = v63;
+  if ( v63 )
+  {
+    xrFactory__register(v63, (int)&v254, (int)"fracture");
+    *(_DWORD *)v64 = &off_105761C0;
+  }
+  else
+  {
+    v64 = 0;
+  }
+  sub_10341BF0((int)v2, v64);
+  v254 = 4704396097165939275i64;
+  v65 = xrMemory__mem_alloc(Memory, 24);
+  v66 = v65;
+  if ( v65 )
+  {
+    xrFactory__register(v65, (int)&v254, (int)"snork");
+    *(_DWORD *)v66 = &off_10576220;
+  }
+  else
+  {
+    v66 = 0;
+  }
+  sub_10341BF0((int)v2, v66);
+  v254 = 4704396028228673568i64;
+  v67 = xrMemory__mem_alloc(Memory, 24);
+  if ( v67 )
+  {
+    xrFactory__register(v67, (int)&v254, (int)&unk_10525B7C);
+    *(_DWORD *)v67 = &off_1057627C;
+  }
+  else
+  {
+    v67 = 0;
+  }
+  sub_10341BF0((int)v2, v67);
+  v254 = 4704396101578606624i64;
+  v68 = xrMemory__mem_alloc(Memory, 24);
+  v69 = v68;
+  if ( v68 )
+  {
+    xrFactory__register(v68, (int)&v254, (int)"tushkano");
+    *(_DWORD *)v69 = &off_105762DC;
+  }
+  else
+  {
+    v69 = 0;
+  }
+  sub_10341BF0((int)v2, v69);
+  v254 = 4704396084179455572i64;
+  v70 = xrMemory__mem_alloc(Memory, 24);
+  v71 = v70;
+  if ( v70 )
+  {
+    xrFactory__register(v70, (int)&v254, (int)"phantom");
+    *(_DWORD *)v71 = &off_10576340;
+  }
+  else
+  {
+    v71 = 0;
+  }
+  sub_10341BF0((int)v2, v71);
+  v254 = 4704396101527094341i64;
+  v72 = xrMemory__mem_alloc(Memory, 24);
+  if ( v72 )
+  {
+    xrFactory__register(v72, (int)&v254, (int)"trader");
+    *(_DWORD *)v72 = &off_105763A4;
+  }
+  else
+  {
+    v72 = 0;
+  }
+  sub_10341BF0((int)v2, v72);
+  v254 = 4704396028513572640i64;
+  v73 = xrMemory__mem_alloc(Memory, 24);
+  v74 = v73;
+  if ( v73 )
+  {
+    xrFactory__register(v73, (int)&v254, (int)"crow");
+    *(_DWORD *)v74 = &off_10576404;
+  }
+  else
+  {
+    v74 = 0;
+  }
+  sub_10341BF0((int)v2, v74);
+  v254 = 4704396092653183008i64;
+  v75 = xrMemory__mem_alloc(Memory, 24);
+  v76 = v75;
+  if ( v75 )
+  {
+    xrFactory__register(v75, (int)&v254, (int)"rat");
+    *(_DWORD *)v76 = &off_10576468;
+  }
+  else
+  {
+    v76 = 0;
+  }
+  sub_10341BF0((int)v2, v76);
+  v254 = 4854685000215371808i64;
+  v77 = xrMemory__mem_alloc(Memory, 24);
+  if ( v77 )
+  {
+    xrFactory__register(v77, (int)&v254, (int)"car");
+    *(_DWORD *)v77 = &off_105764C4;
+  }
+  else
+  {
+    v77 = 0;
+  }
+  sub_10341BF0((int)v2, v77);
+  v254 = 4854678415712736338i64;
+  v78 = xrMemory__mem_alloc(Memory, 24);
+  v79 = v78;
+  if ( v78 )
+  {
+    xrFactory__register(v78, (int)&v254, (int)"helicopter");
+    *(_DWORD *)v79 = &off_1057651C;
+  }
+  else
+  {
+    v79 = 0;
+  }
+  sub_10341BF0((int)v2, v79);
+  v254 = 4703551646263757900i64;
+  v80 = xrMemory__mem_alloc(Memory, 24);
+  v81 = v80;
+  if ( v80 )
+  {
+    xrFactory__register(v80, (int)&v254, (int)"art_mercury_ball");
+    *(_DWORD *)v81 = &off_10576580;
+  }
+  else
+  {
+    v81 = 0;
+  }
+  sub_10341BF0((int)v2, v81);
+  v254 = 4703551599053786960i64;
+  v82 = xrMemory__mem_alloc(Memory, 24);
+  if ( v82 )
+  {
+    xrFactory__register(v82, (int)&v254, (int)"art_black_drops");
+    *(_DWORD *)v82 = &off_105765E4;
+  }
+  else
+  {
+    v82 = 0;
+  }
+  sub_10341BF0((int)v2, v82);
+  v254 = 4703551650609316940i64;
+  v83 = xrMemory__mem_alloc(Memory, 24);
+  v84 = v83;
+  if ( v83 )
+  {
+    xrFactory__register(v83, (int)&v254, (int)"art_needles");
+    *(_DWORD *)v84 = &off_1057664C;
+  }
+  else
+  {
+    v84 = 0;
+  }
+  sub_10341BF0((int)v2, v84);
+  v254 = 4703551599003522080i64;
+  v85 = xrMemory__mem_alloc(Memory, 24);
+  v86 = v85;
+  if ( v85 )
+  {
+    xrFactory__register(v85, (int)&v254, (int)"art_bast_artefact");
+    *(_DWORD *)v86 = &off_105766BC;
+  }
+  else
+  {
+    v86 = 0;
+  }
+  sub_10341BF0((int)v2, v86);
+  v254 = 4703551599104115030i64;
+  v87 = xrMemory__mem_alloc(Memory, 24);
+  if ( v87 )
+  {
+    xrFactory__register(v87, (int)&v254, (int)"art_gravi_black");
+    *(_DWORD *)v87 = &off_1057664C;
+  }
+  else
+  {
+    v87 = 0;
+  }
+  sub_10341BF0((int)v2, v87);
+  v254 = 4703551607928606041i64;
+  v88 = xrMemory__mem_alloc(Memory, 24);
+  v89 = v88;
+  if ( v88 )
+  {
+    xrFactory__register(v88, (int)&v254, (int)"art_dummy");
+    *(_DWORD *)v89 = &off_10576724;
+  }
+  else
+  {
+    v89 = 0;
+  }
+  sub_10341BF0((int)v2, v89);
+  v254 = 4703551702417293600i64;
+  v90 = xrMemory__mem_alloc(Memory, 24);
+  v91 = v90;
+  if ( v90 )
+  {
+    xrFactory__register(v90, (int)&v254, (int)"art_zuda");
+    *(_DWORD *)v91 = &off_10576790;
+  }
+  else
+  {
+    v91 = 0;
+  }
+  sub_10341BF0((int)v2, v91);
+  v254 = 4703551676430111310i64;
+  v92 = xrMemory__mem_alloc(Memory, 24);
+  if ( v92 )
+  {
+    xrFactory__register(v92, (int)&v254, (int)"art_thorn");
+    *(_DWORD *)v92 = &off_105767F4;
+  }
+  else
+  {
+    v92 = 0;
+  }
+  sub_10341BF0((int)v2, v92);
+  v254 = 4703551616198986828i64;
+  v93 = xrMemory__mem_alloc(Memory, 24);
+  v94 = v93;
+  if ( v93 )
+  {
+    xrFactory__register(v93, (int)&v254, (int)"art_faded_ball");
+    *(_DWORD *)v94 = &off_10576860;
+  }
+  else
+  {
+    v94 = 0;
+  }
+  sub_10341BF0((int)v2, v94);
+  v254 = 4703551611904019532i64;
+  v95 = xrMemory__mem_alloc(Memory, 24);
+  v96 = v95;
+  if ( v95 )
+  {
+    xrFactory__register(v95, (int)&v254, (int)"art_electric_ball");
+    *(_DWORD *)v96 = &off_105768C4;
+  }
+  else
+  {
+    v96 = 0;
+  }
+  sub_10341BF0((int)v2, v96);
+  v254 = 4703551667839256914i64;
+  v97 = xrMemory__mem_alloc(Memory, 24);
+  if ( v97 )
+  {
+    xrFactory__register(v97, (int)&v254, (int)"art_rusty_hair");
+    *(_DWORD *)v97 = &off_1057692C;
+  }
+  else
+  {
+    v97 = 0;
+  }
+  sub_10341BF0((int)v2, v97);
+  v254 = 4703551620477894990i64;
+  v98 = xrMemory__mem_alloc(Memory, 24);
+  v99 = v98;
+  if ( v98 )
+  {
+    xrFactory__register(v98, (int)&v254, (int)"art_galantine");
+    *(_DWORD *)v99 = &off_1057699C;
+  }
+  else
+  {
+    v99 = 0;
+  }
+  sub_10341BF0((int)v2, v99);
+  v254 = 4703551620762392137i64;
+  v100 = xrMemory__mem_alloc(Memory, 24);
+  v101 = v100;
+  if ( v100 )
+  {
+    xrFactory__register(v100, (int)&v254, (int)"art_gravi");
+    *(_DWORD *)v101 = &off_10576A0C;
+  }
+  else
+  {
+    v101 = 0;
+  }
+  sub_10341BF0((int)v2, v101);
+  v254 = 4706917217063748436i64;
+  v102 = xrMemory__mem_alloc(Memory, 24);
+  if ( v102 )
+  {
+    xrFactory__register(v102, (int)&v254, (int)"artefact");
+    *(_DWORD *)v102 = &off_10576A0C;
+  }
+  else
+  {
+    v102 = 0;
+  }
+  sub_10341BF0((int)v2, v102);
+  v254 = 4703551603616063520i64;
+  v103 = xrMemory__mem_alloc(Memory, 24);
+  v104 = v103;
+  if ( v103 )
+  {
+    xrFactory__register(v103, (int)&v254, (int)"art_cta");
+    *(_DWORD *)v104 = &off_10576A78;
+  }
+  else
+  {
+    v104 = 0;
+  }
+  sub_10341BF0((int)v2, v104);
+  v254 = 6295846793406529882i64;
+  v105 = xrMemory__mem_alloc(Memory, 24);
+  v106 = v105;
+  if ( v105 )
+  {
+    xrFactory__register(v105, (int)&v254, (int)"wpn_wmagaz");
+    *(_DWORD *)v106 = &off_10576AE0;
+  }
+  else
+  {
+    v106 = 0;
+  }
+  sub_10341BF0((int)v2, v106);
+  v254 = 6295846793406531404i64;
+  v107 = xrMemory__mem_alloc(Memory, 24);
+  if ( v107 )
+  {
+    xrFactory__register(v107, (int)&v254, (int)"wpn_wmaggl");
+    *(_DWORD *)v107 = &off_10576B50;
+  }
+  else
+  {
+    v107 = 0;
+  }
+  sub_10341BF0((int)v2, v107);
+  v254 = 6295828105750655024i64;
+  v108 = xrMemory__mem_alloc(Memory, 24);
+  v109 = v108;
+  if ( v108 )
+  {
+    xrFactory__register(v108, (int)&v254, (int)"wpn_fn2000");
+    *(_DWORD *)v109 = &off_10576BCC;
+  }
+  else
+  {
+    v109 = 0;
+  }
+  sub_10341BF0((int)v2, v109);
+  v254 = 6295822595391758368i64;
+  v110 = xrMemory__mem_alloc(Memory, 24);
+  v111 = v110;
+  if ( v110 )
+  {
+    xrFactory__register(v110, (int)&v254, (int)"wpn_ak74");
+    *(_DWORD *)v111 = &off_10576C40;
+  }
+  else
+  {
+    v111 = 0;
+  }
+  sub_10341BF0((int)v2, v111);
+  v254 = 6295834720017068064i64;
+  v112 = xrMemory__mem_alloc(Memory, 24);
+  if ( v112 )
+  {
+    xrFactory__register(v112, (int)&v254, (int)"wpn_lr300");
+    *(_DWORD *)v112 = &off_10576CAC;
+  }
+  else
+  {
+    v112 = 0;
+  }
+  sub_10341BF0((int)v2, v112);
+  v254 = 6295830313918603296i64;
+  v113 = xrMemory__mem_alloc(Memory, 24);
+  v114 = v113;
+  if ( v113 )
+  {
+    xrFactory__register(v113, (int)&v254, (int)"wpn_hpsa");
+    *(_DWORD *)v114 = &off_10576D1C;
+  }
+  else
+  {
+    v114 = 0;
+  }
+  sub_10341BF0((int)v2, v114);
+  v254 = 6295839096268922912i64;
+  v115 = xrMemory__mem_alloc(Memory, 24);
+  v116 = v115;
+  if ( v115 )
+  {
+    xrFactory__register(v115, (int)&v254, (int)"wpn_pm");
+    *(_DWORD *)v116 = &off_10576D8C;
+  }
+  else
+  {
+    v116 = 0;
+  }
+  sub_10341BF0((int)v2, v116);
+  v254 = 6295828110584848416i64;
+  v117 = xrMemory__mem_alloc(Memory, 24);
+  if ( v117 )
+  {
+    xrFactory__register(v117, (int)&v254, (int)"wpn_fort");
+    *(_DWORD *)v117 = &off_10576DF8;
+  }
+  else
+  {
+    v117 = 0;
+  }
+  sub_10341BF0((int)v2, v117);
+  v254 = 6295823686701105952i64;
+  v118 = xrMemory__mem_alloc(Memory, 24);
+  v119 = v118;
+  if ( v118 )
+  {
+    xrFactory__register(v118, (int)&v254, (int)"wpn_binocular");
+    *(_DWORD *)v119 = &off_10576E64;
+  }
+  else
+  {
+    v119 = 0;
+  }
+  sub_10341BF0((int)v2, v119);
+  v254 = 6295842374120916814i64;
+  v120 = xrMemory__mem_alloc(Memory, 24);
+  v121 = v120;
+  if ( v120 )
+  {
+    xrFactory__register(v120, (int)&v254, (int)"wpn_shotgun");
+    *(_DWORD *)v121 = &off_10576ED8;
+  }
+  else
+  {
+    v121 = 0;
+  }
+  sub_10341BF0((int)v2, v121);
+  v254 = 6295842434062491680i64;
+  v122 = xrMemory__mem_alloc(Memory, 24);
+  if ( v122 )
+  {
+    xrFactory__register(v122, (int)&v254, (int)"wpn_svd");
+    *(_DWORD *)v122 = &off_10576F44;
+  }
+  else
+  {
+    v122 = 0;
+  }
+  sub_10341BF0((int)v2, v122);
+  v254 = 6295842434347704352i64;
+  v123 = xrMemory__mem_alloc(Memory, 24);
+  v124 = v123;
+  if ( v123 )
+  {
+    xrFactory__register(v123, (int)&v254, (int)"wpn_svu");
+    *(_DWORD *)v124 = &off_10576FB0;
+  }
+  else
+  {
+    v124 = 0;
+  }
+  sub_10341BF0((int)v2, v124);
+  v254 = 6295841308832899104i64;
+  v125 = xrMemory__mem_alloc(Memory, 24);
+  v126 = v125;
+  if ( v125 )
+  {
+    xrFactory__register(v125, (int)&v254, (int)"wpn_rpg7");
+    *(_DWORD *)v126 = &off_10577018;
+  }
+  else
+  {
+    v126 = 0;
+  }
+  sub_10341BF0((int)v2, v126);
+  v254 = 6295845642537279520i64;
+  v127 = xrMemory__mem_alloc(Memory, 24);
+  if ( v127 )
+  {
+    xrFactory__register(v127, (int)&v254, (int)"wpn_val");
+    *(_DWORD *)v127 = &off_10577084;
+  }
+  else
+  {
+    v127 = 0;
+  }
+  sub_10341BF0((int)v2, v127);
+  v254 = 6295845676933980192i64;
+  v128 = xrMemory__mem_alloc(Memory, 24);
+  v129 = v128;
+  if ( v128 )
+  {
+    xrFactory__register(v128, (int)&v254, (int)"wpn_vintorez");
+    *(_DWORD *)v129 = &off_105770F0;
+  }
+  else
+  {
+    v129 = 0;
+  }
+  sub_10341BF0((int)v2, v129);
+  v254 = 6295846742052325458i64;
+  v130 = xrMemory__mem_alloc(Memory, 24);
+  v131 = v130;
+  if ( v130 )
+  {
+    xrFactory__register(v130, (int)&v254, (int)"wpn_walther");
+    *(_DWORD *)v131 = &off_10577160;
+  }
+  else
+  {
+    v131 = 0;
+  }
+  sub_10341BF0((int)v2, v131);
+  v254 = 6295844620403488032i64;
+  v132 = xrMemory__mem_alloc(Memory, 24);
+  if ( v132 )
+  {
+    xrFactory__register(v132, (int)&v254, (int)"wpn_usp45");
+    *(_DWORD *)v132 = &off_105771CC;
+  }
+  else
+  {
+    v132 = 0;
+  }
+  sub_10341BF0((int)v2, v132);
+  v254 = 6295829222931448096i64;
+  v133 = xrMemory__mem_alloc(Memory, 24);
+  v134 = v133;
+  if ( v133 )
+  {
+    xrFactory__register(v133, (int)&v254, (int)"wpn_groza");
+    *(_DWORD *)v134 = &off_1057723C;
+  }
+  else
+  {
+    v134 = 0;
+  }
+  sub_10341BF0((int)v2, v134);
+  v254 = 6295833603696117024i64;
+  v135 = xrMemory__mem_alloc(Memory, 24);
+  v136 = v135;
+  if ( v135 )
+  {
+    xrFactory__register(v135, (int)&v254, (int)"wpn_knife");
+    *(_DWORD *)v136 = &off_105772B0;
+  }
+  else
+  {
+    v136 = 0;
+  }
+  sub_10341BF0((int)v2, v136);
+  v254 = 6295823703392788512i64;
+  v137 = xrMemory__mem_alloc(Memory, 24);
+  if ( v137 )
+  {
+    xrFactory__register(v137, (int)&v254, (int)"wpn_bm16");
+    *(_DWORD *)v137 = &off_10577314;
+  }
+  else
+  {
+    v137 = 0;
+  }
+  sub_10341BF0((int)v2, v137);
+  v254 = 6295841269891473440i64;
+  v138 = xrMemory__mem_alloc(Memory, 24);
+  v139 = v138;
+  if ( v138 )
+  {
+    xrFactory__register(v138, (int)&v254, (int)"wpn_rg6");
+    *(_DWORD *)v139 = &off_10577380;
+  }
+  else
+  {
+    v139 = 0;
+  }
+  sub_10341BF0((int)v2, v139);
+  v254 = 4705502187908767776i64;
+  v140 = xrMemory__mem_alloc(Memory, 24);
+  v141 = v140;
+  if ( v140 )
+  {
+    xrFactory__register(v140, (int)&v254, (int)"wpn_ammo");
+    *(_DWORD *)v141 = &off_105773E8;
+  }
+  else
+  {
+    v141 = 0;
+  }
+  sub_10341BF0((int)v2, v141);
+  v254 = 4710578633749706016i64;
+  v142 = xrMemory__mem_alloc(Memory, 24);
+  if ( v142 )
+  {
+    xrFactory__register(v142, (int)&v254, (int)"wpn_ammo_vog25");
+    *(_DWORD *)v142 = &off_105773E8;
+  }
+  else
+  {
+    v142 = 0;
+  }
+  sub_10341BF0((int)v2, v142);
+  v254 = 4710570902541180960i64;
+  v143 = xrMemory__mem_alloc(Memory, 24);
+  v144 = v143;
+  if ( v143 )
+  {
+    xrFactory__register(v143, (int)&v254, (int)"wpn_ammo_og7b");
+    *(_DWORD *)v144 = &off_105773E8;
+  }
+  else
+  {
+    v144 = 0;
+  }
+  sub_10341BF0((int)v2, v144);
+  v254 = 4710568613205581856i64;
+  v145 = xrMemory__mem_alloc(Memory, 24);
+  v146 = v145;
+  if ( v145 )
+  {
+    xrFactory__register(v145, (int)&v254, (int)"wpn_ammo_m209");
+    *(_DWORD *)v146 = &off_105773E8;
+  }
+  else
+  {
+    v146 = 0;
+  }
+  sub_10341BF0((int)v2, v146);
+  v254 = 6295842352645817632i64;
+  v147 = xrMemory__mem_alloc(Memory, 24);
+  if ( v147 )
+  {
+    xrFactory__register(v147, (int)&v254, (int)"wpn_scope");
+    *(_DWORD *)v147 = &off_10577448;
+  }
+  else
+  {
+    v147 = 0;
+  }
+  sub_10341BF0((int)v2, v147);
+  v254 = 6295842378364571203i64;
+  v148 = xrMemory__mem_alloc(Memory, 24);
+  v149 = v148;
+  if ( v148 )
+  {
+    xrFactory__register(v148, (int)&v254, (int)"wpn_silencer");
+    *(_DWORD *)v149 = &off_105774A0;
+  }
+  else
+  {
+    v149 = 0;
+  }
+  sub_10341BF0((int)v2, v149);
+  v254 = 6295829196926438979i64;
+  v150 = xrMemory__mem_alloc(Memory, 24);
+  v151 = v150;
+  if ( v150 )
+  {
+    xrFactory__register(v150, (int)&v254, (int)"wpn_grenade_launcher");
+    *(_DWORD *)v151 = &off_105774F8;
+  }
+  else
+  {
+    v151 = 0;
+  }
+  sub_10341BF0((int)v2, v151);
+  v254 = 5280856776471499808i64;
+  v152 = xrMemory__mem_alloc(Memory, 24);
+  if ( v152 )
+  {
+    xrFactory__register(v152, (int)&v254, (int)"obj_bolt");
+    *(_DWORD *)v152 = &off_10577558;
+  }
+  else
+  {
+    v152 = 0;
+  }
+  sub_10341BF0((int)v2, v152);
+  v254 = 5280856823547841353i64;
+  v153 = xrMemory__mem_alloc(Memory, 24);
+  v154 = v153;
+  if ( v153 )
+  {
+    xrFactory__register(v153, (int)&v254, (int)"obj_medkit");
+    *(_DWORD *)v154 = &off_105775B0;
+  }
+  else
+  {
+    v154 = 0;
+  }
+  sub_10341BF0((int)v2, v154);
+  v254 = 5280856776236745799i64;
+  v155 = xrMemory__mem_alloc(Memory, 24);
+  v156 = v155;
+  if ( v155 )
+  {
+    xrFactory__register(v155, (int)&v254, (int)"obj_bandage");
+    *(_DWORD *)v156 = &off_105775B0;
+  }
+  else
+  {
+    v156 = 0;
+  }
+  sub_10341BF0((int)v2, v156);
+  v254 = 5280856772160276818i64;
+  v157 = xrMemory__mem_alloc(Memory, 24);
+  if ( v157 )
+  {
+    xrFactory__register(v157, (int)&v254, (int)"obj_antirad");
+    *(_DWORD *)v157 = &off_10577608;
+  }
+  else
+  {
+    v157 = 0;
+  }
+  sub_10341BF0((int)v2, v157);
+  v254 = 5280856793651561504i64;
+  v158 = xrMemory__mem_alloc(Memory, 24);
+  v159 = v158;
+  if ( v158 )
+  {
+    xrFactory__register(v158, (int)&v254, (int)"obj_food");
+    *(_DWORD *)v159 = &off_10577660;
+  }
+  else
+  {
+    v159 = 0;
+  }
+  sub_10341BF0((int)v2, v159);
+  v254 = 5280856776472024140i64;
+  v160 = xrMemory__mem_alloc(Memory, 24);
+  v161 = v160;
+  if ( v160 )
+  {
+    xrFactory__register(v160, (int)&v254, (int)"obj_bottle");
+    *(_DWORD *)v161 = &off_105776B8;
+  }
+  else
+  {
+    v161 = 0;
+  }
+  sub_10341BF0((int)v2, v161);
+  v254 = 5280856789507656783i64;
+  v162 = xrMemory__mem_alloc(Memory, 24);
+  if ( v162 )
+  {
+    xrFactory__register(v162, (int)&v254, (int)"obj_explosive");
+    *(_DWORD *)v162 = &off_10577714;
+  }
+  else
+  {
+    v162 = 0;
+  }
+  sub_10341BF0((int)v2, v162);
+  v254 = 5280856785060831264i64;
+  v163 = xrMemory__mem_alloc(Memory, 24);
+  v164 = v163;
+  if ( v163 )
+  {
+    xrFactory__register(v163, (int)&v254, (int)"obj_document");
+    *(_DWORD *)v164 = &off_10577780;
+  }
+  else
+  {
+    v164 = 0;
+  }
+  sub_10341BF0((int)v2, v164);
+  v254 = 5280856772260938568i64;
+  v165 = xrMemory__mem_alloc(Memory, 24);
+  v166 = v165;
+  if ( v165 )
+  {
+    xrFactory__register(v165, (int)&v254, (int)"obj_attachable");
+    *(_DWORD *)v166 = &off_105777E4;
+  }
+  else
+  {
+    v166 = 0;
+  }
+  sub_10341BF0((int)v2, v166);
+  v254 = 4994867329637763397i64;
+  v167 = xrMemory__mem_alloc(Memory, 24);
+  if ( v167 )
+  {
+    xrFactory__register(v167, (int)&v254, (int)"equ_scientific");
+    *(_DWORD *)v167 = &off_1057784C;
+  }
+  else
+  {
+    v167 = 0;
+  }
+  sub_10341BF0((int)v2, v167);
+  v254 = 4994867329638878283i64;
+  v168 = xrMemory__mem_alloc(Memory, 24);
+  v169 = v168;
+  if ( v168 )
+  {
+    xrFactory__register(v168, (int)&v254, (int)"equ_stalker");
+    *(_DWORD *)v169 = &off_105778BC;
+  }
+  else
+  {
+    v169 = 0;
+  }
+  sub_10341BF0((int)v2, v169);
+  v254 = 4994867329537692754i64;
+  v170 = xrMemory__mem_alloc(Memory, 24);
+  v171 = v170;
+  if ( v170 )
+  {
+    xrFactory__register(v170, (int)&v254, (int)"equ_military");
+    *(_DWORD *)v171 = &off_1057792C;
+  }
+  else
+  {
+    v171 = 0;
+  }
+  sub_10341BF0((int)v2, v171);
+  v254 = 4994867329404260128i64;
+  v172 = xrMemory__mem_alloc(Memory, 24);
+  if ( v172 )
+  {
+    xrFactory__register(v172, (int)&v254, (int)"equ_exo");
+    *(_DWORD *)v172 = &off_1057799C;
+  }
+  else
+  {
+    v172 = 0;
+  }
+  sub_10341BF0((int)v2, v172);
+  v254 = 4994878225853007188i64;
+  v173 = xrMemory__mem_alloc(Memory, 24);
+  v174 = v173;
+  if ( v173 )
+  {
+    xrFactory__register(v173, (int)&v254, (int)"helmet");
+    *(_DWORD *)v174 = &off_10577A08;
+  }
+  else
+  {
+    v174 = 0;
+  }
+  sub_10341BF0((int)v2, v174);
+  v254 = 5142906476286713888i64;
+  v175 = xrMemory__mem_alloc(Memory, 24);
+  v176 = v175;
+  if ( v175 )
+  {
+    xrFactory__register(v175, (int)&v254, (int)"wpn_grenade_f1");
+    *(_DWORD *)v176 = &off_10577A60;
+  }
+  else
+  {
+    v176 = 0;
+  }
+  sub_10341BF0((int)v2, v176);
+  v254 = 5142919765520883744i64;
+  v177 = xrMemory__mem_alloc(Memory, 24);
+  if ( v177 )
+  {
+    xrFactory__register(v177, (int)&v254, (int)"wpn_grenade_rgd5");
+    *(_DWORD *)v177 = &off_10577ABC;
+  }
+  else
+  {
+    v177 = 0;
+  }
+  sub_10341BF0((int)v2, v177);
+  v254 = 5142919804226052128i64;
+  v178 = xrMemory__mem_alloc(Memory, 24);
+  v179 = v178;
+  if ( v178 )
+  {
+    xrFactory__register(v178, (int)&v254, (int)"wpn_grenade_rpg7");
+    *(_DWORD *)v179 = &off_10577B1C;
+  }
+  else
+  {
+    v179 = 0;
+  }
+  sub_10341BF0((int)v2, v179);
+  v254 = 5142906545730035744i64;
+  v180 = xrMemory__mem_alloc(Memory, 24);
+  v181 = v180;
+  if ( v180 )
+  {
+    xrFactory__register(v180, (int)&v254, (int)"wpn_grenade_fake");
+    *(_DWORD *)v181 = &off_10577B1C;
+  }
+  else
+  {
+    v181 = 0;
+  }
+  sub_10341BF0((int)v2, v181);
+  v254 = 5571057537538736455i64;
+  v182 = xrMemory__mem_alloc(Memory, 24);
+  if ( v182 )
+  {
+    xrFactory__register(v182, (int)&v254, (int)"mp_players_bag");
+    *(_DWORD *)v182 = &off_10577B80;
+  }
+  else
+  {
+    v182 = 0;
+  }
+  sub_10341BF0((int)v2, v182);
+  v254 = 6512022882863095840i64;
+  v183 = xrMemory__mem_alloc(Memory, 24);
+  v184 = v183;
+  if ( v183 )
+  {
+    xrFactory__register(v183, (int)&v254, (int)"zone");
+    *(_DWORD *)v184 = &off_10577BDC;
+  }
+  else
+  {
+    v184 = 0;
+  }
+  sub_10341BF0((int)v2, v184);
+  v254 = 6512008533159724064i64;
+  v185 = xrMemory__mem_alloc(Memory, 24);
+  v186 = v185;
+  if ( v185 )
+  {
+    xrFactory__register(v185, (int)&v254, (int)"zone_mosquito_bald");
+    *(_DWORD *)v186 = &off_10577C40;
+  }
+  else
+  {
+    v186 = 0;
+  }
+  sub_10341BF0((int)v2, v186);
+  v254 = 6512008563442009426i64;
+  v187 = xrMemory__mem_alloc(Memory, 24);
+  if ( v187 )
+  {
+    xrFactory__register(v187, (int)&v254, (int)"zone_mincer");
+    *(_DWORD *)v187 = &off_10577CA8;
+  }
+  else
+  {
+    v187 = 0;
+  }
+  sub_10341BF0((int)v2, v187);
+  v254 = 6511995343448852000i64;
+  v188 = xrMemory__mem_alloc(Memory, 24);
+  v189 = v188;
+  if ( v188 )
+  {
+    xrFactory__register(v188, (int)&v254, (int)"zone_acid_fog");
+    *(_DWORD *)v189 = &off_10577C40;
+  }
+  else
+  {
+    v189 = 0;
+  }
+  sub_10341BF0((int)v2, v189);
+  v254 = 6512001931978821204i64;
+  v190 = xrMemory__mem_alloc(Memory, 24);
+  v191 = v190;
+  if ( v190 )
+  {
+    xrFactory__register(v190, (int)&v254, (int)"zone_galantine");
+    *(_DWORD *)v191 = &off_10577CA8;
+  }
+  else
+  {
+    v191 = 0;
+  }
+  sub_10341BF0((int)v2, v191);
+  v254 = 6512014026473033504i64;
+  v192 = xrMemory__mem_alloc(Memory, 24);
+  if ( v192 )
+  {
+    xrFactory__register(v192, (int)&v254, (int)"zone_radioactive");
+    *(_DWORD *)v192 = &off_10577D08;
+  }
+  else
+  {
+    v192 = 0;
+  }
+  sub_10341BF0((int)v2, v192);
+  v254 = 6511996456048155168i64;
+  v193 = xrMemory__mem_alloc(Memory, 24);
+  v194 = v193;
+  if ( v193 )
+  {
+    xrFactory__register(v193, (int)&v254, (int)"zone_bfuzz");
+    *(_DWORD *)v194 = &off_10577D70;
+  }
+  else
+  {
+    v194 = 0;
+  }
+  sub_10341BF0((int)v2, v194);
+  v254 = 6512014112624761160i64;
+  v195 = xrMemory__mem_alloc(Memory, 24);
+  v196 = v195;
+  if ( v195 )
+  {
+    xrFactory__register(v195, (int)&v254, (int)"zone_rusty_hair");
+    *(_DWORD *)v196 = &off_10577D70;
+  }
+  else
+  {
+    v196 = 0;
+  }
+  sub_10341BF0((int)v2, v196);
+  v254 = 6511998650439442464i64;
+  v197 = xrMemory__mem_alloc(Memory, 24);
+  if ( v197 )
+  {
+    xrFactory__register(v197, (int)&v254, (int)"zone_dead");
+    *(_DWORD *)v197 = &off_10577C40;
+  }
+  else
+  {
+    v197 = 0;
+  }
+  sub_10341BF0((int)v2, v197);
+  v254 = 5500667846739248978i64;
+  v198 = xrMemory__mem_alloc(Memory, 24);
+  v199 = v198;
+  if ( v198 )
+  {
+    xrFactory__register(v198, (int)&v254, (int)"level_changer");
+    *(_DWORD *)v199 = &off_10577DD0;
+  }
+  else
+  {
+    v199 = 0;
+  }
+  sub_10341BF0((int)v2, v199);
+  v254 = 5999729603421428302i64;
+  v200 = xrMemory__mem_alloc(Memory, 24);
+  v201 = v200;
+  if ( v200 )
+  {
+    xrFactory__register(v200, (int)&v254, (int)"script_zone");
+    *(_DWORD *)v201 = &off_10577E34;
+  }
+  else
+  {
+    v201 = 0;
+  }
+  sub_10341BF0((int)v2, v201);
+  v254 = 6002544400600616517i64;
+  v202 = xrMemory__mem_alloc(Memory, 24);
+  if ( v202 )
+  {
+    xrFactory__register(v202, (int)&v254, (int)"smart_zone");
+    *(_DWORD *)v202 = &off_10577EA0;
+  }
+  else
+  {
+    v202 = 0;
+  }
+  sub_10341BF0((int)v2, v202);
+  v254 = 6512016242626085459i64;
+  v203 = xrMemory__mem_alloc(Memory, 24);
+  v204 = v203;
+  if ( v203 )
+  {
+    xrFactory__register(v203, (int)&v254, (int)"team_base_zone");
+    *(_DWORD *)v204 = &off_10577F00;
+  }
+  else
+  {
+    v204 = 0;
+  }
+  sub_10341BF0((int)v2, v204);
+  v254 = 6512016285861300548i64;
+  v205 = xrMemory__mem_alloc(Memory, 24);
+  v206 = v205;
+  if ( v205 )
+  {
+    xrFactory__register(v205, (int)&v254, (int)"torrid_zone");
+    *(_DWORD *)v206 = &off_10577F64;
+  }
+  else
+  {
+    v206 = 0;
+  }
+  sub_10341BF0((int)v2, v206);
+  v254 = 6003370060467360339i64;
+  v207 = xrMemory__mem_alloc(Memory, 24);
+  if ( v207 )
+  {
+    xrFactory__register(v207, (int)&v254, (int)"space_restrictor");
+    *(_DWORD *)v207 = &off_10577FC8;
+  }
+  else
+  {
+    v207 = 0;
+  }
+  sub_10341BF0((int)v2, v207);
+  v254 = 6512009688606982486i64;
+  v208 = xrMemory__mem_alloc(Memory, 24);
+  v209 = v208;
+  if ( v208 )
+  {
+    xrFactory__register(v208, (int)&v254, (int)"nogravity_zone");
+    *(_DWORD *)v209 = &off_10578034;
+  }
+  else
+  {
+    v209 = 0;
+  }
+  sub_10341BF0((int)v2, v209);
+  v254 = 6511997555357926688i64;
+  v210 = xrMemory__mem_alloc(Memory, 24);
+  v211 = v210;
+  if ( v210 )
+  {
+    xrFactory__register(v210, (int)&v254, (int)"zone_campfire");
+    *(_DWORD *)v211 = &off_10578328;
+  }
+  else
+  {
+    v211 = 0;
+  }
+  sub_10341BF0((int)v2, v211);
+  v254 = 4926748091660649812i64;
+  v212 = xrMemory__mem_alloc(Memory, 24);
+  if ( v212 )
+  {
+    xrFactory__register(v212, (int)&v254, (int)"device_detector_simple");
+    *(_DWORD *)v212 = &off_10578390;
+  }
+  else
+  {
+    v212 = 0;
+  }
+  sub_10341BF0((int)v2, v212);
+  v254 = 4926728279127313987i64;
+  v213 = xrMemory__mem_alloc(Memory, 24);
+  v214 = v213;
+  if ( v213 )
+  {
+    xrFactory__register(v213, (int)&v254, (int)"device_detector_advanced");
+    *(_DWORD *)v214 = &off_105783F8;
+  }
+  else
+  {
+    v214 = 0;
+  }
+  sub_10341BF0((int)v2, v214);
+  v254 = 4926732711316702496i64;
+  v215 = xrMemory__mem_alloc(Memory, 24);
+  v216 = v215;
+  if ( v215 )
+  {
+    xrFactory__register(v215, (int)&v254, (int)"device_detector_elite");
+    *(_DWORD *)v216 = &off_10578460;
+  }
+  else
+  {
+    v216 = 0;
+  }
+  sub_10341BF0((int)v2, v216);
+  v254 = 4926748065823805012i64;
+  v217 = xrMemory__mem_alloc(Memory, 24);
+  if ( v217 )
+  {
+    xrFactory__register(v217, (int)&v254, (int)"device_detector_scientific");
+    *(_DWORD *)v217 = &off_105784C8;
+  }
+  else
+  {
+    v217 = 0;
+  }
+  sub_10341BF0((int)v2, v217);
+  v254 = 4926749217025902624i64;
+  v218 = xrMemory__mem_alloc(Memory, 24);
+  v219 = v218;
+  if ( v218 )
+  {
+    xrFactory__register(v218, (int)&v254, (int)"device_torch");
+    *(_DWORD *)v219 = &off_10578534;
+  }
+  else
+  {
+    v219 = 0;
+  }
+  sub_10341BF0((int)v2, v219);
+  v254 = 4926744771447234592i64;
+  v220 = xrMemory__mem_alloc(Memory, 24);
+  v221 = v220;
+  if ( v220 )
+  {
+    xrFactory__register(v220, (int)&v254, (int)"device_pda");
+    *(_DWORD *)v221 = &off_10578594;
+  }
+  else
+  {
+    v221 = 0;
+  }
+  sub_10341BF0((int)v2, v221);
+  v254 = 4926733810693981472i64;
+  v222 = xrMemory__mem_alloc(Memory, 24);
+  if ( v222 )
+  {
+    xrFactory__register(v222, (int)&v254, (int)"device_flare");
+    *(_DWORD *)v222 = &off_105785F0;
+  }
+  else
+  {
+    v222 = 0;
+  }
+  sub_10341BF0((int)v2, v222);
+  v254 = 5719381608697578312i64;
+  v223 = xrMemory__mem_alloc(Memory, 24);
+  v224 = v223;
+  if ( v223 )
+  {
+    xrFactory__register(v223, (int)&v254, (int)"projector");
+    *(_DWORD *)v224 = &off_10578648;
+  }
+  else
+  {
+    v224 = 0;
+  }
+  sub_10341BF0((int)v2, v224);
+  v254 = 6295842425626121550i64;
+  v225 = xrMemory__mem_alloc(Memory, 24);
+  v226 = v225;
+  if ( v225 )
+  {
+    xrFactory__register(v225, (int)&v254, (int)"wpn_stat_mgun");
+    *(_DWORD *)v226 = &off_105786AC;
+  }
+  else
+  {
+    v226 = 0;
+  }
+  sub_10341BF0((int)v2, v226);
+  v254 = 5719369544134119456i64;
+  v227 = xrMemory__mem_alloc(Memory, 24);
+  if ( v227 )
+  {
+    xrFactory__register(v227, (int)&v254, (int)"hanging_lamp");
+    *(_DWORD *)v227 = &off_10578718;
+  }
+  else
+  {
+    v227 = 0;
+  }
+  sub_10341BF0((int)v2, v227);
+  v254 = 5719378323450317123i64;
+  v228 = xrMemory__mem_alloc(Memory, 24);
+  v229 = v228;
+  if ( v228 )
+  {
+    xrFactory__register(v228, (int)&v254, (int)"obj_physic");
+    *(_DWORD *)v229 = &off_10578780;
+  }
+  else
+  {
+    v229 = 0;
+  }
+  sub_10341BF0((int)v2, v229);
+  v254 = 5999729633552974410i64;
+  v230 = xrMemory__mem_alloc(Memory, 24);
+  v231 = v230;
+  if ( v230 )
+  {
+    xrFactory__register(v230, (int)&v254, (int)"script_object");
+    *(_DWORD *)v231 = &off_105787E4;
+  }
+  else
+  {
+    v231 = 0;
+  }
+  sub_10341BF0((int)v2, v231);
+  v254 = 5719362973001206816i64;
+  v232 = xrMemory__mem_alloc(Memory, 24);
+  if ( v232 )
+  {
+    xrFactory__register(v232, (int)&v254, (int)"obj_breakable");
+    *(_DWORD *)v232 = &off_10578854;
+  }
+  else
+  {
+    v232 = 0;
+  }
+  sub_10341BF0((int)v2, v232);
+  v254 = 5719364046776585248i64;
+  v233 = xrMemory__mem_alloc(Memory, 24);
+  v234 = v233;
+  if ( v233 )
+  {
+    xrFactory__register(v233, (int)&v254, (int)"obj_climable");
+    *(_DWORD *)v234 = &off_105788C4;
+  }
+  else
+  {
+    v234 = 0;
+  }
+  sub_10341BF0((int)v2, v234);
+  v254 = 5791439228572026196i64;
+  v235 = xrMemory__mem_alloc(Memory, 24);
+  v236 = v235;
+  if ( v235 )
+  {
+    xrFactory__register(v235, (int)&v254, (int)"obj_phskeleton");
+    *(_DWORD *)v236 = &off_10578930;
+  }
+  else
+  {
+    v236 = 0;
+  }
+  sub_10341BF0((int)v2, v236);
+  v254 = 5791422770509398604i64;
+  v237 = xrMemory__mem_alloc(Memory, 24);
+  if ( v237 )
+  {
+    xrFactory__register(v237, (int)&v254, (int)"obj_phys_destroyable");
+    *(_DWORD *)v237 = &off_105789A4;
+  }
+  else
+  {
+    v237 = 0;
+  }
+  sub_10341BF0((int)v2, v237);
+  v254 = 5719370652587282264i64;
+  v238 = xrMemory__mem_alloc(Memory, 24);
+  v239 = v238;
+  if ( v238 )
+  {
+    xrFactory__register(v238, (int)&v254, (int)"inventory_box");
+    *(_DWORD *)v239 = &off_10578A18;
+  }
+  else
+  {
+    v239 = 0;
+  }
+  sub_10341BF0((int)v2, v239);
+  LODWORD(v242) = ((int (__stdcall *)(_DWORD))TEXT2CLSID)("SMRTCOVR");
+  v254 = v242;
+  v240 = xrMemory__mem_alloc(Memory, 24);
+  v241 = v240;
+  if ( v240 )
+  {
+    xrFactory__register(v240, (int)&v254, (int)"smart_cover");
+    *(_DWORD *)v241 = &off_10578A7C;
+  }
+  else
+  {
+    v241 = 0;
+  }
+  sub_10341BF0((int)v2, v241);
+  result = g_dedicated_server;
+  if ( g_dedicated_server )
+  {
+    v254 = TEXT2CLSID("SCRPTART");
+    v244 = xrMemory__mem_alloc(Memory, 24);
+    v245 = v244;
+    if ( v244 )
+    {
+      xrFactory__register(v244, (int)&v254, (int)"artefact_s");
+      *(_DWORD *)v245 = &off_105768C4;
+    }
+    else
+    {
+      v245 = 0;
+    }
+    sub_10341BF0((int)v2, v245);
+    v254 = TEXT2CLSID("TORCH_S");
+    v246 = xrMemory__mem_alloc(Memory, 24);
+    v247 = v246;
+    if ( v246 )
+    {
+      xrFactory__register(v246, (int)&v254, (int)"device_torch_s");
+      *(_DWORD *)v247 = &off_10578534;
+    }
+    else
+    {
+      v247 = 0;
+    }
+    sub_10341BF0((int)v2, v247);
+    v254 = TEXT2CLSID("E_STLK");
+    v248 = xrMemory__mem_alloc(Memory, 24);
+    if ( v248 )
+    {
+      xrFactory__register(v248, (int)&v254, (int)"equ_stalker_s");
+      *(_DWORD *)v248 = &off_105778BC;
+    }
+    else
+    {
+      v248 = 0;
+    }
+    sub_10341BF0((int)v2, v248);
+    v254 = TEXT2CLSID("WP_SCOPE");
+    v249 = xrMemory__mem_alloc(Memory, 24);
+    v250 = v249;
+    if ( v249 )
+    {
+      xrFactory__register(v249, (int)&v254, (int)"wpn_scope_s");
+      *(_DWORD *)v250 = &off_10577448;
+    }
+    else
+    {
+      v250 = 0;
+    }
+    sub_10341BF0((int)v2, v250);
+    v254 = TEXT2CLSID("WP_AK74");
+    v251 = xrMemory__mem_alloc(Memory, 24);
+    v252 = v251;
+    if ( v251 )
+    {
+      xrFactory__register(v251, (int)&v254, (int)"wpn_ak74_s");
+      *(_DWORD *)v252 = &off_10576C40;
+    }
+    else
+    {
+      v252 = 0;
+    }
+    sub_10341BF0((int)v2, v252);
+    v254 = TEXT2CLSID("WP_LR300");
+    v253 = xrMemory__mem_alloc(Memory, 24);
+    if ( v253 )
+    {
+      xrFactory__register(v253, (int)&v254, (int)"wpn_lr300_s");
+      *(_DWORD *)v253 = &off_10576CAC;
+    }
+    else
+    {
+      v253 = 0;
+    }
+    sub_10341BF0((int)v2, v253);
+    v254 = TEXT2CLSID("WP_BINOC");
+    sub_10341D70(v2, (int)&v254, (int)"wpn_binocular_s");
+    v254 = TEXT2CLSID("WP_BM16");
+    sub_103420E0(v2, (int)&v254, (int)"wpn_bm16_s");
+    v254 = TEXT2CLSID("WP_GROZA");
+    sub_10342040(v2, (int)&v254, (int)"wpn_groza_s");
+    v254 = TEXT2CLSID("WP_SVD");
+    sub_10341E10(v2, (int)&v254, (int)"wpn_svd_s");
+    v254 = TEXT2CLSID("WP_HPSA");
+    sub_10341CD0(v2, (int)&v254, (int)"wpn_hpsa_s");
+    v254 = TEXT2CLSID("WP_KNIFE");
+    sub_10342090(v2, (int)&v254, (int)"wpn_knife_s");
+    v254 = TEXT2CLSID("WP_PM");
+    sub_10341D20(v2, (int)&v254, (int)"wpn_pm_s");
+    v254 = TEXT2CLSID("WP_RG6");
+    sub_10342130(v2, (int)&v254, (int)"wpn_rg6_s");
+    v254 = TEXT2CLSID("WP_RPG7");
+    sub_10341EB0(v2, (int)&v254, (int)"wpn_rpg7_s");
+    v254 = TEXT2CLSID("WP_SHOTG");
+    sub_10341DC0(v2, (int)&v254, (int)"wpn_shotgun_s");
+    v254 = TEXT2CLSID("WP_SVU");
+    sub_10341E60(v2, (int)&v254, (int)"wpn_svu_s");
+    v254 = TEXT2CLSID("WP_USP45");
+    sub_10341FF0(v2, (int)&v254, (int)"wpn_usp45_s");
+    v254 = TEXT2CLSID("WP_VAL");
+    sub_10341F00(v2, (int)&v254, (int)"wpn_val_s");
+    v254 = TEXT2CLSID("WP_VINT");
+    sub_10341F50(v2, (int)&v254, (int)"wpn_vintorez_s");
+    v254 = TEXT2CLSID("WP_WALTH");
+    sub_10341FA0(v2, (int)&v254, (int)"wpn_walther_s");
+    v254 = TEXT2CLSID("ZS_BFUZZ");
+    sub_10342220(v2, (int)&v254, (int)"zone_bfuzz_s");
+    v254 = TEXT2CLSID("ZS_MBALD");
+    sub_10342180(v2, (int)&v254, (int)"zone_mbald_s");
+    v254 = TEXT2CLSID("ZS_GALAN");
+    sub_103421D0(v2, (int)&v254, (int)"zone_galant_s");
+    v254 = TEXT2CLSID("ZS_MINCE");
+    sub_103421D0(v2, (int)&v254, (int)"zone_mincer_s");
+    v254 = TEXT2CLSID("SPC_RS_S");
+    result = sub_10342270(v2, (int)&v254, (int)"script_restr");
+  }
+  return result;
+}

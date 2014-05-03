@@ -1,0 +1,228 @@
+.text:0041E970 ; int __stdcall cmd_start(char *Str)
+.text:0041E970 cmd_start       proc near               ; DATA XREF: .rdata:004728B4o
+.text:0041E970
+.text:0041E970 Dst             = byte ptr -3000h
+.text:0041E970 var_2000        = byte ptr -2000h
+.text:0041E970 var_1000        = byte ptr -1000h
+.text:0041E970 Str             = dword ptr  8
+.text:0041E970
+.text:0041E970                 push    ebp
+.text:0041E971                 mov     ebp, esp
+.text:0041E973                 and     esp, 0FFFFFFF8h
+.text:0041E976                 mov     eax, 3004h
+.text:0041E97B                 call    __alloca_probe
+.text:0041E980                 push    ebx
+.text:0041E981                 push    esi
+.text:0041E982                 mov     esi, ds:strstr
+.text:0041E988                 push    edi
+.text:0041E989                 mov     edi, [ebp+Str]
+.text:0041E98C                 push    offset aServer  ; "server"
+.text:0041E991                 push    edi             ; Str
+.text:0041E992                 mov     [esp+3018h+Dst], 0
+.text:0041E997                 mov     [esp+3018h+var_2000], 0
+.text:0041E99F                 call    esi ; strstr
+.text:0041E9A1                 mov     ebx, ds:sscanf
+.text:0041E9A7                 add     esp, 8
+.text:0041E9AA                 test    eax, eax
+.text:0041E9AC                 jz      short loc_41E9CF
+.text:0041E9AE                 lea     eax, [esp+3010h+var_2000]
+.text:0041E9B5                 push    eax
+.text:0041E9B6                 push    offset asc_472558 ; "(%[^)])"
+.text:0041E9BB                 push    offset aServer  ; "server"
+.text:0041E9C0                 push    edi             ; Str
+.text:0041E9C1                 call    esi ; strstr
+.text:0041E9C3                 add     eax, 6
+.text:0041E9C6                 add     esp, 8
+.text:0041E9C9                 push    eax             ; Src
+.text:0041E9CA                 call    ebx ; sscanf
+.text:0041E9CC                 add     esp, 0Ch
+.text:0041E9CF
+.text:0041E9CF loc_41E9CF:                             ; CODE XREF: cmd_start+3Cj
+.text:0041E9CF                 push    offset aClient  ; "client"
+.text:0041E9D4                 push    edi             ; Str
+.text:0041E9D5                 mov     [esp+3018h+Dst], 0
+.text:0041E9DA                 call    esi ; strstr
+.text:0041E9DC                 add     esp, 8
+.text:0041E9DF                 test    eax, eax
+.text:0041E9E1                 jz      short loc_41EA01
+.text:0041E9E3                 lea     ecx, [esp+3010h+Dst]
+.text:0041E9E7                 push    ecx
+.text:0041E9E8                 push    offset asc_472558 ; "(%[^)])"
+.text:0041E9ED                 push    offset aClient  ; "client"
+.text:0041E9F2                 push    edi             ; Str
+.text:0041E9F3                 call    esi ; strstr
+.text:0041E9F5                 add     eax, 6
+.text:0041E9F8                 add     esp, 8
+.text:0041E9FB                 push    eax             ; Src
+.text:0041E9FC                 call    ebx ; sscanf
+.text:0041E9FE                 add     esp, 0Ch
+.text:0041EA01
+.text:0041EA01 loc_41EA01:                             ; CODE XREF: cmd_start+71j
+.text:0041EA01                 push    offset aDemo    ; "demo"
+.text:0041EA06                 push    edi             ; Str
+.text:0041EA07                 mov     [esp+3018h+var_1000], 0
+.text:0041EA0F                 call    esi ; strstr
+.text:0041EA11                 add     esp, 8
+.text:0041EA14                 test    eax, eax
+.text:0041EA16                 jz      short loc_41EA39
+.text:0041EA18                 lea     edx, [esp+3010h+var_1000]
+.text:0041EA1F                 push    edx
+.text:0041EA20                 push    offset asc_472558 ; "(%[^)])"
+.text:0041EA25                 push    offset aDemo    ; "demo"
+.text:0041EA2A                 push    edi             ; Str
+.text:0041EA2B                 call    esi ; strstr
+.text:0041EA2D                 add     eax, 4
+.text:0041EA30                 add     esp, 8
+.text:0041EA33                 push    eax             ; Src
+.text:0041EA34                 call    ebx ; sscanf
+.text:0041EA36                 add     esp, 0Ch
+.text:0041EA39
+.text:0041EA39 loc_41EA39:                             ; CODE XREF: cmd_start+A6j
+.text:0041EA39                 lea     eax, [esp+3010h+var_2000]
+.text:0041EA40                 push    eax             ; Str
+.text:0041EA41                 call    ds:_strlwr
+.text:0041EA47                 add     esp, 4
+.text:0041EA4A                 lea     ecx, [esp+3010h+Dst]
+.text:0041EA4E                 push    ecx             ; Str
+.text:0041EA4F                 call    sub_41E800
+.text:0041EA54                 cmp     [esp+3010h+Dst], 0
+.text:0041EA59                 jnz     short loc_41EA8E
+.text:0041EA5B                 lea     edx, [esp+3010h+var_2000]
+.text:0041EA62                 push    offset aSingle  ; "single"
+.text:0041EA67                 push    edx             ; Str
+.text:0041EA68                 call    esi ; strstr
+.text:0041EA6A                 add     esp, 8
+.text:0041EA6D                 test    eax, eax
+.text:0041EA6F                 jz      short loc_41EA8E
+.text:0041EA71                 push    1000h           ; MaxCount
+.text:0041EA76                 push    offset aLocalhost ; "localhost"
+.text:0041EA7B                 lea     eax, [esp+3018h+Dst]
+.text:0041EA7F                 push    1000h           ; SizeInBytes
+.text:0041EA84                 push    eax             ; Dst
+.text:0041EA85                 call    ds:strncpy_s
+.text:0041EA8B                 add     esp, 10h
+.text:0041EA8E
+.text:0041EA8E loc_41EA8E:                             ; CODE XREF: cmd_start+E9j
+.text:0041EA8E                                         ; cmd_start+FFj
+.text:0041EA8E                 lea     eax, [esp+3010h+Dst]
+.text:0041EA92                 lea     edx, [eax+1]
+.text:0041EA95
+.text:0041EA95 loc_41EA95:                             ; CODE XREF: cmd_start+12Cj
+.text:0041EA95                 mov     cl, [eax]
+.text:0041EA97                 add     eax, 1
+.text:0041EA9A                 test    cl, cl
+.text:0041EA9C                 jnz     short loc_41EA95
+.text:0041EA9E                 sub     eax, edx
+.text:0041EAA0                 jnz     short loc_41EAD5
+.text:0041EAA2                 lea     eax, [esp+3010h+var_1000]
+.text:0041EAA9                 lea     edx, [eax+1]
+.text:0041EAAC                 lea     esp, [esp+0]
+.text:0041EAB0
+.text:0041EAB0 loc_41EAB0:                             ; CODE XREF: cmd_start+147j
+.text:0041EAB0                 mov     cl, [eax]
+.text:0041EAB2                 add     eax, 1
+.text:0041EAB5                 test    cl, cl
+.text:0041EAB7                 jnz     short loc_41EAB0
+.text:0041EAB9                 sub     eax, edx
+.text:0041EABB                 jnz     short loc_41EAD5
+.text:0041EABD                 push    edi
+.text:0041EABE                 push    offset aCanTStartGameW ; "! Can't start game without client. Argu"...
+.text:0041EAC3                 call    ds:?Log@@YAXPBD0@Z ; Log(char const *,char const *)
+.text:0041EAC9                 add     esp, 8
+.text:0041EACC                 pop     edi
+.text:0041EACD                 pop     esi
+.text:0041EACE                 pop     ebx
+.text:0041EACF                 mov     esp, ebp
+.text:0041EAD1                 pop     ebp
+.text:0041EAD2                 retn    4
+.text:0041EAD5 ; ---------------------------------------------------------------------------
+.text:0041EAD5
+.text:0041EAD5 loc_41EAD5:                             ; CODE XREF: cmd_start+130j
+.text:0041EAD5                                         ; cmd_start+14Bj
+.text:0041EAD5                 cmp     ?g_pGameLevel@@3PAVIGame_Level@@A, 0 ; IGame_Level * g_pGameLevel
+.text:0041EADC                 jz      short loc_41EAF5
+.text:0041EADE                 push    0
+.text:0041EAE0                 push    0
+.text:0041EAE2                 push    0
+.text:0041EAE4                 push    0
+.text:0041EAE6                 push    offset aKernelDisconne ; "KERNEL:disconnect"
+.text:0041EAEB                 mov     ecx, offset dword_48EACC
+.text:0041EAF0                 call    ?Defer@CEventAPI@@QAEXPBD_K1@Z ; CEventAPI::Defer(char const *,unsigned __int64,unsigned __int64)
+.text:0041EAF5
+.text:0041EAF5 loc_41EAF5:                             ; CODE XREF: cmd_start+16Cj
+.text:0041EAF5                 lea     eax, [esp+3010h+var_1000]
+.text:0041EAFC                 lea     edx, [eax+1]
+.text:0041EAFF                 nop
+.text:0041EB00
+.text:0041EB00 loc_41EB00:                             ; CODE XREF: cmd_start+197j
+.text:0041EB00                 mov     cl, [eax]
+.text:0041EB02                 add     eax, 1
+.text:0041EB05                 test    cl, cl
+.text:0041EB07                 jnz     short loc_41EB00
+.text:0041EB09                 sub     eax, edx
+.text:0041EB0B                 jz      short loc_41EB3D
+.text:0041EB0D                 push    0
+.text:0041EB0F                 lea     ecx, [esp+3014h+var_1000]
+.text:0041EB16                 push    0
+.text:0041EB18                 push    ecx
+.text:0041EB19                 call    ds:?xr_strdup@@YAPADPBD@Z ; xr_strdup(char const *)
+.text:0041EB1F                 add     esp, 4
+.text:0041EB22                 cdq
+.text:0041EB23                 push    edx
+.text:0041EB24                 push    eax
+.text:0041EB25                 push    offset aKernelStart_mp ; "KERNEL:start_mp_demo"
+.text:0041EB2A                 mov     ecx, offset dword_48EACC
+.text:0041EB2F                 call    ?Defer@CEventAPI@@QAEXPBD_K1@Z ; CEventAPI::Defer(char const *,unsigned __int64,unsigned __int64)
+.text:0041EB34                 pop     edi
+.text:0041EB35                 pop     esi
+.text:0041EB36                 pop     ebx
+.text:0041EB37                 mov     esp, ebp
+.text:0041EB39                 pop     ebp
+.text:0041EB3A                 retn    4
+.text:0041EB3D ; ---------------------------------------------------------------------------
+.text:0041EB3D
+.text:0041EB3D loc_41EB3D:                             ; CODE XREF: cmd_start+19Bj
+.text:0041EB3D                 lea     eax, [esp+3010h+var_2000]
+.text:0041EB44                 lea     edx, [eax+1]
+.text:0041EB47
+.text:0041EB47 loc_41EB47:                             ; CODE XREF: cmd_start+1DEj
+.text:0041EB47                 mov     cl, [eax]
+.text:0041EB49                 add     eax, 1
+.text:0041EB4C                 test    cl, cl
+.text:0041EB4E                 jnz     short loc_41EB47
+.text:0041EB50                 sub     eax, edx
+.text:0041EB52                 mov     edi, ds:?xr_strdup@@YAPADPBD@Z ; xr_strdup(char const *)
+.text:0041EB58                 jz      short loc_41EB6B
+.text:0041EB5A                 lea     edx, [esp+3010h+var_2000]
+.text:0041EB61                 push    edx
+.text:0041EB62                 call    edi ; xr_strdup(char const *) ; xr_strdup(char const *)
+.text:0041EB64                 add     esp, 4
+.text:0041EB67                 mov     esi, eax
+.text:0041EB69                 jmp     short loc_41EB6D
+.text:0041EB6B ; ---------------------------------------------------------------------------
+.text:0041EB6B
+.text:0041EB6B loc_41EB6B:                             ; CODE XREF: cmd_start+1E8j
+.text:0041EB6B                 xor     esi, esi
+.text:0041EB6D
+.text:0041EB6D loc_41EB6D:                             ; CODE XREF: cmd_start+1F9j
+.text:0041EB6D                 lea     eax, [esp+3010h+Dst]
+.text:0041EB71                 push    eax
+.text:0041EB72                 call    edi ; xr_strdup(char const *) ; xr_strdup(char const *)
+.text:0041EB74                 add     esp, 4
+.text:0041EB77                 cdq
+.text:0041EB78                 push    edx
+.text:0041EB79                 push    eax
+.text:0041EB7A                 mov     eax, esi
+.text:0041EB7C                 cdq
+.text:0041EB7D                 push    edx
+.text:0041EB7E                 push    eax
+.text:0041EB7F                 push    offset aKernelStart ; "KERNEL:start"
+.text:0041EB84                 mov     ecx, offset dword_48EACC
+.text:0041EB89                 call    ?Defer@CEventAPI@@QAEXPBD_K1@Z ; CEventAPI::Defer(char const *,unsigned __int64,unsigned __int64)
+.text:0041EB8E                 pop     edi
+.text:0041EB8F                 pop     esi
+.text:0041EB90                 pop     ebx
+.text:0041EB91                 mov     esp, ebp
+.text:0041EB93                 pop     ebp
+.text:0041EB94                 retn    4
+.text:0041EB94 cmd_start       endp

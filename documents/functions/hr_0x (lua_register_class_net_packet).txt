@@ -1,0 +1,177 @@
+int __cdecl lua_register_class_net_packet(int a1)
+{
+  void *v2; // eax@1
+  void *v3; // eax@1
+  int v4; // STF0_4@1
+  int v5; // ST04_4@1
+  void *v6; // eax@1
+  void *v7; // eax@1
+  void *v8; // eax@1
+  void *v9; // eax@1
+  void *v10; // eax@1
+  void *v11; // eax@1
+  void *v12; // eax@1
+  void *v13; // eax@1
+  void *v14; // eax@1
+  void *v15; // eax@1
+  void *v16; // eax@1
+  void *v17; // eax@1
+  void *v18; // eax@1
+  void *v19; // eax@1
+  void *v20; // eax@1
+  void *v21; // eax@1
+  void *v22; // eax@1
+  void *v23; // eax@1
+  void *v24; // eax@1
+  void *v25; // eax@1
+  void *v26; // eax@1
+  void *v27; // eax@1
+  void *v28; // eax@1
+  void *v29; // eax@1
+  void *v30; // eax@1
+  void *v31; // eax@1
+  void *v32; // eax@1
+  void *v33; // eax@1
+  void *v34; // eax@1
+  void *v35; // eax@1
+  void *v36; // eax@1
+  void *v37; // eax@1
+  void *v38; // eax@1
+  void *v39; // eax@1
+  void *v40; // eax@1
+  void *v41; // eax@1
+  void *v42; // eax@1
+  void *v43; // eax@1
+  void *v44; // eax@1
+  void *v45; // eax@1
+  void *v46; // eax@1
+  void *v47; // eax@1
+  void *v48; // eax@1
+  void *v49; // eax@1
+  void *v50; // eax@1
+  void *v51; // eax@1
+  void *v52; // eax@1
+  void *v53; // eax@1
+  void *v54; // eax@1
+  void *v55; // eax@1
+  void *v56; // eax@1
+  void *v57; // eax@1
+  void *v58; // eax@1
+  void *v59; // eax@1
+  void *v60; // eax@1
+  void *v61; // eax@1
+  void *v62; // eax@1
+  void *v63; // eax@1
+  void *v64; // eax@1
+  void *v65; // eax@1
+  void *v66; // eax@1
+  void *v67; // eax@1
+  int v68; // ecx@1
+  void *v69; // eax@1
+  void *v70; // eax@1
+  int v71; // ecx@1
+  int v72; // eax@1
+  int v73; // eax@1
+  int v74; // eax@1
+  int v75; // ecx@1
+  int v76; // [sp-4h] [bp-4Ch]@1
+  char v77; // [sp+Ch] [bp-3Ch]@1
+  char v78; // [sp+18h] [bp-30h]@1
+  char v79; // [sp+24h] [bp-24h]@1
+  int v80; // [sp+2Ch] [bp-1Ch]@1
+  int v81; // [sp+30h] [bp-18h]@1
+  int v82; // [sp+34h] [bp-14h]@1
+  void *v83; // [sp+38h] [bp-10h]@1
+  int v84; // [sp+3Fh] [bp-9h]@1
+  int v85; // [sp+43h] [bp-5h]@1
+  char v86; // [sp+47h] [bp-1h]@1
+
+  LOBYTE(v82) = 0;
+  LOBYTE(v81) = 0;
+  LOBYTE(v85) = 0;
+  v76 = v85;
+  v83 = sub_1005A6C0;
+  v2 = sub_101FB212(&v78, (int)"ClientID");
+  v3 = sub_101FA857(v2, v76);
+  LOBYTE(v85) = 0;
+  LOBYTE(v84) = 0;
+  v83 = sub_101FCA0A(v3, (int)"value", (int *)&v83, (int)&v86, v84, v85);
+  luabind__module___module_(&v79, a1, 0);
+  v4 = v82;
+  v5 = v81;
+  v6 = sub_101FB22F(&v77, (int)"net_packet");
+  v7 = sub_101FA86E(v6, v5);
+  v8 = sub_101FDDE9(v7, (int)"w_begin", (int)NET_Packet__w_begin);
+  v9 = sub_101FDE14(v8, (int)"w_tell", (int)NET_Packet__w_tell);
+  v10 = sub_101FDE3F(v9, (int)"w_vec3", (int)NET_Packet__w_vec3);
+  v11 = sub_101FDE6A(v10, (int)"w_float", (int)NET_Packet__w_float);
+  v12 = sub_101FDE95(v11, (int)"w_u64", (int)NET_Packet__w_u64);
+  v13 = sub_101FDEC0(v12, (int)"w_s64", (int)NET_Packet__w_s64);
+  v14 = sub_101FDEEB(v13, (int)"w_u32", (int)NET_Packet__w_u32);
+  v15 = sub_101FDF16(v14, (int)"w_s32", (int)NET_Packet__w_s32);
+  v16 = sub_101FDDE9(v15, (int)"w_u16", (int)NET_Packet__w_u16);
+  v17 = sub_101FDF41(v16, (int)"w_s16", (int)NET_Packet__w_s16);
+  v18 = sub_101FDF6C(v17, (int)"w_u8", (int)NET_Packet__w_u8);
+  v19 = sub_101FC989(v18, (int)"w_bool", (int)sub_101F6FA0);
+  v20 = sub_101FDF97(v19, (int)"w_float_q16", (int)NET_Packet__w_float_q16);
+  v21 = sub_101FDF97(v20, (int)"w_float_q8", (int)NET_Packet__w_float_q8);
+  v22 = sub_101FDE6A(v21, (int)"w_angle16", (int)NET_Packet__w_angle16);
+  v23 = sub_101FDE6A(v22, (int)"w_angle8", (int)NET_Packet__w_angle8);
+  v24 = sub_101FDE3F(v23, (int)"w_dir", (int)NET_Packet__w_dir);
+  v25 = sub_101FDE3F(v24, (int)"w_sdir", (int)NET_Packet__w_sdir);
+  v26 = sub_101FDFC2(v25, (int)"w_stringZ", (int)NET_Packet__w_stringZ);
+  v27 = sub_101FDFED(v26, (int)"w_matrix", (int)NET_Packet__w_matrix);
+  v28 = sub_101FE018(v27, (int)"w_clientID", (int)NET_Packet__w_clientID);
+  v29 = sub_101FE043(v28, (int)"w_chunk_open8", (int)NET_Packet__w_chunk_open8);
+  v30 = sub_101FDEEB(v29, (int)"w_chunk_close8", (int)NET_Packet__w_chunk_close8);
+  v31 = sub_101FE043(v30, (int)"w_chunk_open16", (int)NET_Packet__w_chunk_open16);
+  v32 = sub_101FDEEB(v31, (int)"w_chunk_close16", (int)NET_Packet__w_chunk_close16);
+  v33 = sub_101FE06E(v32, (int)"r_begin", (int)NET_Packet__r_begin);
+  v34 = sub_101FDEEB(v33, (int)"r_seek", (int)NET_Packet__r_seek);
+  v35 = sub_101FDE14(v34, (int)"r_tell", (int)NET_Packet__r_tell);
+  v36 = sub_101FE61D(v35, (int)"r_vec3", (char)NET_Packet__r_vec3, v4);
+  v37 = sub_101FE099(v36, (int)"r_float", (int)NET_Packet__r_float);
+  v38 = sub_101FE0C4(v37, (int)"r_u64", (int)NET_Packet__r_u64);
+  v39 = sub_101FE0EF(v38, (int)"r_s64", (int)NET_Packet__r_s64);
+  v40 = sub_101FE043(v39, (int)"r_u32", (int)NET_Packet__r_u32);
+  v41 = sub_101FE11A(v40, (int)"r_s32", (int)NET_Packet__r_s32);
+  v42 = sub_101FE145(v41, (int)"r_u16", (int)NET_Packet__r_u16);
+  v43 = sub_101FE170(v42, (int)"r_s16", (int)NET_Packet__r_s16);
+  v44 = sub_101FE19B(v43, (int)"r_u8", (int)NET_Packet__r_u8);
+  v45 = sub_101FE1C6(v44, (int)"r_s8", (int)NET_Packet__r_s8);
+  v46 = sub_101FC9B4(v45, (int)"r_bool", (int)sub_101F6FC0);
+  v47 = sub_101FE1F1(v46, (int)"r_float", (int)NET_Packet__r_float);
+  v48 = sub_101FE50E(v47, (int)"r_u64", (int)NET_Packet__r_u64);
+  v49 = sub_101FE539(v48, (int)"r_s64", (int)NET_Packet__r_s64);
+  v50 = sub_101FDE14(v49, (int)"r_u32", (int)NET_Packet__r_u32);
+  v51 = sub_101FE21C(v50, (int)"r_s32", (int)NET_Packet__r_s32);
+  v52 = sub_101FE247(v51, (int)"r_u16", (int)NET_Packet__r_u16);
+  v53 = sub_101FE272(v52, (int)"r_s16", (int)NET_Packet__r_s16);
+  v54 = sub_101FE29D(v53, (int)"r_u8", (int)NET_Packet__r_u8);
+  v55 = sub_101FE2C8(v54, (int)"r_s8", (int)NET_Packet__r_s8);
+  v56 = sub_101FE2F3(v55, (int)"r_float_q16", (int)NET_Packet__r_float_q16);
+  v57 = sub_101FE2F3(v56, (int)"r_float_q8", (int)NET_Packet__r_float_q8);
+  v58 = sub_101FE099(v57, (int)"r_angle16", (int)NET_Packet__r_angle16);
+  v59 = sub_101FE099(v58, (int)"r_angle8", (int)NET_Packet__r_angle8);
+  v60 = sub_101FE31E(v59, (int)"r_dir", (int)NET_Packet__r_dir);
+  v61 = sub_101FE31E(v60, (int)"r_sdir", (int)NET_Packet__r_sdir);
+  v62 = sub_101FC9DF(v61, (int)"r_stringZ", (int)sub_101F7820);
+  v63 = sub_101FDFED(v62, (int)"r_matrix", (int)NET_Packet__r_matrix);
+  v64 = sub_101FE564(v63, (int)"r_clientID", (int)sub_101F7850);
+  v65 = sub_101FDE14(v64, (int)"r_elapsed", (int)NET_Packet__r_elapsed);
+  v66 = sub_101FDEEB(v65, (int)"r_advance", (int)NET_Packet__r_advance);
+  v67 = sub_101FC9B4(v66, (int)"r_eof", (int)sub_101F6F80);
+  luabind__scope__scope(&v76, v67, v68);
+  v76 = v80;
+  v69 = sub_101FDD9C(v83, (int)"set", (int)sub_10096D60);
+  v70 = sub_101FDDC7(v69, v76);
+  luabind__scope__scope(&v76, v70, v71);
+  v72 = sub_101FA0D7((int)&v80, (int)"script_server_object_version", (int)sub_103B2DC0);
+  v73 = luabind__scope__operator_(v72);
+  v74 = luabind__scope__operator_(v73);
+  luabind__scope__scope(&v76, v74, v75);
+  luabind__module___operator__(&v79);
+  luabind__scope___scope(&v80);
+  luabind__scope___scope(&v78);
+  return luabind__scope___scope(&v77);
+}

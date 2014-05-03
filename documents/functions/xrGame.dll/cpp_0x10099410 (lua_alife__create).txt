@@ -1,0 +1,47 @@
+int lua_alife__create(int alife,char* section,vector pos,int lvertex,int gvertex,int parentid)
+{
+	int unknown1;
+	int unknown2;
+	int unknown3;
+	NET_Packet* np1;
+	NET_Packet* np2;
+
+	if(parentid != -1)
+	{
+		unknown1 = sub_10039890();
+		unknown2 = *(DWORD*)(*(DWORD*)(*(DWORD*)(unknown1 + 0xC) + 0x4) + unknown1 + 0x20)->sub_1005B040(parentid,1);
+		if(unknown2)
+		{
+			if(unknown2->0xA4)
+			{
+				np = new NET_Packet();
+				np->w_begin(1);
+				np->w_stringZ(section);
+				
+				unknown3 = *(DWORD*)(*(DWORD*)(*(DWORD*)(alife +  0xC) + 0x4) + alife + 0xC)->sub_1009F0D0(section,pos,lvertex,gvertex,parentid,0);
+				
+				(*(DWORD*)(*(DWORD*)(unknown3)))(unknown3,&np,0);
+
+				*(DWORD*)(*(DWORD*)(*(DWORD*)(alife + 0xC) + 0x4) + alife + 0x10)->sub_10098300(*(WORD*)(unknown3 + 0x32),0);
+			
+				unknown4 = __RTCastToVoid(unknown3);
+
+				(*(DWORD*)(unknown3 + 0x8))->(*(DWORD*)(*(DWORD*)(unknown3 + 0x8) + 0x14))(0);
+
+				Memory->mem_free(unknown4);
+
+				np->r_begin(&unknown5);
+
+				return (*(DWORD*)(*(DWORD*)(*(DWORD*)(alife + 0xC) + 0x4) + alife + 0x10)->sub_10435E20(&np,65535,0,0);
+			}
+			
+			return *(DWORD*)(*(DWORD*)(*(DWORD*)(alife +  0xC) + 0x4) + alife + 0xC)->sub_1009F0D0(section,pos,lvertex,gvertex,parentid,1);
+		}
+		else
+		{
+			Msg("! invalid parent id [%d] specified",parentid);
+			return 0;
+		}
+	}
+	return *(DWORD*)(*(DWORD*)(*(DWORD*)(alife +  0xC) + 0x4) + alife + 0xC)->sub_1009F0D0(section,pos,lvertex,gvertex,-1,1);
+}

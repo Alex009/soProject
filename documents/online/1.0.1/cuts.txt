@@ -1,0 +1,113 @@
+/*
+	FLOAT m_state_holder_state[33];
+	DWORD pEntityAlive__PHGetSyncItem = *(DWORD*)(*(DWORD*)pClass + 0x1C0);
+	DWORD pPHCharacter__get_State;
+	DWORD PHCharacter;
+	void* pointer = &m_state_holder_state;
+
+	// get sync item
+	_asm
+	{
+		push 0
+		mov ecx, pClass
+		call pEntityAlive__PHGetSyncItem
+		mov PHCharacter, eax
+	};
+
+	pPHCharacter__get_State = *(DWORD*)(*(DWORD*)PHCharacter + 0x8);
+
+	// get state
+	_asm
+	{
+		push pointer
+		mov ecx, PHCharacter
+		call pPHCharacter__get_State
+	};
+	
+	// pack data
+	pack->w(&m_state_holder_state,33 * 4);
+
+#ifdef CBASEMONSTER_DEBUG
+
+	LogHandle->Write("CBaseMonster::NET_Export(0x%X,0x%X)",pClass,pack);
+	LogHandle->Write("{");
+	
+	for(int i = 0;i < 33;i++) LogHandle->Write("m_state_holder[%d] = %f",i,m_state_holder_state[i]);
+
+	LogHandle->Write("}");
+#endif
+*/
+
+
+
+/*
+	FLOAT m_state_holder_state[33];
+	DWORD pEntityAlive__PHGetSyncItem = *(DWORD*)(*(DWORD*)pClass + 0x1C0);
+	DWORD pPHCharacter__set_State;
+	DWORD PHCharacter;
+	void* pointer = &m_state_holder_state;
+	
+	// unpack data
+	pack->r(&m_state_holder_state,33 * 4);
+
+#ifdef CBASEMONSTER_DEBUG
+
+	LogHandle->Write("CBaseMonster::NET_Import(0x%X,0x%X)",pClass,pack);
+	LogHandle->Write("{");
+	
+	for(int i = 0;i < 33;i++) LogHandle->Write("m_state_holder[%d] = %f",i,m_state_holder_state[i]);
+
+	LogHandle->Write("}");
+#endif
+
+	// get sync item
+	_asm
+	{
+		push 0
+		mov ecx, pClass
+		call pEntityAlive__PHGetSyncItem
+		mov PHCharacter, eax
+	};
+
+	pPHCharacter__set_State = *(DWORD*)(*(DWORD*)PHCharacter + 0xC);
+
+	// set state
+	_asm
+	{
+		push pointer
+		mov ecx, PHCharacter
+		call pPHCharacter__set_State
+	};
+*/
+
+
+/*	
+	// pack data
+	pack->w(&sync_buffer->phstate,33 * 4);
+
+#ifdef CSE_ALIFE_MONSTER_BASE_DEBUG
+
+	LogHandle->Write("CSE_ALifeMonsterBase::UPDATE_Write(0x%X,0x%X)",pClass,pack);
+	LogHandle->Write("{");
+	
+	for(unsigned long i = 0;i < 33;i++) LogHandle->Write("phstate[%d] = %f",i,sync_buffer->phstate[i]);
+
+	LogHandle->Write("}");
+#endif
+*/
+
+/*	
+	// unpack data
+	pack->r(&sync_buffer->phstate,33 * 4);
+
+#ifdef CSE_ALIFE_MONSTER_BASE_DEBUG
+
+	LogHandle->Write("CSE_ALifeMonsterBase::UPDATE_Read(0x%X,0x%X)",pClass,pack);
+	LogHandle->Write("{");
+	
+	for(unsigned long i = 0;i < 33;i++) LogHandle->Write("phstate[%d] = %f",i,sync_buffer->phstate[i]);
+
+	LogHandle->Write("}");
+#endif
+*/
+

@@ -1,0 +1,41 @@
+(0x3663DDB) -> [CLevel__cl_Process_Spawn](0x366B210) -> [SpawnEntity](0x366AFF8) -> CObjectList::Create(char const *) -> IGame_ObjectPool::create(char const *) -> xrFactory_Create()
+
+xrGame.dll base 0x3430000
+
+SpawnEntity class = 0x33C80F0
+
+0x366AFF8 - 0x3430000 = 0x23AFF8 (SpawnEntity 0x23AFB0)
+
+sub_10233D50 - SyncThread (server)
+
+функция не дающая грузиться без сети - xrNetServer.dll -> 0x280ADCB (b: 0x2800000)
+
+CObjectList::Create("mp_actor")
+
+0x3B29E0 -> ClassidByName
+
+103B31C0 CSE_Abstract__Spawn_Read
+
+TEXT_TO_CLASSID
+
+O_ACTOR -> 
+eax = 0x544F5220
+edx = 0x4F5F4143
+
+dedicated/xrEngine.exe:
+41E970 - cmd_start
+
+ERROR:
+3A91C03 - 37E0000
+
+3ACC4C0 - 3860000
+
+
+
+3B331C0 - 3780000
+
+
+Создание мп актора (в мульте):
+0x10233D50(case 0) -> 0x1023B160(CLevel::cl_Process_Spawn) -> 0x1023AFB0 ->
+0x466350(CObjectList::create("mp_actor")) -> 0x45B930(IGame_ObjectPool::create("mp_actor")) ->
+0x10348120(xrFactory_Create) -> 0x1033C3E0 -(jmp)-> 0x1025FA50

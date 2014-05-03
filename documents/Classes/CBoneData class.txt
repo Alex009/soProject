@@ -1,0 +1,6 @@
+0x0: ftable
+
+0x1A8: pointer of start wtf (think what it xr_vector)
+0x1AC: end wtf
+
+0x19C: pointer on wtf

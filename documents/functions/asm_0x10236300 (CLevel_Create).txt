@@ -1,0 +1,448 @@
+.text:10236300 CLevel__Create  proc near               ; CODE XREF: sub_1033C510+17p
+.text:10236300
+.text:10236300 var_2           = word ptr -2
+.text:10236300
+.text:10236300                 sub     esp, 0Ch
+.text:10236303                 push    ebx
+.text:10236304                 push    esi
+.text:10236305                 mov     esi, ecx
+.text:10236307                 call    ds:??0IGame_Level@@QAE@XZ ; IGame_Level::IGame_Level(void)
+.text:1023630D                 mov     ecx, ds:?Device@@3VCRenderDevice@@A ; CRenderDevice Device
+.text:10236313                 call    ds:?GetTimerGlobal@CRenderDevice@@QAEPAVCTimer_paused@@XZ ; CRenderDevice::GetTimerGlobal(void)
+.text:10236319                 xor     ebx, ebx
+.text:1023631B                 cmp     eax, ebx
+.text:1023631D                 jz      short loc_10236324
+.text:1023631F                 add     eax, 8
+.text:10236322                 jmp     short loc_10236326
+.text:10236324 ; ---------------------------------------------------------------------------
+.text:10236324
+.text:10236324 loc_10236324:                           ; CODE XREF: CLevel__Create+1Dj
+.text:10236324                 xor     eax, eax
+.text:10236326
+.text:10236326 loc_10236326:                           ; CODE XREF: CLevel__Create+22j
+.text:10236326                 push    ebp
+.text:10236327                 push    edi
+.text:10236328                 lea     ebp, [esi+40110h]
+.text:1023632E                 push    eax
+.text:1023632F                 mov     ecx, ebp
+.text:10236331                 call    ds:??0IPureClient@@QAE@PAVCTimer@@@Z ; IPureClient::IPureClient(CTimer *)
+.text:10236337                 mov     dword ptr [esi], offset off_1054258C
+.text:1023633D                 mov     dword ptr [esi+10h], offset off_1054255C
+.text:10236344                 mov     dword ptr [esi+14h], offset off_10542554
+.text:1023634B                 mov     dword ptr [esi+18h], offset off_1054254C
+.text:10236352                 mov     dword ptr [esi+1Ch], offset off_10542544
+.text:10236359                 mov     dword ptr [ebp+0], offset off_10542504
+.text:10236360                 mov     dword ptr [esi+40114h], offset off_105424F8
+.text:1023636A                 mov     [esi+4859Ch], ebx
+.text:10236370                 mov     [esi+4869Ch], ebx
+.text:10236376                 mov     [esi+486A0h], ebx
+.text:1023637C                 mov     [esi+486A4h], ebx
+.text:10236382                 mov     [esi+486A8h], ebx
+.text:10236388                 mov     [esi+486ACh], ebx
+.text:1023638E                 mov     [esi+486B0h], ebx
+.text:10236394                 mov     [esi+486C4h], ebx
+.text:1023639A                 lea     edi, [esi+1Ch]   	// **** IEventReciever *
+.text:1023639D                 lea     eax, [esi+486CCh]
+.text:102363A3                 mov     [eax+10h], eax
+.text:102363A6                 lea     ecx, [eax+10h]
+.text:102363A9                 mov     [eax+14h], ecx
+.text:102363AC                 mov     eax, [ecx] 		// -
+.text:102363AE                 mov     [eax], bl  		// -
+.text:102363B0                 mov     [esi+486E4h], ebx
+.text:102363B6                 mov     [esi+486E8h], ebx
+.text:102363BC                 lea     ecx, [esi+48700h]
+.text:102363C2                 mov     [esi+486ECh], ebx
+.text:102363C8                 mov     [ecx], ebx
+.text:102363CA                 mov     [ecx+4], ebx
+.text:102363CD                 mov     [ecx+8], ebx
+.text:102363D0                 mov     [ecx+0Ch], ebx
+.text:102363D3                 mov     [ecx+10h], ebx
+.text:102363D6                 mov     [ecx+14h], ebx
+.text:102363D9                 mov     [ecx+18h], ebx
+.text:102363DC                 mov     [ecx+1Ch], ebx
+.text:102363DF                 mov     [ecx+20h], ebx
+.text:102363E2                 push    ebx
+.text:102363E3                 mov     [ecx+24h], ebx
+.text:102363E6                 call    sub_10369BB0
+.text:102363EB                 lea     ecx, [esi+4872Ch]
+.text:102363F1                 call    sub_10255460
+.text:102363F6                 mov     [esi+4876Ch], ebx
+.text:102363FC                 lea     eax, [esi+4875Ch]
+.text:10236402                 xor     ecx, ecx
+.text:10236404                 mov     [eax], ecx
+.text:10236406                 mov     cl, byte ptr [esp+14h+var_2]
+.text:1023640A                 mov     [eax], bl
+.text:1023640C                 mov     [eax+4], ebx
+.text:1023640F                 mov     [eax+8], eax
+.text:10236412                 mov     [eax+0Ch], eax
+.text:10236415                 mov     [eax+14h], cl
+.text:10236418                 mov     [esi+48788h], ebx
+.text:1023641E                 mov     [esi+4878Ch], ebx
+.text:10236424                 mov     [esi+48790h], ebx
+.text:1023642A                 mov     [esi+48784h], bl
+.text:10236430                 mov     [esi+48785h], bl
+.text:10236436                 mov     [esi+4879Dh], bl
+.text:1023643C                 mov     [esi+48786h], bl
+.text:10236442                 mov     [esi+4879Ch], bl
+.text:10236448                 mov     [esi+48794h], ebx
+.text:1023644E                 mov     [esi+48798h], ebx
+.text:10236454                 mov     [esi+487A0h], ebx
+.text:1023645A                 mov     [esi+487A4h], ebx
+.text:10236460                 mov     [esi+487A8h], ebx
+.text:10236466                 mov     [esi+487ACh], ebx
+.text:1023646C                 mov     [esi+487B0h], ebx
+.text:10236472                 mov     eax, ds:?Core@@3VxrCore@@A ; xrCore Core
+.text:10236477                 add     eax, 4D0h
+.text:1023647C                 push    offset aDebug_ge ; "-debug_ge"
+.text:10236481                 push    eax             ; Str
+.text:10236482                 call    ds:strstr
+.text:10236488                 add     esp, 8
+.text:1023648B                 neg     eax
+.text:1023648D                 sbb     eax, eax
+.text:1023648F                 neg     eax
+.text:10236491                 mov     dword_1064593C, eax
+.text:10236496                 mov     [esi+48728h], ebx
+.text:1023649C                 mov     [esi+486F0h], ebx
+.text:102364A2                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:102364A8                 push    28h
+.text:102364AA                 call    ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:102364B0                 mov     ebp, eax
+.text:102364B2                 cmp     ebp, ebx
+.text:102364B4                 jz      short loc_102364DE
+.text:102364B6                 mov     [ebp+0], ebx
+.text:102364B9                 mov     [ebp+4], ebx
+.text:102364BC                 mov     [ebp+8], ebx
+.text:102364BF                 mov     [ebp+0Ch], ebx
+.text:102364C2                 mov     [ebp+10h], ebx
+.text:102364C5                 mov     [ebp+14h], ebx
+.text:102364C8                 mov     [ebp+18h], ebx
+.text:102364CB                 mov     [ebp+1Ch], ebx
+.text:102364CE                 mov     [ebp+20h], ebx
+.text:102364D1                 push    ebx
+.text:102364D2                 mov     ecx, ebp
+.text:102364D4                 mov     [ebp+24h], ebx
+.text:102364D7                 call    sub_10232C70
+.text:102364DC                 jmp     short loc_102364E0
+.text:102364DE ; ---------------------------------------------------------------------------
+.text:102364DE
+.text:102364DE loc_102364DE:                           ; CODE XREF: CLevel__Create+1B4j
+.text:102364DE                 xor     ebp, ebp
+.text:102364E0
+.text:102364E0 loc_102364E0:                           ; CODE XREF: CLevel__Create+1DCj
+.text:102364E0                 mov     [esi+486FCh], ebp
+.text:102364E6                 mov     ebp, ds:?Handler_Attach@CEventAPI@@QAEPAVCEvent@@PBDPAVIEventReceiver@@@Z ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:102364EC                 mov     [esi+486F8h], ebx
+.text:102364F2                 mov     [esi+486F4h], ebx
+.text:102364F8                 mov     dword ptr [esi+486B8h], 1
+.text:10236502                 mov     ecx, ds:?Engine@@3VCEngine@@A ; CEngine Engine
+.text:10236508                 push    edi
+.text:10236509                 push    offset aLevelChangerp ; "LEVEL:ChangeRP"
+.text:1023650E                 add     ecx, 24h
+.text:10236511                 call    ebp ; CEventAPI::Handler_Attach(char const *,IEventReceiver *) ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:10236513                 mov     [esi+485E0h], eax
+.text:10236519                 mov     ecx, ds:?Engine@@3VCEngine@@A ; CEngine Engine
+.text:1023651F                 push    edi
+.text:10236520                 push    offset aLevelPlaydemo ; "LEVEL:PlayDEMO"
+.text:10236525                 add     ecx, 24h
+.text:10236528                 call    ebp ; CEventAPI::Handler_Attach(char const *,IEventReceiver *) ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:1023652A                 mov     [esi+485E4h], eax
+.text:10236530                 mov     ecx, ds:?Engine@@3VCEngine@@A ; CEngine Engine
+.text:10236536                 push    edi
+.text:10236537                 push    offset aLevelPlaymusic ; "LEVEL:PlayMusic"
+.text:1023653C                 add     ecx, 24h
+.text:1023653F                 call    ebp ; CEventAPI::Handler_Attach(char const *,IEventReceiver *) ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:10236541                 mov     [esi+485E8h], eax
+.text:10236547                 mov     ecx, ds:?Engine@@3VCEngine@@A ; CEngine Engine
+.text:1023654D                 push    edi
+.text:1023654E                 push    offset aLevelEnvironme ; "LEVEL:Environment"
+.text:10236553                 add     ecx, 24h
+.text:10236556                 call    ebp ; CEventAPI::Handler_Attach(char const *,IEventReceiver *) ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:10236558                 mov     [esi+485ECh], eax
+.text:1023655E                 mov     ecx, ds:?Engine@@3VCEngine@@A ; CEngine Engine
+.text:10236564                 push    edi
+.text:10236565                 push    offset aLevelSpawn ; "LEVEL:spawn"
+.text:1023656A                 add     ecx, 24h
+.text:1023656D                 call    ebp ; CEventAPI::Handler_Attach(char const *,IEventReceiver *) ; CEventAPI::Handler_Attach(char const *,IEventReceiver *)
+.text:1023656F                 mov     edi, ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:10236575                 mov     [esi+485F0h], eax
+.text:1023657B                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:10236581                 push    8Ch
+.text:10236586                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:10236588                 cmp     eax, ebx
+.text:1023658A                 jz      short loc_10236595
+.text:1023658C                 mov     ecx, eax
+.text:1023658E                 call    sub_1024EE90
+.text:10236593                 jmp     short loc_10236597
+.text:10236595 ; ---------------------------------------------------------------------------
+.text:10236595
+.text:10236595 loc_10236595:                           ; CODE XREF: CLevel__Create+28Aj
+.text:10236595                 xor     eax, eax
+.text:10236597
+.text:10236597 loc_10236597:                           ; CODE XREF: CLevel__Create+293j
+.text:10236597                 mov     [esi+487BCh], eax
+.text:1023659D                 mov     edx, ds:?g_dedicated_server@@3_NA ; bool g_dedicated_server
+.text:102365A3                 cmp     [edx], bl
+.text:102365A5                 jnz     short loc_102365ED
+.text:102365A7                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:102365AD                 push    14h
+.text:102365AF                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:102365B1                 cmp     eax, ebx
+.text:102365B3                 jz      short loc_102365BE
+.text:102365B5                 mov     ecx, eax
+.text:102365B7                 call    sub_102A6920
+.text:102365BC                 jmp     short loc_102365C0
+.text:102365BE ; ---------------------------------------------------------------------------
+.text:102365BE
+.text:102365BE loc_102365BE:                           ; CODE XREF: CLevel__Create+2B3j
+.text:102365BE                 xor     eax, eax
+.text:102365C0
+.text:102365C0 loc_102365C0:                           ; CODE XREF: CLevel__Create+2BCj
+.text:102365C0                 mov     [esi+487B4h], eax
+.text:102365C6                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:102365CC                 push    10h
+.text:102365CE                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:102365D0                 cmp     eax, ebx
+.text:102365D2                 jz      short loc_102365E3
+.text:102365D4                 mov     ecx, eax
+.text:102365D6                 call    sub_1029AF10
+.text:102365DB                 mov     [esi+487B8h], eax
+.text:102365E1                 jmp     short loc_102365F9
+.text:102365E3 ; ---------------------------------------------------------------------------
+.text:102365E3
+.text:102365E3 loc_102365E3:                           ; CODE XREF: CLevel__Create+2D2j
+.text:102365E3                 xor     eax, eax
+.text:102365E5                 mov     [esi+487B8h], eax
+.text:102365EB                 jmp     short loc_102365F9
+.text:102365ED ; ---------------------------------------------------------------------------
+.text:102365ED
+.text:102365ED loc_102365ED:                           ; CODE XREF: CLevel__Create+2A5j
+.text:102365ED                 mov     [esi+487B4h], ebx
+.text:102365F3                 mov     [esi+487B8h], ebx
+.text:102365F9
+.text:102365F9 loc_102365F9:                           ; CODE XREF: CLevel__Create+2E1j
+.text:102365F9                                         ; CLevel__Create+2EBj
+.text:102365F9                 mov     [esi+48690h], ebx
+.text:102365FF                 fnstcw  [esp+14h+var_2]
+.text:10236603                 mov     [esi+48698h], bl
+.text:10236609                 mov     [esi+48694h], ebx
+.text:1023660F                 mov     eax, ds:?fixed_step@@3MA ; float fixed_step
+.text:10236614                 fld     dword ptr [eax]
+.text:10236616                 movzx   eax, [esp+14h+var_2]
+.text:1023661B                 fmul    ds:dword_1050E664
+.text:10236621                 or      eax, 0C00h
+.text:10236626                 mov     [esp+14h], eax
+.text:1023662A                 mov     [esi+486C0h], ebx
+.text:10236630                 push    108h
+.text:10236635                 fldcw   word ptr [esp+18h]
+.text:10236639                 fistp   qword ptr [esp+18h]
+.text:1023663D                 mov     ecx, [esp+18h]
+.text:10236641                 mov     [esi+486BCh], ecx
+.text:10236647                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:1023664D                 fldcw   [esp+18h+var_2]
+.text:10236651                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:10236653                 cmp     eax, ebx
+.text:10236655                 jz      short loc_10236660
+.text:10236657                 mov     ecx, eax
+.text:10236659                 call    sub_10232AF0
+.text:1023665E                 jmp     short loc_10236662
+.text:10236660 ; ---------------------------------------------------------------------------
+.text:10236660
+.text:10236660 loc_10236660:                           ; CODE XREF: CLevel__Create+355j
+.text:10236660                 xor     eax, eax
+.text:10236662
+.text:10236662 loc_10236662:                           ; CODE XREF: CLevel__Create+35Ej
+.text:10236662                 mov     [esi+485C8h], eax
+.text:10236668                 mov     edx, ds:?g_dedicated_server@@3_NA ; bool g_dedicated_server
+.text:1023666E                 cmp     [edx], bl
+.text:10236670                 jnz     loc_10236725
+.text:10236676                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:1023667C                 push    20h
+.text:1023667E                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:10236680                 cmp     eax, ebx
+.text:10236682                 jz      short loc_1023668D
+.text:10236684                 mov     ecx, eax
+.text:10236686                 call    sub_10255200
+.text:1023668B                 jmp     short loc_1023668F
+.text:1023668D ; ---------------------------------------------------------------------------
+.text:1023668D
+.text:1023668D loc_1023668D:                           ; CODE XREF: CLevel__Create+382j
+.text:1023668D                 xor     eax, eax
+.text:1023668F
+.text:1023668F loc_1023668F:                           ; CODE XREF: CLevel__Create+38Bj
+.text:1023668F                 mov     [esi+485C0h], eax
+.text:10236695                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:1023669B                 push    40h
+.text:1023669D                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:1023669F                 cmp     eax, ebx
+.text:102366A1                 jz      short loc_102366AC
+.text:102366A3                 mov     ecx, eax
+.text:102366A5                 call    sub_10072C50
+.text:102366AA                 jmp     short loc_102366AE
+.text:102366AC ; ---------------------------------------------------------------------------
+.text:102366AC
+.text:102366AC loc_102366AC:                           ; CODE XREF: CLevel__Create+3A1j
+.text:102366AC                 xor     eax, eax
+.text:102366AE
+.text:102366AE loc_102366AE:                           ; CODE XREF: CLevel__Create+3AAj
+.text:102366AE                 mov     [esi+485C4h], eax
+.text:102366B4                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:102366BA                 push    1Ch
+.text:102366BC                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:102366BE                 mov     edi, eax
+.text:102366C0                 cmp     edi, ebx
+.text:102366C2                 jz      short loc_102366E6
+.text:102366C4                 mov     al, byte ptr [esp+14h+var_2]
+.text:102366C8                 lea     ecx, [edi+4]
+.text:102366CB                 mov     dword ptr [edi], offset off_105426DC
+.text:102366D1                 mov     [ecx], ebx
+.text:102366D3                 mov     [ecx], bl
+.text:102366D5                 mov     [ecx+4], ebx
+.text:102366D8                 mov     [ecx+8], ecx
+.text:102366DB                 mov     [ecx+0Ch], ecx
+.text:102366DE                 mov     [ecx+10h], ebx
+.text:102366E1                 mov     [ecx+14h], al
+.text:102366E4                 jmp     short loc_102366E8
+.text:102366E6 ; ---------------------------------------------------------------------------
+.text:102366E6
+.text:102366E6 loc_102366E6:                           ; CODE XREF: CLevel__Create+3C2j
+.text:102366E6                 xor     edi, edi
+.text:102366E8
+.text:102366E8 loc_102366E8:                           ; CODE XREF: CLevel__Create+3E4j
+.text:102366E8                 mov     [esi+485CCh], edi
+.text:102366EE                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:102366F4                 push    18h
+.text:102366F6                 call    ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:102366FC                 cmp     eax, ebx
+.text:102366FE                 jz      short loc_10236715
+.text:10236700                 mov     ecx, eax
+.text:10236702                 call    sub_10254180
+.text:10236707                 mov     edi, ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:1023670D                 mov     [esi+485D0h], eax
+.text:10236713                 jmp     short loc_1023673D
+.text:10236715 ; ---------------------------------------------------------------------------
+.text:10236715
+.text:10236715 loc_10236715:                           ; CODE XREF: CLevel__Create+3FEj
+.text:10236715                 mov     edi, ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:1023671B                 xor     eax, eax
+.text:1023671D                 mov     [esi+485D0h], eax
+.text:10236723                 jmp     short loc_1023673D
+.text:10236725 ; ---------------------------------------------------------------------------
+.text:10236725
+.text:10236725 loc_10236725:                           ; CODE XREF: CLevel__Create+370j ***************
+.text:10236725                 mov     [esi+485C0h], ebx
+.text:1023672B                 mov     [esi+485CCh], ebx
+.text:10236731                 mov     [esi+485D0h], ebx
+.text:10236737                 mov     [esi+485C4h], ebx
+.text:1023673D
+.text:1023673D loc_1023673D:                           ; CODE XREF: CLevel__Create+413j
+.text:1023673D                                         ; CLevel__Create+423j
+.text:1023673D                 call    sub_10232EB0
+.text:10236742                 mov     [esi+485D4h], eax
+.text:10236748                 call    sub_10232EB0
+.text:1023674D                 mov     ebp, ds:memmove
+.text:10236753                 mov     [esi+485D8h], eax
+.text:10236759                 mov     [esi+48600h], ebx
+.text:1023675F                 mov     [esi+485F4h], ebx
+.text:10236765                 mov     ecx, [esi+486A0h]
+.text:1023676B                 mov     eax, [esi+4869Ch]
+.text:10236771                 cmp     eax, ecx
+.text:10236773                 jz      short loc_10236791
+.text:10236775                 mov     edi, ecx
+.text:10236777                 sub     edi, ecx
+.text:10236779                 jz      short loc_10236785
+.text:1023677B                 push    edi             ; Size
+.text:1023677C                 push    ecx             ; Src
+.text:1023677D                 push    eax             ; Dst
+.text:1023677E                 call    ebp ; memmove
+.text:10236780                 add     esp, 0Ch
+.text:10236783                 add     eax, edi
+.text:10236785
+.text:10236785 loc_10236785:                           ; CODE XREF: CLevel__Create+479j
+.text:10236785                 mov     edi, ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:1023678B                 mov     [esi+486A0h], eax
+.text:10236791
+.text:10236791 loc_10236791:                           ; CODE XREF: CLevel__Create+473j
+.text:10236791                 mov     ecx, [esi+486ACh]
+.text:10236797                 mov     eax, [esi+486A8h]
+.text:1023679D                 cmp     eax, ecx
+.text:1023679F                 jz      short loc_102367BD
+.text:102367A1                 mov     edi, ecx
+.text:102367A3                 sub     edi, ecx
+.text:102367A5                 jz      short loc_102367B1
+.text:102367A7                 push    edi             ; Size
+.text:102367A8                 push    ecx             ; Src
+.text:102367A9                 push    eax             ; Dst
+.text:102367AA                 call    ebp ; memmove
+.text:102367AC                 add     esp, 0Ch
+.text:102367AF                 add     eax, edi
+.text:102367B1
+.text:102367B1 loc_102367B1:                           ; CODE XREF: CLevel__Create+4A5j
+.text:102367B1                 mov     edi, ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:102367B7                 mov     [esi+486ACh], eax
+.text:102367BD
+.text:102367BD loc_102367BD:                           ; CODE XREF: CLevel__Create+49Fj
+.text:102367BD                 mov     [esi+486B4h], ebx
+.text:102367C3                 mov     [esi+487C4h], ebx
+.text:102367C9                 mov     dword ptr [esi+487C0h], 3E8h
+.text:102367D3                 mov     [esi+487C8h], ebx
+.text:102367D9                 mov     [esi+485A8h], ebx
+.text:102367DF                 mov     [esi+485ACh], ebx
+.text:102367E5                 mov     [esi+48568h], ebx
+.text:102367EB                 mov     [esi+4856Ch], ebx
+.text:102367F1                 mov     [esi+48570h], ebx
+.text:102367F7                 mov     [esi+48574h], ebx
+.text:102367FD                 mov     [esi+48578h], ebx
+.text:10236803                 mov     [esi+48580h], ebx
+.text:10236809                 mov     [esi+48584h], ebx
+.text:1023680F                 mov     [esi+48588h], ebx
+.text:10236815                 mov     [esi+485A0h], ebx
+.text:1023681B                 cmp     byte_10645947, bl
+.text:10236821                 jnz     short loc_10236850
+.text:10236823                 cmp     dword_10646EB4, ebx
+.text:10236829                 jz      short loc_10236850
+.text:1023682B                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:10236831                 push    offset byte_10645947
+.text:10236836                 push    offset aClevelClevel ; "CLevel::CLevel"
+.text:1023683B                 push    0BAh
+.text:10236840                 push    offset asc_105426F4 ; "D:\\prog_repository\\sources\\trunk\\xrGame"...
+.text:10236845                 push    offset aNullG_player_h ; "NULL==g_player_hud"
+.text:1023684A                 call    ds:?fail@xrDebug@@QAEXPBD0H0AA_N@Z ; xrDebug::fail(char const *,char const *,int,char const *,bool &)
+.text:10236850
+.text:10236850 loc_10236850:                           ; CODE XREF: CLevel__Create+521j
+.text:10236850                                         ; CLevel__Create+529j
+.text:10236850                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:10236856                 push    0A8h
+.text:1023685B                 call    edi ; xrMemory::mem_alloc(uint) ; xrMemory::mem_alloc(uint)
+.text:1023685D                 cmp     eax, ebx
+.text:1023685F                 pop     edi
+.text:10236860                 pop     ebp
+.text:10236861                 jz      short loc_1023686C
+.text:10236863                 mov     ecx, eax
+.text:10236865                 call    sub_102FC3A0
+.text:1023686A                 jmp     short loc_1023686E
+.text:1023686C ; ---------------------------------------------------------------------------
+.text:1023686C
+.text:1023686C loc_1023686C:                           ; CODE XREF: CLevel__Create+561j
+.text:1023686C                 xor     eax, eax
+.text:1023686E
+.text:1023686E loc_1023686E:                           ; CODE XREF: CLevel__Create+56Aj
+.text:1023686E                 mov     ecx, eax
+.text:10236870                 mov     dword_10646EB4, eax
+.text:10236875                 call    sub_10232230
+.text:1023687A                 mov     [esi+48758h], ebx
+.text:10236880                 mov     ecx, ds:?Core@@3VxrCore@@A ; xrCore Core
+.text:10236886                 add     ecx, 4D0h
+.text:1023688C                 push    ecx
+.text:1023688D                 push    offset aS       ; "%s"
+.text:10236892                 call    ds:?Msg@@YAXPBDZZ ; Msg(char const *,...)
+.text:10236898                 add     esp, 8
+.text:1023689B                 mov     [esi+487CCh], ebx
+.text:102368A1                 mov     [esi+487D0h], ebx
+.text:102368A7                 mov     [esi+487DCh], ebx
+.text:102368AD                 mov     [esi+487E0h], ebx
+.text:102368B3                 mov     eax, esi
+.text:102368B5                 pop     esi
+.text:102368B6                 pop     ebx
+.text:102368B7                 add     esp, 0Ch
+.text:102368BA                 retn
+.text:102368BA CLevel__Create  endp

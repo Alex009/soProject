@@ -1,0 +1,266 @@
+char __thiscall CActorMP__net_Import(void *this, int a2)
+{
+  char *v2; // ebx@1
+  void *_ESI; // esi@1
+  int _EAX; // eax@4
+  int _EDX; // edx@5
+  int v7; // edi@5
+  __int16 v8; // ax@5
+  unsigned __int8 _CF; // cf@5
+  unsigned __int8 _ZF; // zf@5
+  void (__thiscall *v17)(_DWORD, _DWORD); // eax@13
+  void *v18; // ecx@13
+  int v19; // ST18_4@13
+  __int16 v20; // di@14
+  int v21; // eax@15
+  int v22; // ecx@17
+  int v24; // edx@17
+  int v27; // eax@17
+  int v28; // ecx@17
+  unsigned __int8 _CF; // cf@17
+  unsigned __int8 _ZF; // zf@17
+  int _EDX; // edx@24
+  int _ECX; // ecx@24
+  int v42; // ecx@25
+  int v43; // eax@25
+  int v44; // edx@25
+  char v45; // al@25
+  int v46; // ecx@25
+  int v47; // edx@25
+  int v48; // eax@25
+  int v49; // ecx@25
+  int v50; // edx@25
+  int v51; // eax@25
+  int v52; // ecx@25
+  int v53; // edx@25
+  int v54; // eax@25
+  int v55; // ecx@25
+  int v56; // edx@25
+  int v57; // eax@25
+  int v58; // ecx@25
+  int v59; // edx@25
+  int v60; // eax@25
+  int v61; // ecx@25
+  int v62; // eax@25
+  int v65; // [sp+2Ch] [bp-70h]@1
+  int v66; // [sp+30h] [bp-6Ch]@17
+  int v67; // [sp+34h] [bp-68h]@1
+  int v68; // [sp+38h] [bp-64h]@1
+  int v69; // [sp+3Ch] [bp-60h]@1
+  int v70; // [sp+40h] [bp-5Ch]@1
+  int v71; // [sp+44h] [bp-58h]@1
+  int v72; // [sp+48h] [bp-54h]@1
+  int v73; // [sp+4Ch] [bp-50h]@1
+  int v74; // [sp+50h] [bp-4Ch]@1
+  int v75; // [sp+54h] [bp-48h]@1
+  int v76; // [sp+58h] [bp-44h]@1
+  int v77; // [sp+5Ch] [bp-40h]@1
+  int v78; // [sp+60h] [bp-3Ch]@1
+  int v79; // [sp+64h] [bp-38h]@17
+  int v80; // [sp+68h] [bp-34h]@25
+  int v81; // [sp+78h] [bp-24h]@25
+  int v82; // [sp+7Ch] [bp-20h]@25
+  int v83; // [sp+80h] [bp-1Ch]@25
+  int v84; // [sp+84h] [bp-18h]@25
+  char v85; // [sp+98h] [bp-4h]@25
+
+  __asm { xorps   xmm0, xmm0 }
+  _ESI = this;
+  v2 = (char *)this + 2512;
+  __asm
+  {
+    movss   [esp+84h+var_60], xmm0
+    movss   [esp+84h+var_64], xmm0
+    movss   [esp+84h+var_68], xmm0
+  }
+  v65 = 0;
+  __asm
+  {
+    movss   [esp+84h+var_5C], xmm0
+    movss   [esp+84h+var_58], xmm0
+    movss   [esp+84h+var_54], xmm0
+    movss   [esp+84h+var_50], xmm0
+    movss   [esp+84h+var_4C], xmm0
+    movss   [esp+84h+var_48], xmm0
+    movss   [esp+84h+var_44], xmm0
+    movss   [esp+84h+var_40], xmm0
+    movss   [esp+84h+var_3C], xmm0
+  }
+  Read_Actor_Sync_Packet((char *)this + 2512, a2);
+  if ( !byte_10645F58 )
+  {
+    if ( !(unsigned __int8)valid_pos((char *)_ESI + 2588) )
+      xrDebug__fail(
+        Debug,
+        "valid_pos(m_state_holder.state().position)",
+        "imported bad position",
+        "D:\\prog_repository\\sources\\trunk\\xrGame\\actor_mp_client_import.cpp",
+        16,
+        "CActorMP::net_Import",
+        &byte_10645F58);
+  }
+  LOBYTE(_EAX) = IsServer(SLODWORD(g_pGameLevel));
+  if ( (_BYTE)_EAX )
+  {
+    v7 = *(_DWORD *)(LODWORD(g_pGameLevel) + 296688);
+    v8 = sub_102B0A30((char *)_ESI + 712);
+    _EAX = sub_10356480(v7, (unsigned __int16)v8);
+    __asm { movss   xmm0, dword ptr [esi+0A48h] }
+    _EDX = *((_DWORD *)_ESI + 128);
+    __asm
+    {
+      comiss  xmm0, dword ptr [edx+4]
+      movss   [esp+80h+var_74], xmm0
+    }
+    if ( !(_CF | _ZF) )
+    {
+      __asm { movss   dword ptr [edx+4], xmm0 }
+      goto LABEL_11;
+    }
+    if ( _EAX )
+    {
+      LOBYTE(_EAX) = sub_1034CA60(_EAX, 0x20u);
+      if ( (_BYTE)_EAX )
+        goto LABEL_11;
+      __asm { movss   xmm0, [esp+80h+var_74] }
+    }
+    _EAX = *((_DWORD *)_ESI + 128);
+    __asm { movss   dword ptr [eax+4], xmm0 }
+  }
+LABEL_11:
+  if ( !*((_DWORD *)_ESI + 123) )
+  {
+    if ( IsServer(SLODWORD(g_pGameLevel)) )
+    {
+      __asm
+      {
+        movss   xmm0, dword ptr [esi+0A4Ch]
+        mulss   xmm0, ds:dword_1053218C
+      }
+      v17 = *(void (__thiscall **)(_DWORD, _DWORD))(*(_DWORD *)_ESI + 0x22C);
+      v18 = _ESI;
+      __asm { movss   [esp+84h+var_84], xmm0 }
+      v17(v18, v19);
+    }
+    v20 = *((_BYTE *)_ESI + 2640) & 0xF;
+    if ( IsServer(SLODWORD(g_pGameLevel)) )
+    {
+      v21 = *((_DWORD *)_ESI + 185);
+      if ( *(_WORD *)(v21 + 64) != v20 )
+      {
+        *(_WORD *)(v21 + 66) = v20;
+        *(_WORD *)(v21 + 64) = v20;
+      }
+    }
+    v22 = *((_DWORD *)_ESI + 657);
+    __asm { movss   xmm0, dword ptr [esi+0A34h] }
+    v24 = *((_DWORD *)_ESI + 647);
+    __asm
+    {
+      movss   xmm1, dword ptr [esi+0A38h]
+      movss   xmm2, dword ptr [esi+0A3Ch]
+    }
+    v79 = (*((_DWORD *)_ESI + 660) >> 4) & 0x7FFF;
+    v27 = *((_DWORD *)_ESI + 648);
+    v65 = v22;
+    v28 = *((_DWORD *)_ESI + 649);
+    __asm
+    {
+      movss   [esp+80h+var_6C], xmm0
+      movss   xmm0, dword ptr [esi+0A40h]
+      comiss  xmm0, ds:dword_10545F74
+    }
+    v70 = v24;
+    v71 = v27;
+    v72 = v28;
+    __asm
+    {
+      movss   [esp+80h+var_68], xmm1
+      movss   [esp+80h+var_64], xmm2
+      movss   [esp+80h+var_60], xmm0
+    }
+    if ( !(_CF | _ZF) )
+    {
+      __asm
+      {
+        subss   xmm0, ds:dword_10545F78
+        movss   [esp+80h+var_60], xmm0
+      }
+    }
+    if ( *(_DWORD *)(LODWORD(g_pGameLevel) + 296308) || !*(_DWORD *)(LODWORD(g_pGameLevel) + 296296) )
+    {
+      if ( !IsValidGameLevel(SLODWORD(g_pGameLevel)) && !(~(unsigned __int8)(*((_DWORD *)_ESI + 41) >> 27) & 1) )
+        goto LABEL_25;
+      __asm
+      {
+        movss   xmm1, [esp+80h+var_68]
+        movss   xmm2, [esp+80h+var_64]
+        movss   xmm0, [esp+80h+var_60]
+      }
+    }
+    __asm
+    {
+      movss   dword ptr [esi+4E8h], xmm0
+      movss   xmm0, dword ptr ds:off_1050E9CC
+      movss   dword ptr [esi+4E0h], xmm1
+      movss   dword ptr [esi+4E4h], xmm2
+    }
+    _EDX = *((_DWORD *)_ESI + *((_DWORD *)_ESI + 328) + 325);
+    __asm
+    {
+      subss   xmm0, xmm1
+      movss   dword ptr [edx+14h], xmm0
+    }
+    _ECX = *((_DWORD *)_ESI + *((_DWORD *)_ESI + 328) + 325);
+    __asm { movss   dword ptr [ecx+18h], xmm2 }
+LABEL_25:
+    v42 = *((_DWORD *)_ESI + 652);
+    v43 = *((_DWORD *)_ESI + 651);
+    v73 = *((_DWORD *)_ESI + 650);
+    v75 = v42;
+    v74 = v43;
+    sub_1025D6C0((int)((char *)_ESI - 8), &v65);
+    sub_104D3BB0((int)((char *)_ESI + 2324));
+    v44 = *((_DWORD *)_ESI + 633);
+    v45 = (*((_DWORD *)_ESI + 660) >> 19) & 1;
+    v69 = *((_DWORD *)_ESI + 632);
+    v46 = *((_DWORD *)_ESI + 635);
+    v70 = v44;
+    v47 = *((_DWORD *)_ESI + 636);
+    v85 = v45;
+    v48 = *((_DWORD *)_ESI + 634);
+    v66 = v46;
+    v49 = *((_DWORD *)_ESI + 638);
+    v67 = v47;
+    v50 = *((_DWORD *)_ESI + 639);
+    v71 = v48;
+    v51 = *((_DWORD *)_ESI + 637);
+    v72 = v49;
+    v52 = *((_DWORD *)_ESI + 641);
+    v73 = v50;
+    v53 = *((_DWORD *)_ESI + 642);
+    v68 = v51;
+    v54 = *((_DWORD *)_ESI + 640);
+    v75 = v52;
+    v55 = *((_DWORD *)_ESI + 644);
+    v76 = v53;
+    v56 = *((_DWORD *)_ESI + 645);
+    v74 = v54;
+    v57 = *((_DWORD *)_ESI + 643);
+    v78 = v55;
+    v58 = *(_DWORD *)v2;
+    v79 = v56;
+    v59 = *((_DWORD *)v2 + 1);
+    v77 = v57;
+    v60 = *((_DWORD *)_ESI + 646);
+    v81 = v58;
+    v61 = *((_DWORD *)v2 + 3);
+    v82 = v59;
+    v80 = v60;
+    v62 = *((_DWORD *)v2 + 2);
+    v84 = v61;
+    v83 = v62;
+    LOBYTE(_EAX) = Client_Apply_Actor_Sync_Packet((int)((char *)_ESI - 8), (int)&v65);
+  }
+  return _EAX;
+}

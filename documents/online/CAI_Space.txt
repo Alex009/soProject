@@ -1,0 +1,238 @@
+18.06.11
+__________________________________________________________________
+
+Для работы AI классов требуется активировать класс CAI_Space, он работает со всем искусственным интелектом, картами AI и прочее...для начала дедик заблочен в CAI_Space::Initialize()
+далее для загрузки AI карты надо снять проверку на сингл в фукнции класса CLevel (что за функция пока не известно...) адрес 102373F0 
+функция грузящая AI карту - CAI_Space::Load(char* mapname) 
+в 102373F0 стоит проверка на сингл и потом имя карты берётся из IPureClient::net_SessionName(CLevel->0x40110)
+снимаем проверку на сингл и проверяем какое имя сессии при игре в мп...
+адрес для проверки: 23749C + GameOffset
+вернуло название карты как надо: mp_pripyat
+слетаем в GameGraph__CHeader__level... надо бы пробороздить просторы игры в поиске груза гейм графа...
+
+
+
+v12 = IReader__open_chunk(a2, 4);
+*(_DWORD *)(v4 + 0xB8) = v12;
+
+v14 = *(_DWORD *)(v4 + 0xB8);
+v13 = xrMemory__mem_alloc(Memory, 0x54u);
+
+if ( v13 ) v15 = CGameGraph__CGameGraph(v13, v14);
+else v15 = 0;
+
+*(_DWORD *)(v4 + 0xBC) = v15;
+if ( !g_pAI_Space )
+{
+	v16 = xrMemory__mem_alloc(Memory, 44);
+	if ( v16 ) v17 = CAI_Space__CAI_Space(v16);
+	else v17 = 0;
+	g_pAI_Space = v17;
+	CAI_Space__Initialize();
+}
+sub_10227A40(g_pAI_Space, *(_DWORD *)(v4 + 0xBC));
+
+100A6C1E -> 100A8B10
+
+из чего делаем вывод: для успешного запуска геймграф требуется загрузить файл спавна алайфа (захуя?)
+
+void* fileaddr;
+
+if ( !g_pAI_Space )
+{
+	v16 = xrMemory__mem_alloc(Memory, 44);
+	if ( v16 ) v17 = CAI_Space__CAI_Space(v16);
+	else v17 = 0;
+	g_pAI_Space = v17;
+	CAI_Space__Initialize();
+}
+
+if(xr_FS->exist(fileaddr,"$game_spawn$","all",".spawn"))
+{
+	SpawnFile = xr_FS->r_open(fileaddr);
+
+	Chunk = SpawnFile->open_chunk(3);
+	g_pAI_Space->sub_10226790(Chunk);
+	Chunk->close();
+
+	Chunk = SpawnFile->open_chunk(4);
+
+	v13 = xrMemory__mem_alloc(Memory, 0x54u);
+
+	if ( v13 ) CGameGraph = CGameGraph__CGameGraph(v13,Chunk);
+	else v15 = 0;
+
+	g_pAI_Space->sub_10227A40(CGameGraph);
+	Chunk->close();
+}
+
+Подгрузка AI_Space решила проблему спавна у клиента, но появилась проблема "чувства" монстров (реакция на игрока и т.д.)
+
+Проверены классы:
+AI_STL_S
+AI_CONTR
+AI_CHIM - химера не появилась...вылет другой...втф короче (по логу не полностью заполнена секция)
+AI_BURER
+AI_BLOOD
+
+падения в sub_1004CD20 при кровососе...
+CSheduler::ProcessStep -> sub_1004DE80 -> sub_1004CD20
+
+в 4CD20 в качестве this идёт this + 0x60 из 4DE80 а туда this идёт из CSheduler::ProcessStep такой:
+
+v5 = *(DWORD**)(this + 0xC); // т.е. указатель на массив элементов
+v8 = v5[3];
+v8->sub_1004DE80(1);
+
+значит от CSheduler ошибка в:
+this->0xC[3]->0x60
+
+убрав вызов 4DE80 ничего не улучшили, теперь в другом месте тоже самое
+все они появляются так как и должны, но потом игра вылетает...вроде всегда по одной причине - Feel::Vision
+
+вылет тут 100BEFE6 -> 1004E058 -> 1005B340 -> 10072560 (ошибка тут, длинны строк...не существующих строк)
+
+в 72560 в качестве this идёт CLevel + 0x485C4
+
+то же смещение 0x1C там строка...хи хи весело блин...
+
+в CObject::net_Spawn есть вызов CSheduler::Register, CSheduler this на 494B18
+CEngine + 0x40 -> CSheduler
+
+CSheduler::Update вызывается из xrGame адрес 1023209D
+
+CParticlesObject::Init -> ISheduled::sheduler_register -> CSheduler::Register
+
+ -> 0x10234000 -> 0x10233D50 -> CLevel::cl_Process_Spawn -> CLevel::SpawnEntity -> 0x10F3F50 -> CBaseMonster::net_Spawn -> 0x10BEF80 -> 0x1027B5D0 -> CEntity::net_Spawn -> sub_1028B390 -> CGameObject::net_Spawn -> CObject::net_Spawn -> CSheduler::Register
+
+проблема решилась снятием проверки на сингл плеер по адресу 1027953D (CEntity::net_Spawn)
+далее была проблема с функцией Actor() там была проверка на сингл, но с ней легко разобраться прыжком от 1026A110 к 1026A14A
+
+in dedicated:
+CLevel::SpawnEntity -> CAI_Stalker::NET_Spawn -> CInventoryOwner::net_Spawn
+
+05.11.11:
+для полноценной работы АИ классов (не просто ходить по путям...) нужно подключить полностью скрипты =>
+CALifeSimulator...
+и так...
+1. перенести алайф из game_sv_GameState__PreCreate_SINGLE в game_sv_GameState__PreCreate_MP
+2. убрать из CALifeSimulator проверки на данные командной строки, загрузку спавнов сингла
+3. после создания алайфа грузить ai карту (через CAI_Space::Load)
+
+Вид исправленого конструктора алайфа:
+int __thiscall CALifeSimulator__CALifeSimulator(int this, int a2, int a3, int a4)
+{
+  int v4; // ebx@1
+  int v5; // eax@3
+  int v6; // eax@4
+  int v7; // eax@5
+  int v8; // esi@8
+  void *v9; // eax@9
+  char v10; // cl@10
+  char v11; // zf@12
+  signed int v12; // ecx@12
+  int v13; // edi@12
+  char *v14; // esi@12
+  char v15; // zf@17
+  signed int v16; // ecx@17
+  int v17; // edi@17
+  char *v18; // esi@17
+  int v19; // eax@25
+  int v20; // edi@30
+  int v21; // esi@30
+  int v22; // eax@32
+  int v23; // eax@33
+  int v24; // eax@40
+  int v26; // [sp+1Ch] [bp-120h]@30
+  int v27; // [sp+2Ch] [bp-110h]@30
+  int v28; // [sp+30h] [bp-10Ch]@30
+  int v29; // [sp+34h] [bp-108h]@30
+  int v30; // [sp+38h] [bp-104h]@1
+  char Dst; // [sp+3Ch] [bp-100h]@25
+
+  v4 = this;
+  v30 = 0;
+  if ( a4 )
+  {
+    *(_DWORD *)(this + 0xC) = &unk_105118D4;
+    *(_DWORD *)(this + 0x2C) = &unk_105118CC;
+    *(_DWORD *)(this + 0x48) = &unk_105118C4;
+    *(_DWORD *)(this + 0x27C) = &unk_105118BC;
+    *(_DWORD *)(this + 0x280) = &unk_105118B4;
+    CALifeSimulatorBase__CALifeSimulatorBase(this + 0x294, a2, (int)alife_section);
+  }
+  CALifeUpdateManager__CALifeUpdateManager(v4, a2, (int)alife_section, 0);
+  CALifeInteractionManager__CALifeInteractionManager(v4 + 0x278, a2, (int)alife_section, 0);
+  v5 = *(_DWORD *)(v4 + 0xC);
+  *(_DWORD *)v4 = &CALifeSimulator___vftable_;
+  *(_DWORD *)(*(_DWORD *)(v5 + 4) + v4 + 0xC) = &off_105116E4;
+  *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v4 + 0xC) + 4) + v4 + 8) = *(_DWORD *)(*(_DWORD *)(v4 + 0xC) + 4) - 648;
+  *(_DWORD *)(v4 + 0x284) = v4 + 0x284;
+  *(_DWORD *)(v4 + 0x288) = v4 + 0x284;
+  restart_all();
+  if ( !g_pAI_Space )
+  {
+    v6 = xrMemory__mem_alloc(Memory, 44);
+    if ( v6 )
+      v7 = CAI_Space__CAI_Space(v6);
+    else
+      v7 = 0;
+    g_pAI_Space = v7;
+    CAI_Space__Initialize();
+  }
+  CAI_Space__LinkALife(g_pAI_Space, v4);
+  v8 = a3;
+  *(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v4 + 12) + 4) + v4 + 72) = a3;
+  v21 = 0;
+  v20 = CInifile__r_string(pSettings, alife_section);
+  v27 = 0;
+  v28 = 0;
+  v29 = -2;
+  if ( !byte_10643A6D )
+  {
+    if ( !g_pAI_Space )
+    {
+      v22 = xrMemory__mem_alloc(Memory, 44);
+      if ( v22 )
+        v23 = CAI_Space__CAI_Space(v22);
+      else
+        v23 = 0;
+      g_pAI_Space = v23;
+      CAI_Space__Initialize();
+    }
+    if ( !CScriptEngine__functor_void_(*(void **)(g_pAI_Space + 0x1C), (const char *)v20, (int)&v27) )
+      xrDebug__fail(
+        Debug,
+        "ai().script_engine().functor(start_game_callback,functor)",
+        "failed to get start game callback",
+        "D:\\prog_repository\\sources\\trunk\\xrGame\\alife_simulator.cpp",
+        74,
+        "CALifeSimulator::CALifeSimulator",
+        &byte_10643A6D);
+    v21 = v27;
+  }
+  lua_rawgeti(v21, -10000, v29);
+  if ( luabind__detail__pcall(v21, 0, 0) )
+  {
+    v24 = luabind__get_error_callback(v26, "start_game_callback");
+    if ( v24 )
+      ((void (__cdecl *)(int))v24)(v21);
+    abort();
+  }
+  if ( v28 )
+  {
+    if ( v29 != -2 )
+      luabind__detail__unref(v28, v29);
+  }
+  return v4;
+}
+
+и так вид нашей функции game_sv_mp__Create_fix:
+1. выделяем память под ALifeSimulator
+2. вызываем конструктор симулятора на выделенной памяти
+3. фиксируем симулятор в game_sv_mp
+4. загружаем ai карту через CAI_Space::load
+
+начинаем строить...
+
+подключил алайф симулятор....теперь куча проблем с этими скриптами...сталкера не создать (создаётся а потом крашит сервер), актора не заспавнить (спавнит и крашит сервер...) короче эта жесточайшая связь алайфа с клиентом + сервером требует жуткой работы над этой хернёй

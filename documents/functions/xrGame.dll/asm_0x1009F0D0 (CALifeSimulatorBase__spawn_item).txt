@@ -1,0 +1,211 @@
+.text:1009F0D0 CALifeSimulatorBase__spawn_item proc near ; CODE XREF: sub_10096EA0+29p
+.text:1009F0D0                                         ; lua_alife__create+51p ...
+.text:1009F0D0
+.text:1009F0D0 DstBuf          = byte ptr -110h
+.text:1009F0D0 Dst             = byte ptr -100h
+.text:1009F0D0 arg_0           = dword ptr  4
+.text:1009F0D0 arg_4           = dword ptr  8
+.text:1009F0D0 arg_8           = dword ptr  0Ch
+.text:1009F0D0 arg_C           = word ptr  10h
+.text:1009F0D0 arg_10          = word ptr  14h
+.text:1009F0D0 arg_14          = byte ptr  18h
+.text:1009F0D0
+.text:1009F0D0                 sub     esp, 110h
+.text:1009F0D6                 push    ebp
+.text:1009F0D7                 push    esi
+.text:1009F0D8                 push    edi
+.text:1009F0D9                 mov     edi, [esp+11Ch+arg_0]
+.text:1009F0E0                 push    edi
+.text:1009F0E1                 mov     ebp, ecx
+.text:1009F0E3                 call    ClassidByName
+.text:1009F0E8                 add     esp, 4
+.text:1009F0EB                 cmp     byte_10643AAB, 0
+.text:1009F0F2                 mov     esi, eax
+.text:1009F0F4                 jnz     short loc_1009F122
+.text:1009F0F6                 test    esi, esi
+.text:1009F0F8                 jnz     short loc_1009F122
+.text:1009F0FA                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:1009F100                 push    offset byte_10643AAB
+.text:1009F105                 push    offset aCalifesimula_2 ; "CALifeSimulatorBase::spawn_item"
+.text:1009F10A                 push    65h
+.text:1009F10C                 push    offset asc_10512138 ; "D:\\prog_repository\\sources\\trunk\\xrGame"...
+.text:1009F111                 push    edi
+.text:1009F112                 push    offset aCannotFindItem ; "Cannot find item with section"
+.text:1009F117                 push    offset aAbstract ; "abstract"
+.text:1009F11C                 call    ds:?fail@xrDebug@@QAEXPBD000H0AA_N@Z ; xrDebug::fail(char const *,char const *,char const *,char const *,int,char const *,bool &)
+.text:1009F122
+.text:1009F122 loc_1009F122:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+24j
+.text:1009F122                                         ; CALifeSimulatorBase__spawn_item+28j
+.text:1009F122                 mov     eax, ds:?g_pStringContainer@@3PAVstr_container@@A ; str_container * g_pStringContainer
+.text:1009F127                 mov     ecx, [eax]
+.text:1009F129                 push    edi
+.text:1009F12A                 call    ds:?dock@str_container@@QAEPAUstr_value@@PBD@Z ; str_container::dock(char const *)
+.text:1009F130                 test    eax, eax
+.text:1009F132                 jz      short loc_1009F137
+.text:1009F134                 add     dword ptr [eax], 1
+.text:1009F137
+.text:1009F137 loc_1009F137:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+62j
+.text:1009F137                 mov     ecx, [esi+3Ch]
+.text:1009F13A                 test    ecx, ecx
+.text:1009F13C                 jz      short loc_1009F150
+.text:1009F13E                 add     dword ptr [ecx], 0FFFFFFFFh
+.text:1009F141                 mov     ecx, [esi+3Ch]
+.text:1009F144                 cmp     dword ptr [ecx], 0
+.text:1009F147                 jnz     short loc_1009F150
+.text:1009F149                 mov     dword ptr [esi+3Ch], 0
+.text:1009F150
+.text:1009F150 loc_1009F150:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+6Cj
+.text:1009F150                                         ; CALifeSimulatorBase__spawn_item+77j
+.text:1009F150                 mov     [esi+3Ch], eax
+.text:1009F153                 mov     byte ptr [esi+42h], 0FFh
+.text:1009F157                 mov     edi, [ebp+4]
+.text:1009F15A                 add     edi, 88504h
+.text:1009F160                 cmp     byte_10643AA8, 0
+.text:1009F167                 jnz     short loc_1009F195
+.text:1009F169                 cmp     dword ptr [edi], 0
+.text:1009F16C                 jnz     short loc_1009F195
+.text:1009F16E                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:1009F174                 push    offset byte_10643AA8
+.text:1009F179                 push    offset aCid_generato_0 ; "CID_Generator<unsigned int,unsigned cha"...
+.text:1009F17E                 push    5Ch
+.text:1009F180                 push    offset aDProg_repos_68 ; "d:\\prog_repository\\sources\\trunk\\xrgame"...
+.text:1009F185                 push    offset aNotEnoughIds ; "Not enough IDs"
+.text:1009F18A                 push    offset aM_available_co ; "m_available_count"
+.text:1009F18F                 call    ds:?fail@xrDebug@@QAEXPBD00H0AA_N@Z ; xrDebug::fail(char const *,char const *,char const *,int,char const *,bool &)
+.text:1009F195
+.text:1009F195 loc_1009F195:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+97j
+.text:1009F195                                         ; CALifeSimulatorBase__spawn_item+9Cj
+.text:1009F195                 lea     edx, [edi+10804h]
+.text:1009F19B                 push    edx
+.text:1009F19C                 lea     eax, [edi+4]
+.text:1009F19F                 push    eax
+.text:1009F1A0                 call    sub_1009DEC0
+.text:1009F1A5                 add     esp, 8
+.text:1009F1A8                 push    0FFFFh
+.text:1009F1AD                 push    eax
+.text:1009F1AE                 mov     ecx, edi
+.text:1009F1B0                 call    sub_1009E190
+.text:1009F1B5                 mov     cx, [esp+11Ch+arg_10]
+.text:1009F1BD                 mov     [esi+32h], ax
+.text:1009F1C1                 mov     eax, [esp+11Ch+arg_4]
+.text:1009F1C8                 mov     [esi+34h], cx
+.text:1009F1CC                 mov     word ptr [esi+36h], 0FFFFh
+.text:1009F1D2                 mov     edx, [eax]
+.text:1009F1D4                 mov     [esi+54h], edx
+.text:1009F1D7                 mov     ecx, [eax+4]
+.text:1009F1DA                 mov     [esi+58h], ecx
+.text:1009F1DD                 mov     edx, [eax+8]
+.text:1009F1E0                 mov     [esi+5Ch], edx
+.text:1009F1E3                 mov     word ptr [esi+2Ch], 80h
+.text:1009F1E9                 mov     eax, [esi+3Ch]
+.text:1009F1EC                 test    eax, eax
+.text:1009F1EE                 jz      short loc_1009F1F5
+.text:1009F1F0                 add     eax, 10h
+.text:1009F1F3                 jmp     short loc_1009F1F7
+.text:1009F1F5 ; ---------------------------------------------------------------------------
+.text:1009F1F5
+.text:1009F1F5 loc_1009F1F5:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+11Ej
+.text:1009F1F5                 xor     eax, eax
+.text:1009F1F7
+.text:1009F1F7 loc_1009F1F7:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+123j
+.text:1009F1F7                 push    100h            ; MaxCount
+.text:1009F1FC                 push    eax             ; Src
+.text:1009F1FD                 lea     eax, [esp+124h+Dst]
+.text:1009F201                 push    100h            ; SizeInBytes
+.text:1009F206                 push    eax             ; Dst
+.text:1009F207                 call    ds:strncpy_s
+.text:1009F20D                 add     esp, 10h
+.text:1009F210                 cmp     word ptr [esi+32h], 3E8h
+.text:1009F216                 jnb     short loc_1009F22F
+.text:1009F218                 push    offset a0       ; "0"
+.text:1009F21D                 lea     ecx, [esp+120h+Dst]
+.text:1009F221                 push    100h
+.text:1009F226                 push    ecx
+.text:1009F227                 call    sub_1005A2D0
+.text:1009F22C                 add     esp, 0Ch
+.text:1009F22F
+.text:1009F22F loc_1009F22F:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+146j
+.text:1009F22F                 cmp     word ptr [esi+32h], 64h
+.text:1009F234                 jnb     short loc_1009F24D
+.text:1009F236                 push    offset a0       ; "0"
+.text:1009F23B                 lea     edx, [esp+120h+Dst]
+.text:1009F23F                 push    100h
+.text:1009F244                 push    edx
+.text:1009F245                 call    sub_1005A2D0
+.text:1009F24A                 add     esp, 0Ch
+.text:1009F24D
+.text:1009F24D loc_1009F24D:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+164j
+.text:1009F24D                 cmp     word ptr [esi+32h], 0Ah
+.text:1009F252                 jnb     short loc_1009F26B
+.text:1009F254                 push    offset a0       ; "0"
+.text:1009F259                 lea     eax, [esp+120h+Dst]
+.text:1009F25D                 push    100h
+.text:1009F262                 push    eax
+.text:1009F263                 call    sub_1005A2D0
+.text:1009F268                 add     esp, 0Ch
+.text:1009F26B
+.text:1009F26B loc_1009F26B:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+182j
+.text:1009F26B                 movzx   edx, word ptr [esi+32h]
+.text:1009F26F                 push    0Ah             ; Radix
+.text:1009F271                 lea     ecx, [esp+120h+DstBuf]
+.text:1009F275                 push    ecx             ; DstBuf
+.text:1009F276                 push    edx             ; Val
+.text:1009F277                 call    ds:_itoa
+.text:1009F27D                 push    eax
+.text:1009F27E                 lea     eax, [esp+12Ch+Dst]
+.text:1009F282                 push    100h
+.text:1009F287                 push    eax
+.text:1009F288                 call    sub_1005A2D0
+.text:1009F28D                 mov     ecx, [esi]
+.text:1009F28F                 mov     eax, [ecx+14h]
+.text:1009F292                 add     esp, 18h
+.text:1009F295                 lea     edx, [esp+11Ch+Dst]
+.text:1009F299                 push    edx
+.text:1009F29A                 push    esi
+.text:1009F29B                 call    eax
+.text:1009F29D                 push    esi
+.text:1009F29E                 call    sub_10346210
+.text:1009F2A3                 mov     esi, eax
+.text:1009F2A5                 add     esp, 4
+.text:1009F2A8                 test    esi, esi
+.text:1009F2AA                 jz      short loc_1009F2C9
+.text:1009F2AC                 push    esi
+.text:1009F2AD                 call    sub_10346230
+.text:1009F2B2                 mov     edi, eax
+.text:1009F2B4                 add     esp, 4
+.text:1009F2B7                 test    edi, edi
+.text:1009F2B9                 jz      short loc_1009F2C9
+.text:1009F2BB                 mov     ecx, edi
+.text:1009F2BD                 call    sub_103DD690
+.text:1009F2C2                 mov     [edi+1A6h], ax
+.text:1009F2C9
+.text:1009F2C9 loc_1009F2C9:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+1DAj
+.text:1009F2C9                                         ; CALifeSimulatorBase__spawn_item+1E9j
+.text:1009F2C9                 cmp     [esp+11Ch+arg_14], 0
+.text:1009F2D1                 mov     ecx, [esp+11Ch+arg_8]
+.text:1009F2D8                 mov     dx, [esp+11Ch+arg_C]
+.text:1009F2E0                 mov     [esi+0A8h], ecx
+.text:1009F2E6                 mov     [esi+9Ch], dx
+.text:1009F2ED                 mov     word ptr [esi+86h], 0FFFFh
+.text:1009F2F6                 jz      short loc_1009F302
+.text:1009F2F8                 push    1
+.text:1009F2FA                 push    esi
+.text:1009F2FB                 mov     ecx, ebp
+.text:1009F2FD                 call    sub_100A44A0
+.text:1009F302
+.text:1009F302 loc_1009F302:                           ; CODE XREF: CALifeSimulatorBase__spawn_item+226j
+.text:1009F302                 mov     eax, [esi]
+.text:1009F304                 mov     edx, [eax+0B4h]
+.text:1009F30A                 mov     ecx, esi
+.text:1009F30C                 call    edx
+.text:1009F30E                 mov     eax, [esi]
+.text:1009F310                 mov     edx, [eax+0C4h]
+.text:1009F316                 mov     ecx, esi
+.text:1009F318                 call    edx
+.text:1009F31A                 pop     edi
+.text:1009F31B                 mov     eax, esi
+.text:1009F31D                 pop     esi
+.text:1009F31E                 pop     ebp
+.text:1009F31F                 add     esp, 110h
+.text:1009F325                 retn    18h
+.text:1009F325 CALifeSimulatorBase__spawn_item endp

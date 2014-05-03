@@ -1,0 +1,98 @@
+void __stdcall cmd_start(const char *Str)
+{
+  char *v1; // eax@2
+  char *v2; // eax@4
+  char *v3; // eax@6
+  char *v4; // eax@10
+  char v5; // cl@11
+  char *v6; // eax@13
+  char v7; // cl@14
+  char *v8; // eax@19
+  char v9; // cl@20
+  int v10; // eax@22
+  char *v11; // eax@23
+  char v12; // cl@24
+  int v13; // esi@26
+  int v14; // eax@28
+  char Dst; // [sp+10h] [bp-3000h]@1
+  char v16; // [sp+11h] [bp-2FFFh]@12
+  char v17; // [sp+1010h] [bp-2000h]@1
+  char v18; // [sp+1011h] [bp-1FFFh]@25
+  char v19; // [sp+2010h] [bp-1000h]@5
+  char v20; // [sp+2011h] [bp-FFFh]@15
+
+  Dst = 0;
+  v17 = 0;
+  if ( strstr(Str, "server") )
+  {
+    v1 = strstr(Str, "server");
+    sscanf(v1 + 6, "(%[^)])", &v17);
+  }
+  Dst = 0;
+  if ( strstr(Str, "client") )
+  {
+    v2 = strstr(Str, "client");
+    sscanf(v2 + 6, "(%[^)])", &Dst);
+  }
+  v19 = 0;
+  if ( strstr(Str, "demo") )
+  {
+    v3 = strstr(Str, "demo");
+    sscanf(v3 + 4, "(%[^)])", &v19);
+  }
+  strlwr(&v17);
+  sub_41E800(&Dst);
+  if ( !Dst )
+  {
+    if ( strstr(&v17, "single") )
+      strncpy_s(&Dst, 0x1000u, "localhost", 0x1000u);
+  }
+  v4 = &Dst;
+  do
+    v5 = *v4++;
+  while ( v5 );
+  if ( v4 != &v16 )
+    goto LABEL_31;
+  v6 = &v19;
+  do
+    v7 = *v6++;
+  while ( v7 );
+  if ( v6 != &v20 )
+  {
+LABEL_31:
+    if ( g_pGameLevel )
+      CEventAPI__Defer(&dword_48EACC, (int)"KERNEL:disconnect", 0, 0, 0, 0);
+    v8 = &v19;
+    do
+      v9 = *v8++;
+    while ( v9 );
+    if ( v8 == &v20 )
+    {
+      v11 = &v17;
+      do
+        v12 = *v11++;
+      while ( v12 );
+      if ( v11 == &v18 )
+        v13 = 0;
+      else
+        v13 = (int)xr_strdup(&v17);
+      v14 = (int)xr_strdup(&Dst);
+      CEventAPI__Defer(
+        &dword_48EACC,
+        (int)"KERNEL:start",
+        v13,
+        (unsigned __int64)v13 >> 32,
+        v14,
+        (unsigned __int64)v14 >> 32);
+    }
+    else
+    {
+      v10 = (int)xr_strdup(&v19);
+      CEventAPI__Defer(&dword_48EACC, (int)"KERNEL:start_mp_demo", v10, (unsigned __int64)v10 >> 32, 0, 0);
+    }
+  }
+  else
+  {
+    Log("! Can't start game without client. Arguments: '%s'.", Str);
+  }
+}

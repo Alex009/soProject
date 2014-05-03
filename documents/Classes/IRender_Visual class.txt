@@ -1,0 +1,62 @@
+dxRender_Visual
+0x0: ftable
+0x4: visual type
+0x8: box3[0][0]
+0xC: box3[0][1]
+0x10: box3[0][2]
+0x14: box3[1][0]
+0x18: box3[1][1]
+0x1C: box3[1][2]
+0x20: box3[2][0]
+0x24: box3[2][1]
+0x28: box3[2][2]
+0x2C: float
+0x30: unknown
+0x34: unknown
+0x38: unknown
+0x3C: unknown
+0x40: unknown
+0x44: xr_vector<IRender_Visual (4 visual type)>
+0x48: class from 0x44 + 0x8
+0x4C: like 0x48
+0x50: unknown
+
+CKinematics:
+0x54: ftable
+0x58: pointer (not always need)
+0x5C: unknown
+0x60: pointer (not always need)
+0x64: unknown
+0x68: unknown
+0x6C: pointer (not always need)
+0x70: unknown
+0x74: unknown
+0x78: see like pointer (need to check)
+0x7C: pointer (start of CBoneInstance...every by 0xA0, count from xr_vector of CBoneData
+0x80: xr_vector<CBoneData*,xr_alloc<CBoneData*>>*
+0x84: unknown
+0x88: pointer
+0x8C: pointer
+0x90: unknown
+0x94: unknown
+0x9C: unknown (0xFFFFFFFF)
+0xA0: unknown
+0xA4: function from xrGame.dll (0x1027F5A0)
+0xA8: pointer on class (class of Object)
+0xAC: unknown
+
+CKinematicsAnimated:
+0xB0: ftable
+0xB4: unknown
+0xB8: pointer (0x44 * count_of_bones)
+0xBC: first shared motion class pointer
+0xC0: shared_motion class pointer
+0xC4: last shared_motion class pointer
+0xC8: see like pointer
+0xCC: unknown
+0xD0: unknown
+0xD4: float
+0xD8: float
+0xDC: float
+
+...

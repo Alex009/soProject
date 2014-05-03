@@ -1,0 +1,13 @@
+000001A8 xrGame.dll:03FE6C7D                    jz      near ptr unk_3FE7094       .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03FE71B8                    jnz     short near ptr unk_3FE71BF .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03FDDE22                    jnz     short near ptr unk_3FDDE2E .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:040DDB15                    jnz     short near ptr unk_40DDB65 .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:0410125E                    jnz     near ptr unk_4101636       .data:bool g_dedicated_server: 01
+000001A8 .text:CConsole::Hide(void)+1C          jnz     short loc_44101A           .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03ED6E35                    nop                                .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03ED6F00                    nop                                .data:bool g_dedicated_server: 01
+000001A8 .text:CApplication::LoadStage(void)+DA jz      short loc_45F63A           .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03F21601                    nop                                .data:bool g_dedicated_server: 01
+000001A8 xrGame.dll:03EC7889                    push    edi                        .data:bool g_dedicated_server: 01
+
+D:\S.T.A.L.K.E.R. - Call of Pripyat 1.6.0.2\bin\xrGame.dll   03CA0000 7282688 

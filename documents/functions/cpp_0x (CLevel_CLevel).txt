@@ -1,0 +1,217 @@
+CLevel::CLevel()
+{
+	CTimer * timer;
+	void * unknown, * unknown2;
+	void * tmp;
+	void * EventReceiever;
+
+	this->IGame_Level(void);
+	if((timer = Device->GetTimerGlobal(void)) != NULL)
+	{
+		(this + 0x40110)->IPureClient(timer);
+		(this) = offset off_1054258C;
+		(this + 0x10) = offset off_1054255C;
+		(this + 0x14) = offset off_10542554;
+		(this + 0x18) = offset off_1054254C;
+		(this + 0x1C) = offset off_10542544; // IEventReceiver * 
+		(this + 0x40110) = offset off_10542504; // IPureClient * 
+		(this + 0x40114) = offset off_105424F8;
+		(this + 0x4859C) = 0;
+		(this + 0x4869C) = 0;
+		(this + 0x486A0) = 0;
+		(this + 0x486A4) = 0;
+		(this + 0x486A8) = 0;
+		(this + 0x486AC) = 0;
+		(this + 0x486B0) = 0;
+		(this + 0x486C4) = 0;
+
+		EventReceiever = (this + 0x1C);
+
+		unknown = (this + 0x486CC);
+		(unknown + 0x10) = (unknown + 0x14) = unknown;
+
+		// not converted data		mov     eax, [ecx]
+		// not converted data		mov     [eax], bl
+		(this + 0x486E4) = 0;
+		(this + 0x486E8) = 0;
+		(this + 0x486EC) = 0;
+
+		unknown2 = (this + 0x48700);
+		(unknown2) = 0;
+		(unknown2 + 0x4) = 0;
+		(unknown2 + 0x8) = 0;
+		(unknown2 + 0xC) = 0;
+		(unknown2 + 0x10) = 0;
+		(unknown2 + 0x14) = 0;
+		(unknown2 + 0x18) = 0;
+		(unknown2 + 0x1C) = 0;
+		(unknown2 + 0x20) = 0;
+		(unknown2 + 0x24) = 0;
+		unknown2->sub_10369BB0(0);
+		
+		unknown2 = (this + 0x4872C);
+		unknown2->sub_10255460();
+		
+		(this + 0x4876C) = 0;
+
+		unknown2 = (this + 0x4875C);
+		(unknown2) = unknown;
+		// not converted		mov     cl, byte ptr [esp+14h+var_2]
+		// not converted		mov     [eax], bl
+		(unknown2 + 0x4) = 0;
+		(unknown2 + 0x8) = unknown2;
+		(unknown2 + 0xC) = unknown2;
+		// not converted		mov     [eax+14h], cl
+		
+		(this + 0x48788) = 0;
+		(this + 0x4878C) = 0;
+		(this + 0x48790) = 0;
+		// not converted		mov     [esi+48784h], bl
+		// not converted		mov     [esi+48785h], bl
+		// not converted		mov     [esi+4879Dh], bl
+		// not converted		mov     [esi+48786h], bl
+		// not converted		mov     [esi+4879Ch], bl
+		(this + 0x48794) = 0;
+		(this + 0x48798) = 0;
+		(this + 0x487A0) = 0;
+		(this + 0x487A4) = 0;
+		(this + 0x487A8) = 0;
+		(this + 0x487AC) = 0;
+		(this + 0x487B0) = 0;
+
+		unknown = Core + 0x4D0;
+		dword_1064593C = strstr(unknown,"-debug_ge");
+
+		(this + 0x48728) = 0;
+		(this + 0x486F0) = 0;
+
+		if((tmp = Memory->mem_alloc(0x28)) != NULL)
+		{
+			(tmp) = 0;
+			(tmp + 0x4) = 0;
+			(tmp + 0x8) = 0;
+			(tmp + 0xC) = 0;
+			(tmp + 0x10) = 0;
+			(tmp + 0x14) = 0;
+			(tmp + 0x18) = 0;
+			(tmp + 0x1C) = 0;
+			(tmp + 0x20) = 0;
+			(tmp + 0x24) = 0;
+			tmp->sub_10232C70(0);
+		}
+
+		(this + 0x486FC) = tmp;
+		(this + 0x486F8) = 0;
+		(this + 0x486F4) = 0;
+		(this + 0x486B8) = 1; // check!
+
+		(this + 0x485E0) = (Engine + 0x24)->Handler_Attach("LEVEL:ChangeRP",EventReceiever);
+		(this + 0x485E4) = (Engine + 0x24)->Handler_Attach("LEVEL:PlayDEMO",EventReceiever);
+		(this + 0x485E8) = (Engine + 0x24)->Handler_Attach("LEVEL:PlayMusic",EventReceiever);
+		(this + 0x485EC) = (Engine + 0x24)->Handler_Attach("LEVEL:Environment",EventReceiever);
+		(this + 0x485F0) = (Engine + 0x24)->Handler_Attach("LEVEL:spawn",EventReceiever);
+		
+		if((tmp = Memory->mem_alloc(0x8C)) != NULL)
+		{
+			tmp->sub_1024EE90();
+		}
+
+		(this + 0x487BC) = tmp;
+
+		if(!g_dedicated_server)
+		{
+			if((tmp = Memory->mem_alloc(0x14)) != NULL)
+			{
+				tmp->sub_102A6920();
+			}
+
+			(this + 0x487B4) = tmp;
+
+			if((tmp = Memory->mem_alloc(0x10)) != NULL)
+			{
+				tmp->sub_1029AF10();
+			}
+
+			(this + 0x487B8) = tmp;
+		}
+		else
+		{
+			(this + 0x487B4) = 0;
+			(this + 0x487B4) = 0;
+		}
+		// not converted		fnstcw  [esp+14h+var_2]
+		// not converted		mov     [esi+48698h], bl
+		(this + 0x48694) = 0;
+		// not converted		mov     eax, ds:?fixed_step@@3MA ; float fixed_step
+		// not converted		fld     dword ptr [eax]
+		// not converted		movzx   eax, [esp+14h+var_2]
+		// not converted		fmul    ds:dword_1050E664
+		// not converted		or      eax, 0C00h
+		(this + 0x486C0) = 0;
+		// not converted		fldcw   word ptr [esp+18h]
+		// not converted		fistp   qword ptr [esp+18h]
+		// not converted		mov     ecx, [esp+18h]
+		// not converted		mov     [esi+486BCh], ecx
+
+		if((tmp = Memory->mem_alloc(0x108)) != NULL)
+		{
+			tmp->sub_10232AF0();
+		}
+		
+		(this + 0x485C8) = tmp;
+		
+		if(!g_dedicated_server)
+		{
+			if((tmp = Memory->mem_alloc(0x20)) != NULL)
+			{
+				tmp->sub_10255200();
+			}
+
+			(this + 0x485C0) = tmp;
+
+			if((tmp = Memory->mem_alloc(0x40)) != NULL)
+			{
+				tmp->sub_10072C50();
+			}
+
+			(this + 0x485C4) = tmp;
+
+			if((tmp = Memory->mem_alloc(0x1C)) != NULL)
+			{
+				(tmp) = offset off_105426DC;
+				(tmp + 0x4) = 0;
+				(tmp + 0x8) = 0;
+				(tmp + 0xC) = 0;
+				(tmp + 0x10) = 0;
+				(tmp + 0x14) = 0;
+				(tmp + 0x18) = 0;
+			}
+
+			(this + 0x485CC) = tmp;
+
+			if((tmp = Memory->mem_alloc(0x18)) != NULL)
+			{
+				tmp->sub_10254180();
+			}
+
+			(this + 0x485D0) = tmp;
+		}
+		else
+		{
+			(this + 0x485C0) = 0;
+			(this + 0x485CC) = 0;
+			(this + 0x485D0) = 0;
+			(this + 0x485C4) = 0;
+		}
+
+		(this + 0x485D4) = sub_10232EB0();
+		(this + 0x485D8) = sub_10232EB0();
+		(this + 0x48600) = 0;
+		(this + 0x485F4) = 0;
+
+		if((this + 0x486A0) != (this + 0x4869C))
+		{
+			memmove((this + 0x4869C),(this + 0x486A0),(this + 0x486A0));
+		}
+	}
+}

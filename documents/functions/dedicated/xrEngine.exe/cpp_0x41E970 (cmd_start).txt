@@ -1,0 +1,84 @@
+int cmd_start(char* Str)
+{
+	char* server_params = new char[0x1000]; // var_2000
+	char* client_params = new char[0x1000]; // Dst
+	char* demo_params = new char[0x1000]; // var_1000
+	char* cmdline;
+
+	if(strstr(Str, "server"))
+	{
+		cmdline = strstr(Str, "server");
+		sscanf(cmdline + 6, "(%[^)])",server_params);
+	}
+	if(strstr(Str, "client"))
+	{
+		cmdline = strstr(Str, "client");
+		sscanf(cmdline + 6, "(%[^)])",client_params);
+	}
+	if(strstr(Str, "demo"))
+	{
+		cmdline = strstr(Str, "demo");
+		sscanf(cmdline + 4, "(%[^)])",demo_params);
+	}
+
+	strlwr(server_params);
+
+	sub_41E800(client_params);
+
+	if(!client_params)
+	{
+		if(strstr(server_params,"single")) strncpy_s(client_params,0x1000,"localhost",0x1000);
+	}
+	
+	edx = [client_params + 1];
+	do
+	{
+		cl = [client_params];
+		client_params++;
+	}
+	while(cl);
+	if(cl != edx) goto gt_point;
+
+	edx = [demo_params + 1];
+	do
+	{
+		cl = [demo_params];
+		demo_params++;
+	}
+	while(cl);
+	if(cl != edx) goto gt_point;
+
+	return Log("! Can't start game without client. Arguments: '%s'.",Str);
+
+	gt_point:
+	if(g_pGameLevel) dword_48EACC->Defer("KERNEL:disconnect",0,0,0,0);
+	
+	edx = [demo_params + 1];
+	do
+	{
+		cl = [demo_params];
+		demo_params++;
+	}
+	while(cl);
+	if(cl != edx)
+	{
+		dword_48EACC->Defer("KERNEL:start_mp_demo",xr_strdup(demo_params),edx,demo_params,0);
+	}
+	else
+	{
+		edx = [server_params + 1];
+		do
+		{
+			cl = [server_params];
+			server_params++;
+		}
+		while(cl);
+
+		if(cl != edx) var1 = xr_strdup(server_params);
+		else var1 = 0;
+
+		var2 = xr_strdup(client_params);
+
+		dword_48EACC->Defer("KERNEL:start",var1,edx,var2,edx);
+	}
+}

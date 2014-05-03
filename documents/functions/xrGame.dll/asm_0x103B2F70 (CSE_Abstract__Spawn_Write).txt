@@ -1,0 +1,160 @@
+.text:103B2F70 CSE_Abstract__Spawn_Write proc near     ; DATA XREF: .rdata:off_105460B4o
+.text:103B2F70                                         ; .rdata:off_105759DCo ...
+.text:103B2F70
+.text:103B2F70 arg_0           = dword ptr  4
+.text:103B2F70 arg_4           = dword ptr  8
+.text:103B2F70 arg_8           = dword ptr  0Ch
+.text:103B2F70
+.text:103B2F70                 push    ebx
+.text:103B2F71                 push    esi
+.text:103B2F72                 mov     esi, [esp+8+arg_4]
+.text:103B2F76                 push    edi
+.text:103B2F77                 push    1
+.text:103B2F79                 mov     ecx, esi
+.text:103B2F7B                 call    ds:?w_begin@NET_Packet@@QAEXG@Z ; NET_Packet::w_begin(ushort)
+.text:103B2F81                 mov     edi, [esp+0Ch+arg_0]
+.text:103B2F85                 lea     eax, [edi+3Ch]
+.text:103B2F88                 push    eax
+.text:103B2F89                 mov     ecx, esi
+.text:103B2F8B                 call    ds:?w_stringZ@NET_Packet@@QAEXABVshared_str@@@Z ; NET_Packet::w_stringZ(shared_str const &)
+.text:103B2F91                 mov     eax, [edi+20h]
+.text:103B2F94                 test    eax, eax
+.text:103B2F96                 jnz     short loc_103B2F9D
+.text:103B2F98                 mov     eax, offset Src
+.text:103B2F9D
+.text:103B2F9D loc_103B2F9D:                           ; CODE XREF: CSE_Abstract__Spawn_Write+26j
+.text:103B2F9D                 push    eax
+.text:103B2F9E                 mov     ecx, esi
+.text:103B2FA0                 call    ds:?w_stringZ@NET_Packet@@QAEXPBD@Z ; NET_Packet::w_stringZ(char const *)
+.text:103B2FA6                 push    0
+.text:103B2FA8                 mov     ecx, esi
+.text:103B2FAA                 call    ds:?w_u8@NET_Packet@@QAEXE@Z ; NET_Packet::w_u8(uchar)
+.text:103B2FB0                 movzx   ecx, byte ptr [edi+42h]
+.text:103B2FB4                 push    ecx
+.text:103B2FB5                 mov     ecx, esi
+.text:103B2FB7                 call    ds:?w_u8@NET_Packet@@QAEXE@Z ; NET_Packet::w_u8(uchar)
+.text:103B2FBD                 lea     edx, [edi+54h]
+.text:103B2FC0                 push    edx
+.text:103B2FC1                 mov     ecx, esi
+.text:103B2FC3                 call    ds:?w_vec3@NET_Packet@@QAEXABU?$_vector3@M@@@Z ; NET_Packet::w_vec3(_vector3<float> const &)
+.text:103B2FC9                 lea     eax, [edi+60h]
+.text:103B2FCC                 push    eax
+.text:103B2FCD                 mov     ecx, esi
+.text:103B2FCF                 call    ds:?w_vec3@NET_Packet@@QAEXABU?$_vector3@M@@@Z ; NET_Packet::w_vec3(_vector3<float> const &)
+.text:103B2FD5                 movzx   ecx, word ptr [edi+30h]
+.text:103B2FD9                 push    ecx
+.text:103B2FDA                 mov     ecx, esi
+.text:103B2FDC                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B2FE2                 movzx   edx, word ptr [edi+32h]
+.text:103B2FE6                 push    edx
+.text:103B2FE7                 mov     ecx, esi
+.text:103B2FE9                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B2FEF                 movzx   eax, word ptr [edi+34h]
+.text:103B2FF3                 push    eax
+.text:103B2FF4                 mov     ecx, esi
+.text:103B2FF6                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B2FFC                 movzx   ecx, word ptr [edi+36h]
+.text:103B3000                 push    ecx
+.text:103B3001                 mov     ecx, esi
+.text:103B3003                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B3009                 or      word ptr [edi+43h], 20h
+.text:103B300E                 cmp     [esp+0Ch+arg_8], 0
+.text:103B3013                 mov     ecx, esi
+.text:103B3015                 jz      short loc_103B3021
+.text:103B3017                 movzx   edx, word ptr [edi+43h]
+.text:103B301B                 or      edx, 1
+.text:103B301E                 push    edx
+.text:103B301F                 jmp     short loc_103B3029
+.text:103B3021 ; ---------------------------------------------------------------------------
+.text:103B3021
+.text:103B3021 loc_103B3021:                           ; CODE XREF: CSE_Abstract__Spawn_Write+A5j
+.text:103B3021                 movzx   eax, word ptr [edi+43h]
+.text:103B3025                 and     eax, 0FFFFFFF6h
+.text:103B3028                 push    eax
+.text:103B3029
+.text:103B3029 loc_103B3029:                           ; CODE XREF: CSE_Abstract__Spawn_Write+AFj
+.text:103B3029                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B302F                 push    80h
+.text:103B3034                 mov     ecx, esi
+.text:103B3036                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B303C                 movzx   ecx, word ptr [edi+40h]
+.text:103B3040                 push    ecx
+.text:103B3041                 mov     ecx, esi
+.text:103B3043                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B3049                 call    sub_103B2DC0
+.text:103B304E                 mov     ecx, esi
+.text:103B3050                 push    eax
+.text:103B3051                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B3057                 mov     dx, [edi+90h]
+.text:103B305E                 sub     dx, [edi+8Ch]
+.text:103B3065                 mov     ecx, esi
+.text:103B3067                 movzx   ebx, dx
+.text:103B306A                 push    ebx
+.text:103B306B                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B3071                 test    bx, bx
+.text:103B3074                 jbe     short loc_103B3089
+.text:103B3076                 mov     ecx, [edi+8Ch]
+.text:103B307C                 movzx   eax, bx
+.text:103B307F                 push    eax
+.text:103B3080                 push    ecx
+.text:103B3081                 mov     ecx, esi
+.text:103B3083                 call    ds:?w@NET_Packet@@QAEXPBXI@Z ; NET_Packet::w(void const *,uint)
+.text:103B3089
+.text:103B3089 loc_103B3089:                           ; CODE XREF: CSE_Abstract__Spawn_Write+104j
+.text:103B3089                 movzx   edx, word ptr [edi+86h]
+.text:103B3090                 push    edx
+.text:103B3091                 mov     ecx, esi
+.text:103B3093                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B3099                 mov     ecx, esi
+.text:103B309B                 call    ds:?w_tell@NET_Packet@@QAEIXZ ; NET_Packet::w_tell(void)
+.text:103B30A1                 push    0
+.text:103B30A3                 mov     ecx, esi
+.text:103B30A5                 mov     ebx, eax
+.text:103B30A7                 call    ds:?w_u16@NET_Packet@@QAEXG@Z ; NET_Packet::w_u16(ushort)
+.text:103B30AD                 mov     eax, [edi+8]
+.text:103B30B0                 mov     edx, [eax+4]
+.text:103B30B3                 lea     ecx, [edi+8]
+.text:103B30B6                 push    esi
+.text:103B30B7                 call    edx
+.text:103B30B9                 mov     ecx, esi
+.text:103B30BB                 call    ds:?w_tell@NET_Packet@@QAEIXZ ; NET_Packet::w_tell(void)
+.text:103B30C1                 sub     eax, ebx
+.text:103B30C3                 cmp     byte_106491FF, 0
+.text:103B30CA                 movzx   eax, ax
+.text:103B30CD                 mov     [esp+0Ch+arg_4], eax
+.text:103B30D1                 jnz     short loc_103B311E
+.text:103B30D3                 cmp     dword ptr [edi+70h], 54202020h
+.text:103B30DA                 jnz     short loc_103B30E5
+.text:103B30DC                 cmp     dword ptr [edi+74h], 53504543h
+.text:103B30E3                 jz      short loc_103B311E
+.text:103B30E5
+.text:103B30E5 loc_103B30E5:                           ; CODE XREF: CSE_Abstract__Spawn_Write+16Aj
+.text:103B30E5                 cmp     ax, 2
+.text:103B30E9                 ja      short loc_103B311E
+.text:103B30EB                 mov     eax, [edi]
+.text:103B30ED                 mov     ecx, [eax+10h]
+.text:103B30F0                 push    offset byte_106491FF
+.text:103B30F5                 push    offset aCse_abstractSp ; "CSE_Abstract::Spawn_Write"
+.text:103B30FA                 push    0F1h
+.text:103B30FF                 push    offset asc_10586F38 ; "D:\\prog_repository\\sources\\trunk\\xrServ"...
+.text:103B3104                 push    edi
+.text:103B3105                 call    ecx
+.text:103B3107                 mov     ecx, ds:?Debug@@3VxrDebug@@A ; xrDebug Debug
+.text:103B310D                 push    eax
+.text:103B310E                 push    offset aObjectIsnTSucc ; "object isn't successfully saved, get yo"...
+.text:103B3113                 push    offset aM_tclassidClsi ; "(m_tClassID == CLSID_SPECTATOR) || (siz"...
+.text:103B3118                 call    ds:?fail@xrDebug@@QAEXPBD000H0AA_N@Z ; xrDebug::fail(char const *,char const *,char const *,char const *,int,char const *,bool &)
+.text:103B311E
+.text:103B311E loc_103B311E:                           ; CODE XREF: CSE_Abstract__Spawn_Write+161j
+.text:103B311E                                         ; CSE_Abstract__Spawn_Write+173j ...
+.text:103B311E                 push    2
+.text:103B3120                 lea     edx, [esp+10h+arg_4]
+.text:103B3124                 push    edx
+.text:103B3125                 push    ebx
+.text:103B3126                 mov     ecx, esi
+.text:103B3128                 call    ds:?w_seek@NET_Packet@@QAEXIPBXI@Z ; NET_Packet::w_seek(uint,void const *,uint)
+.text:103B312E                 pop     edi
+.text:103B312F                 pop     esi
+.text:103B3130                 pop     ebx
+.text:103B3131                 retn    0Ch
+.text:103B3131 CSE_Abstract__Spawn_Write endp

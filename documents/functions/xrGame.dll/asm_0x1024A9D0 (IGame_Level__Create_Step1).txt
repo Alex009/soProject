@@ -1,0 +1,186 @@
+.text:1024A9D0 IGame_Level__Create_Step1 proc near     ; DATA XREF: IGame_Level__Create+326o
+.text:1024A9D0
+.text:1024A9D0 var_8           = dword ptr -8
+.text:1024A9D0 var_4           = dword ptr -4
+.text:1024A9D0 arg_0           = dword ptr  4
+.text:1024A9D0
+.text:1024A9D0                 sub     esp, 8
+.text:1024A9D3                 push    ebx
+.text:1024A9D4                 mov     ebx, [esp+0Ch+arg_0]
+.text:1024A9D8                 mov     eax, [ebx+487ACh]
+.text:1024A9DE                 add     ebx, 487ACh
+.text:1024A9E4                 test    eax, eax
+.text:1024A9E6                 push    ebp
+.text:1024A9E7                 push    esi
+.text:1024A9E8                 push    edi
+.text:1024A9E9                 jz      loc_1024AB6B
+.text:1024A9EF                 cmp     dword ptr [eax+4], 0
+.text:1024A9F3                 jz      loc_1024AB6B
+.text:1024A9F9                 mov     eax, ds:?g_pGamePersistent@@3PAVIGame_Persistent@@A ; IGame_Persistent * g_pGamePersistent
+.text:1024A9FE                 mov     ebp, [eax]
+.text:1024AA00                 add     ebp, 24h
+.text:1024AA03                 mov     edi, offset aSingle ; "single"
+.text:1024AA08                 lea     esi, [ebp+100h]
+.text:1024AA0E                 mov     ecx, 7
+.text:1024AA13                 xor     edx, edx
+.text:1024AA15                 repe cmpsb
+.text:1024AA17                 mov     ecx, ds:?Memory@@3VxrMemory@@A ; xrMemory Memory
+.text:1024AA1D                 jnz     short loc_1024AA4F
+.text:1024AA1F                 push    98D10h
+.text:1024AA24                 call    ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:1024AA2A                 test    eax, eax
+.text:1024AA2C                 jz      short loc_1024AA41
+.text:1024AA2E                 mov     ecx, eax
+.text:1024AA30                 call    UnknownClassInit_single
+.text:1024AA35                 mov     ecx, [esp+18h+arg_0]
+.text:1024AA39                 mov     [ecx+48728h], eax
+.text:1024AA3F                 jmp     short loc_1024AA73
+.text:1024AA41 ; ---------------------------------------------------------------------------
+.text:1024AA41
+.text:1024AA41 loc_1024AA41:                           ; CODE XREF: IGame_Level__Create_Step1+5Cj
+.text:1024AA41                 mov     ecx, [esp+18h+arg_0]
+.text:1024AA45                 xor     eax, eax
+.text:1024AA47                 mov     [ecx+48728h], eax
+.text:1024AA4D                 jmp     short loc_1024AA73
+.text:1024AA4F ; ---------------------------------------------------------------------------
+.text:1024AA4F
+.text:1024AA4F loc_1024AA4F:                           ; CODE XREF: IGame_Level__Create_Step1+4Dj
+.text:1024AA4F                 push    98D90h
+.text:1024AA54                 call    ds:?mem_alloc@xrMemory@@QAEPAXI@Z ; xrMemory::mem_alloc(uint)
+.text:1024AA5A                 test    eax, eax
+.text:1024AA5C                 jz      short loc_1024AA67
+.text:1024AA5E                 mov     ecx, eax
+.text:1024AA60                 call    UnknownClassInit_mp
+.text:1024AA65                 jmp     short loc_1024AA69
+.text:1024AA67 ; ---------------------------------------------------------------------------
+.text:1024AA67
+.text:1024AA67 loc_1024AA67:                           ; CODE XREF: IGame_Level__Create_Step1+8Cj
+.text:1024AA67                 xor     eax, eax
+.text:1024AA69
+.text:1024AA69 loc_1024AA69:                           ; CODE XREF: IGame_Level__Create_Step1+95j
+.text:1024AA69                 mov     edx, [esp+18h+arg_0]
+.text:1024AA6D                 mov     [edx+48728h], eax
+.text:1024AA73
+.text:1024AA73 loc_1024AA73:                           ; CODE XREF: IGame_Level__Create_Step1+6Fj
+.text:1024AA73                                         ; IGame_Level__Create_Step1+7Dj
+.text:1024AA73                 mov     edi, offset aAlife ; "alife"
+.text:1024AA78                 lea     esi, [ebp+200h]
+.text:1024AA7E                 mov     ecx, 6
+.text:1024AA83                 xor     eax, eax
+.text:1024AA85                 repe cmpsb
+.text:1024AA87                 jz      loc_1024AB6B
+.text:1024AA8D                 lea     ecx, [esp+18h+var_8]
+.text:1024AA91                 push    ebx
+.text:1024AA92                 push    ecx
+.text:1024AA93                 call    sub_103750B0
+.text:1024AA98                 lea     edx, [esp+20h+var_4]
+.text:1024AA9C                 push    ebx
+.text:1024AA9D                 push    edx
+.text:1024AA9E                 call    sub_10375190
+.text:1024AAA3                 mov     ecx, [eax]
+.text:1024AAA5                 mov     ebx, [esp+28h+arg_0]
+.text:1024AAA9                 add     esp, 10h
+.text:1024AAAC                 test    ecx, ecx
+.text:1024AAAE                 lea     esi, [ebx+48788h]
+.text:1024AAB4                 jz      short loc_1024AAB9
+.text:1024AAB6                 add     dword ptr [ecx], 1
+.text:1024AAB9
+.text:1024AAB9 loc_1024AAB9:                           ; CODE XREF: IGame_Level__Create_Step1+E4j
+.text:1024AAB9                 mov     eax, [esi]
+.text:1024AABB                 test    eax, eax
+.text:1024AABD                 jz      short loc_1024AACF
+.text:1024AABF                 add     dword ptr [eax], 0FFFFFFFFh
+.text:1024AAC2                 mov     eax, [esi]
+.text:1024AAC4                 cmp     dword ptr [eax], 0
+.text:1024AAC7                 jnz     short loc_1024AACF
+.text:1024AAC9                 mov     dword ptr [esi], 0
+.text:1024AACF
+.text:1024AACF loc_1024AACF:                           ; CODE XREF: IGame_Level__Create_Step1+EDj
+.text:1024AACF                                         ; IGame_Level__Create_Step1+F7j
+.text:1024AACF                 mov     eax, [esp+18h+var_4]
+.text:1024AAD3                 test    eax, eax
+.text:1024AAD5                 mov     [esi], ecx
+.text:1024AAD7                 jz      short loc_1024AADC
+.text:1024AAD9                 add     dword ptr [eax], 0FFFFFFFFh
+.text:1024AADC
+.text:1024AADC loc_1024AADC:                           ; CODE XREF: IGame_Level__Create_Step1+107j
+.text:1024AADC                 mov     ecx, ds:?g_dedicated_server@@3_NA ; bool g_dedicated_server
+.text:1024AAE2                 cmp     byte ptr [ecx], 0
+.text:1024AAE5                 jnz     short loc_1024AB09
+.text:1024AAE7                 mov     edx, ds:?g_pGamePersistent@@3PAVIGame_Persistent@@A ; IGame_Persistent * g_pGamePersistent
+.text:1024AAED                 mov     eax, [edx]
+.text:1024AAEF                 mov     edi, [eax]
+.text:1024AAF1                 push    ecx
+.text:1024AAF2                 mov     ecx, esp
+.text:1024AAF4                 push    esi
+.text:1024AAF5                 call    sub_10058D70
+.text:1024AAFA                 mov     ecx, ds:?g_pGamePersistent@@3PAVIGame_Persistent@@A ; IGame_Persistent * g_pGamePersistent
+.text:1024AB00                 mov     ecx, [ecx]
+.text:1024AB02                 mov     edx, [edi+48h]
+.text:1024AB05                 push    1
+.text:1024AB07                 call    edx
+.text:1024AB09
+.text:1024AB09 loc_1024AB09:                           ; CODE XREF: IGame_Level__Create_Step1+115j
+.text:1024AB09                 mov     eax, [esp+18h+var_8]
+.text:1024AB0D                 test    eax, eax
+.text:1024AB0F                 jz      short loc_1024AB16
+.text:1024AB11                 lea     ecx, [eax+10h]
+.text:1024AB14                 jmp     short loc_1024AB18
+.text:1024AB16 ; ---------------------------------------------------------------------------
+.text:1024AB16
+.text:1024AB16 loc_1024AB16:                           ; CODE XREF: IGame_Level__Create_Step1+13Fj
+.text:1024AB16                 xor     ecx, ecx
+.text:1024AB18
+.text:1024AB18 loc_1024AB18:                           ; CODE XREF: IGame_Level__Create_Step1+144j
+.text:1024AB18                 mov     eax, [esi]
+.text:1024AB1A                 test    eax, eax
+.text:1024AB1C                 jz      short loc_1024AB23
+.text:1024AB1E                 add     eax, 10h
+.text:1024AB21                 jmp     short loc_1024AB25
+.text:1024AB23 ; ---------------------------------------------------------------------------
+.text:1024AB23
+.text:1024AB23 loc_1024AB23:                           ; CODE XREF: IGame_Level__Create_Step1+14Cj
+.text:1024AB23                 xor     eax, eax
+.text:1024AB25
+.text:1024AB25 loc_1024AB25:                           ; CODE XREF: IGame_Level__Create_Step1+151j
+.text:1024AB25                 push    1
+.text:1024AB27                 push    ecx
+.text:1024AB28                 push    eax
+.text:1024AB29                 mov     eax, ds:?pApp@@3PAVCApplication@@A ; CApplication * pApp
+.text:1024AB2E                 mov     ecx, [eax]
+.text:1024AB30                 call    ds:?Level_ID@CApplication@@QAEHPBD0_N@Z ; CApplication::Level_ID(char const *,char const *,bool)
+.text:1024AB36                 test    eax, eax
+.text:1024AB38                 jge     short loc_1024AB60
+.text:1024AB3A                 mov     esi, [esi]
+.text:1024AB3C                 test    esi, esi
+.text:1024AB3E                 jz      short loc_1024AB45
+.text:1024AB40                 lea     eax, [esi+10h]
+.text:1024AB43                 jmp     short loc_1024AB47
+.text:1024AB45 ; ---------------------------------------------------------------------------
+.text:1024AB45
+.text:1024AB45 loc_1024AB45:                           ; CODE XREF: IGame_Level__Create_Step1+16Ej
+.text:1024AB45                 xor     eax, eax
+.text:1024AB47
+.text:1024AB47 loc_1024AB47:                           ; CODE XREF: IGame_Level__Create_Step1+173j
+.text:1024AB47                 push    eax
+.text:1024AB48                 push    offset aCanTFindLevel ; "Can't find level: "
+.text:1024AB4D                 call    ds:?Log@@YAXPBD0@Z ; Log(char const *,char const *)
+.text:1024AB53                 add     esp, 8
+.text:1024AB56                 mov     dword ptr [ebx+48774h], 0
+.text:1024AB60
+.text:1024AB60 loc_1024AB60:                           ; CODE XREF: IGame_Level__Create_Step1+168j
+.text:1024AB60                 mov     eax, [esp+18h+var_8]
+.text:1024AB64                 test    eax, eax
+.text:1024AB66                 jz      short loc_1024AB6B
+.text:1024AB68                 add     dword ptr [eax], 0FFFFFFFFh
+.text:1024AB6B
+.text:1024AB6B loc_1024AB6B:                           ; CODE XREF: IGame_Level__Create_Step1+19j
+.text:1024AB6B                                         ; IGame_Level__Create_Step1+23j ...
+.text:1024AB6B                 pop     edi
+.text:1024AB6C                 pop     esi
+.text:1024AB6D                 pop     ebp
+.text:1024AB6E                 mov     al, 1
+.text:1024AB70                 pop     ebx
+.text:1024AB71                 add     esp, 8
+.text:1024AB74                 retn    4
+.text:1024AB74 IGame_Level__Create_Step1 endp

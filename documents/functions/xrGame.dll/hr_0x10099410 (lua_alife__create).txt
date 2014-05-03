@@ -1,0 +1,54 @@
+int __cdecl lua_alife__create(int a1, int a2, int a3, int a4, __int16 a5, __int16 a6)
+{
+  __int16 v6; // bx@1
+  int result; // eax@3
+  int v8; // eax@4
+  int v9; // eax@4
+  int v10; // esi@8
+  int v11; // edi@8
+  int v12; // ebx@8
+  __int16 v13; // [sp+10h] [bp-4024h]@2
+  char v14; // [sp+14h] [bp-4020h]@2
+  char v15; // [sp+1Ch] [bp-4018h]@8
+  char v16; // [sp+20h] [bp-4014h]@8
+
+  v6 = a6;
+  if ( a6 == -1 )
+  {
+    v14 = 1;
+    v13 = -1;
+    return sub_1009F0D0((void *)(*(_DWORD *)(*(_DWORD *)(a1 + 12) + 4) + a1 + 12), a2, a3, a4, a5, v13, v14);
+  }
+  v9 = sub_10039B90();
+  v8 = sub_1005B040(
+         *(void **)(*(_DWORD *)(*(_DWORD *)(*(_DWORD *)(v9 + 20) + 12) + 4) + *(_DWORD *)(v9 + 20) + 32),
+         (int)&a6,
+         1);
+  if ( v8 )
+  {
+    if ( !*(_BYTE *)(v8 + 164) )
+    {
+      v14 = 1;
+      v13 = v6;
+      return sub_1009F0D0((void *)(*(_DWORD *)(*(_DWORD *)(a1 + 12) + 4) + a1 + 12), a2, a3, a4, a5, v13, v14);
+    }
+    NET_Packet__NET_Packet(&v16);
+    NET_Packet__w_begin(&v16, 1);
+    NET_Packet__w_stringZ(&v16, a2);
+    v10 = a1;
+    v11 = sub_1009F0D0((void *)(*(_DWORD *)(*(_DWORD *)(a1 + 12) + 4) + a1 + 12), a2, a3, a4, a5, v6, 0);
+    (**(void (__stdcall ***)(int, char *, _DWORD))v11)(v11, &v16, 0);
+    sub_10098300(*(void **)(*(_DWORD *)(*(_DWORD *)(v10 + 12) + 4) + v10 + 16), *(_WORD *)(v11 + 50), 0);
+    v12 = _RTCastToVoid(v11);
+    (*(void (__thiscall **)(int, _DWORD))(*(_DWORD *)(v11 + 8) + 20))(v11 + 8, 0);
+    xrMemory__mem_free(Memory, v12);
+    NET_Packet__r_begin(&v16, &v15);
+    result = sub_10435E20(*(void **)(*(_DWORD *)(*(_DWORD *)(v10 + 12) + 4) + v10 + 16), (int)&v16, 65535, 0, 0);
+  }
+  else
+  {
+    Msg("! invalid parent id [%d] specified", (unsigned __int16)v6);
+    result = 0;
+  }
+  return result;
+}

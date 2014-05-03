@@ -1,0 +1,12 @@
+1.6.0.0:
+0x48728 - xrServer
+0x48568 - m_DemoPlay
+0x485A8 - DemoStoreFile
+0x48574 - WriteDemo
+0x485AC - m_reader
+0x4856C - m_DemoPlayStarted
+
+
+1.6.0.2:
+
+0x487BC: CMapManager*

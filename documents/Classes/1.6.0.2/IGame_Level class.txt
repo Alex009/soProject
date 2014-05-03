@@ -1,0 +1,4 @@
+0x487A4: 
+0x487BC: CMapManager*
+0x487C4: CBulletManager*
+0x4877C: flag of good connect ?

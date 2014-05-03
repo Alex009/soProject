@@ -1,0 +1,622 @@
+		if(GetAsyncKeyState(VK_NUMPAD7))
+		{
+			while(GetAsyncKeyState(VK_NUMPAD7)) Sleep(10);
+
+			LogHandle->Write("try create my own actor");
+
+			type_game_sv_GameState__spawn_begin game_sv_GameState__spawn_begin = reinterpret_cast<type_SpawnEntity>((DWORD)(HookHandle->GameOffset) + 0x374870);
+			type_SpawnEntity SpawnEntity = reinterpret_cast<type_SpawnEntity>((DWORD)(HookHandle->GameOffset) + 0x23AFB0);
+			type_ClassidByName ClassidByName = reinterpret_cast<type_ClassidByName>((DWORD)(HookHandle->GameOffset) + 0x3B29E0);
+
+			FARPROC func;
+			long level = (long)HookHandle->g_pGameLevel;
+			long result;
+
+			// classid by name
+			long classid = ClassidByName("mp_actor");
+			LogHandle->Write("class id 0x%X",classid);
+
+/*
+																CSE_Abstract::Spawn_Read
+.text:1023B1D8                 mov     ecx, [esi]
+.text:1023B1DA                 mov     edx, [ecx+4]
+.text:1023B1DD                 push    edi
+.text:1023B1DE                 push    esi
+.text:1023B1DF                 call    edx
+*/
+			long class_base = *(DWORD*)(classid);
+			func = (FARPROC)(*(DWORD*)(class_base + 0x4));
+
+			// build spawn packet
+			NET_Packet *pack = new NET_Packet();
+
+
+			_asm
+			{
+				mov ecx, class_base
+				push pack
+				push classid
+				call func
+			}
+
+			LogHandle->Write("called 0x%X",func);
+
+/*
+.text:1023B208                 push    esi
+.text:1023B209                 mov     ecx, ebx
+.text:1023B20B                 call    SpawnEntity
+*/
+
+			_asm
+			{
+				push classid
+				mov ecx, level
+				call SpawnEntity
+				mov result, eax
+			}
+
+			LogHandle->Write("created entity 0x%X",result);
+
+/*
+.text:1023B216                 mov     edx, [esi+8]
+.text:1023B219                 lea     ecx, [esi+8]
+.text:1023B21C                 add     esp, 4
+.text:1023B21F                 mov     edi, eax
+.text:1023B221                 mov     eax, [edx+14h]
+.text:1023B224                 push    0
+.text:1023B226                 call    eax
+*/
+
+			class_base = classid + 8;
+			func = (FARPROC)(*(DWORD*)(class_base) + 0x14);
+
+			LogHandle->Write("class info 0x%X [0x%X]",class_base,(int)func);
+
+			_asm
+			{
+				mov ecx, class_base
+				call func
+				mov result, eax
+			}
+			
+			LogHandle->Write("result class func 0x%X",result);
+
+
+
+			//long result = SpawnEntity((void*)base,classid);
+			/*
+			LogHandle->Write("try create my own object");
+			if((my_own_object = HookHandle->g_pGameLevel->ObjectList.Create("CAI_Stalker")) != NULL)
+			{
+				_vector3<float> pos = my_own_object->Position();
+				LogHandle->Write("my own object pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+
+			/*
+			LogHandle->Write("try create my own stalker");
+			int returned = HookHandle->Create_AIStalker();
+			LogHandle->Write("stalker created [0x%X] (RELLY????)",returned);
+			CObject * obj = (CObject*)(*(DWORD*)(returned));
+			if(obj)
+			{
+				LogHandle->Write("try get position");
+				_vector3<float> pos = obj->Position();
+				LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+			//Create_CActorMP = reinterpret_cast<type_Create_CActorMP>((DWORD)HookHandle->GameOffset + (DWORD)0x33C3E0);
+
+			
+			//LogHandle->Write("try create my own actor");
+			//type_xrFactory_Create xrFactory_Create = reinterpret_cast<type_xrFactory_Create>(GetProcAddress(HookHandle->GameOffset,"xrFactory_Create"));
+			
+			/*
+			DWORD game = (DWORD)(HookHandle->GameOffset);
+			LogHandle->Write("addr 0x%X",game);
+			DWORD oldp;
+			VirtualProtect((LPVOID)(game + 0x22784C),6,PAGE_EXECUTE_READWRITE, &oldp);
+			for(int i = 0;i < 6;i++) *(BYTE*)(game + 0x22784C + i) = 0x90;
+
+			lua_alife = reinterpret_cast<type_lua_alife>(game + 0x97700);
+			lua_alife__create = reinterpret_cast<type_lua_alife__create>(game + 0x99410);
+
+			DWORD alife = lua_alife();
+			LogHandle->Write("alife pointer [0x%X]",alife);
+
+			if(alife)
+			{
+				float pos[3];
+				pos[0] = 0.0;
+				pos[1] = 0.0;
+				pos[2] = 0.0;
+				DWORD item = lua_alife__create(alife,"wpn_gauss",pos,0,0,-1);
+			}
+			*/
+
+			//actor->SetPosition(5.0,0.0,5.0);
+			//LogHandle->Write("position set");
+			//CObject * obj = (CObject*)(*(DWORD*)(actor));
+			//if(obj)
+			//{
+			//	LogHandle->Write("try get position");
+			//	_vector3<float> pos = obj->Position();
+			//	LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			//}
+		}
+		if(GetAsyncKeyState(VK_NUMPAD8))
+		{
+			while(GetAsyncKeyState(VK_NUMPAD8)) Sleep(10);
+			/*
+			LogHandle->Write("try create my own car");
+			int returned = HookHandle->Create_CCar();
+			LogHandle->Write("car created [0x%X] (RELLY????)",returned);
+			CObject * obj = (CObject*)(*(DWORD*)(returned));
+			if(obj)
+			{
+				LogHandle->Write("try get position");
+				_vector3<float> pos = obj->Position();
+				LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+			/*
+			LogHandle->Write("CGameFont class needed on address 0x%X",(int)(HookHandle->pApp->pFont));
+			if(HookHandle)
+			{
+				if(HookHandle->pApp)
+				{
+					if(HookHandle->pApp->pFont)
+					{
+						HookHandle->pApp->pFont->Out(10.0,500.0,"Character position [%f,%f,%f]",*(FLOAT*)(0x494B90),*(FLOAT*)(0x494B94),*(FLOAT*)(0x494B98));
+						LogHandle->Write("Character position [%f,%f,%f]",*(FLOAT*)(0x494B90),*(FLOAT*)(0x494B94),*(FLOAT*)(0x494B98));
+					}
+				}
+			}
+			*/
+		}
+		if(GetAsyncKeyState(VK_NUMPAD9))
+		{
+			while(GetAsyncKeyState(VK_NUMPAD9)) Sleep(10);
+			LogHandle->Write("check objects exist");
+			for(int i = 0;i < 65535;i++)
+			{
+				if((int)HookHandle->g_pGameLevel->ObjectList.objects[i] > 0x400000)
+				{
+					LogHandle->Write("object id %d exist.addr 0x%X",i,(int)HookHandle->g_pGameLevel->ObjectList.objects[i]);
+					CObject * obj = HookHandle->g_pGameLevel->ObjectList.objects[i];
+					LogHandle->Write("CObject handle 0x%x",(DWORD)(obj));
+
+					LogHandle->Write("Try get position of object");
+					_vector3<float> pos = obj->Position();
+					LogHandle->Write("Position take [%f,%f,%f]",pos.x,pos.y,pos.z);
+					
+					/*
+					LogHandle->Write("try get packet");
+					NET_Packet* pack = new NET_Packet();
+					if(pack)
+					{
+						for(int j = 0;j < 0x4000;j += 0x1) pack->packet_buffer[j] = 0;
+						LogHandle->Write("Try export object");
+						obj->net_Export(*pack);
+						LogHandle->Write("Object exported");
+							
+						if(pack->r_eof()) LogHandle->Write("end of packet");
+
+						for(int j = 0;j < 0x4000;j += 0x1)
+						{
+							if(pack->packet_buffer[j] == 0) continue;
+							LogHandle->Write("offset 0x%X: %8d | %4.4f",j,(DWORD)(pack->packet_buffer[j]),(FLOAT)(pack->packet_buffer[j]));
+						}
+					}
+					else LogHandle->Write("Packet not created");
+					*/
+				}
+			}
+			/*
+				int actor_id = 0;
+				while(true)
+				{
+					DWORD actor_class = *(DWORD*)(main_class + 4 * actor_id + 0x4C);
+					if(!actor_class)
+					{
+						LogHandle->Write("actor %d not exist",actor_id);
+						break;
+					}
+					LogHandle->Write("actor %d exist on address 0x%X",actor_id,actor_class);
+					/*
+					DWORD actor_mp_class = *(DWORD*)(actor_class);
+					if(!actor_mp_class)
+					{
+						LogHandle->Write("actor MP %d not exist",actor_id);
+						break;
+					}
+					LogHandle->Write("actor MP %d exist on address 0x%X",actor_id,actor_mp_class);
+					*/
+					/*
+					DWORD actor_sync = *(DWORD*)(actor_mp_class + 0x9D0);
+					if(actor_sync)
+					{
+						LogHandle->Write("actor sync on 0x%X",actor_sync);
+						for(int i = 0x0;i < 0x84;i+=0x4)
+						{
+							LogHandle->Write("offset 0x%X: %8d | %4.4f",i,*(DWORD*)(actor_sync + i),*(FLOAT*)(actor_sync + i));
+						}
+					}
+					*/
+					/*
+					DWORD actor_pos = *(DWORD*)(actor_class + 0xA1C);
+					if(actor_pos)
+					{
+						LogHandle->Write("actor pos on 0x%X",actor_pos);
+						LogHandle->Write("actor pos: %f,%f,%f",*(FLOAT*)(actor_pos + 0x0),*(FLOAT*)(actor_pos + 0x4),*(FLOAT*)(actor_pos + 0x8));
+					}
+					*
+					//LogHandle->Write("actor %d pos: %f,%f,%f",actor_id,*(FLOAT*)(actor_class + 0x9D0 + 0x40),*(FLOAT*)(actor_class + 0x9D0 + 0x44),*(FLOAT*)(actor_class + 0x9D0 + 0x48));
+					actor_id++;
+				}
+			
+			}
+			*/
+		}
+__________________________________________________________________________________________________________
+			LogHandle->Write("init controll func");
+
+			type_game_sv_GameState__spawn_begin game_sv_GameState__spawn_begin = reinterpret_cast<type_game_sv_GameState__spawn_begin>((DWORD)(HookHandle->GameOffset) + 0x374870);
+			type_SpawnEntity SpawnEntity = reinterpret_cast<type_SpawnEntity>((DWORD)(HookHandle->GameOffset) + 0x23AFB0);
+			type_ClassidByName ClassidByName = reinterpret_cast<type_ClassidByName>((DWORD)(HookHandle->GameOffset) + 0x3B29E0);
+
+			long result = 0;
+			long level = (long)HookHandle->g_pGameLevel;
+			
+			LogHandle->Write("start spawn");
+			result = game_sv_GameState__spawn_begin("mp_wpn_svu");
+			LogHandle->Write("result: 0x%X",result);
+			
+			LogHandle->Write("spawn entity");
+			_asm
+			{
+				push result
+				mov ecx, level
+				call SpawnEntity
+				mov result, eax
+			}
+			LogHandle->Write("result: 0x%X",result);
+_______________________________________________________________________________________________
+if(GetAsyncKeyState(VK_NUMPAD7))
+		{
+			while(GetAsyncKeyState(VK_NUMPAD7)) Sleep(10);
+
+			LogHandle->Write("try create my own actor");
+
+			type_game_sv_GameState__spawn_begin game_sv_GameState__spawn_begin = reinterpret_cast<type_game_sv_GameState__spawn_begin>((DWORD)(HookHandle->GameOffset) + 0x374870);
+			type_SpawnEntity SpawnEntity = reinterpret_cast<type_SpawnEntity>((DWORD)(HookHandle->GameOffset) + 0x23AFB0);
+			type_ClassidByName ClassidByName = reinterpret_cast<type_ClassidByName>((DWORD)(HookHandle->GameOffset) + 0x3B29E0);
+
+			FARPROC func;
+			long level = (long)HookHandle->g_pGameLevel;
+			long result;
+
+			// classid by name
+			long classid = ClassidByName("mp_actor");
+			LogHandle->Write("class id 0x%X",classid);
+
+/*
+																CSE_Abstract::Spawn_Read
+.text:1023B1D8                 mov     ecx, [esi]
+.text:1023B1DA                 mov     edx, [ecx+4]
+.text:1023B1DD                 push    edi
+.text:1023B1DE                 push    esi
+.text:1023B1DF                 call    edx
+*/
+			long class_base = *(DWORD*)(classid);
+			func = (FARPROC)(*(DWORD*)(class_base + 0x4));
+
+			// build spawn packet
+			NET_Packet* packet;
+/*
+			// packet struct from xr_entity_factory.cxx (xray_re)
+			packet.w_begin(1); // packet.w_begin(M_SPAWN);
+			packet.w_stringZ(m_s_name);
+			packet.w_stringZ(m_s_name_replace);
+			packet.w_u8(m_s_game_id);
+			packet.w_u8(m_s_rp);
+			packet.w_vec3(m_o_position);
+			packet.w_vec3(m_o_angle);
+			packet.w_u16(m_respawn_time);
+			packet.w_u16(m_id);
+			packet.w_u16(m_id_parent);
+			packet.w_u16(m_id_phantom);
+			unsigned short m_s_flags |= FL_SPAWN_DESTROY_ON_SPAWN;
+			if (local)
+				m_s_flags |= FL_SPAWN_ENABLED;
+			else
+				m_s_flags &= ~(FL_SPAWN_ENABLED|FL_SPAWN_IF_DESTROYED_ONLY);
+			packet.w_u16(m_s_flags);
+			packet.w_u16(m_version);
+			if (m_version > 0x78)
+				packet.w_u16(m_cs_unk1_u16);
+			packet.w_u16(m_script_version);
+			packet.w_u16(0);
+			packet.w_u16(m_spawn_id);
+			size_t pos = packet.w_tell();
+			packet.w_u16(0);
+			size_t size = packet.w_tell() - pos;
+			packet.w_seek(pos);
+			packet.w_seek(pos + size);
+*/
+			_asm
+			{
+				mov ecx, class_base
+				push packet
+				push classid
+				call func
+			}
+
+			LogHandle->Write("called 0x%X",func);
+
+/*
+.text:1023B208                 push    esi
+.text:1023B209                 mov     ecx, ebx
+.text:1023B20B                 call    SpawnEntity
+*/
+
+			_asm
+			{
+				push classid
+				mov ecx, level
+				call SpawnEntity
+				mov result, eax
+			}
+
+			LogHandle->Write("created entity 0x%X",result);
+
+/*
+.text:1023B216                 mov     edx, [esi+8]
+.text:1023B219                 lea     ecx, [esi+8]
+.text:1023B21C                 add     esp, 4
+.text:1023B21F                 mov     edi, eax
+.text:1023B221                 mov     eax, [edx+14h]
+.text:1023B224                 push    0
+.text:1023B226                 call    eax
+*/
+
+			class_base = classid + 8;
+			func = (FARPROC)(*(DWORD*)(class_base) + 0x14);
+
+			LogHandle->Write("class info 0x%X [0x%X]",class_base,(int)func);
+
+			_asm
+			{
+				mov ecx, class_base
+				call func
+				mov result, eax
+			}
+			
+			LogHandle->Write("result class func 0x%X",result);
+		}
+_____________________________________________________________________________
+	//*(WORD*)(entity_addr + 0x2E) = 0xC;
+	//*(WORD*)(entity_addr + 0x30) = 0;
+	//*(WORD*)(entity_addr + 0x40) = -1;
+	//*(WORD*)(entity_addr + 0x43) = 20;
+	
+	/*
+	*(WORD*)(class_addr + 0x30) = 0;
+	*(WORD*)(class_addr + 0x32) = -1;
+	*(WORD*)(class_addr + 0x34) = -1; // parentid
+	*(WORD*)(class_addr + 0x36) = -1;
+
+	*(DWORD*)(class_addr + 0x3C) = (DWORD)str;
+
+	*(BYTE*)(class_addr + 0x42) = -1;
+
+	*(FLOAT*)(class_addr + 0x54) = position[0];
+	*(FLOAT*)(class_addr + 0x58) = position[1];
+	*(FLOAT*)(class_addr + 0x5C) = position[2];
+
+	*(DWORD*)(class_addr + 0xA8) = level_vertex_id;
+	*/
+________________________________________________________________________________
+/*
+			LogHandle->Write("try create my own object");
+			if((my_own_object = HookHandle->g_pGameLevel->ObjectList.Create("CAI_Stalker")) != NULL)
+			{
+				_vector3<float> pos = my_own_object->Position();
+				LogHandle->Write("my own object pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+			/*
+			LogHandle->Write("try create my own stalker");
+			int returned = HookHandle->Create_AIStalker();
+			LogHandle->Write("stalker created [0x%X] (RELLY????)",returned);
+			CObject * obj = (CObject*)(*(DWORD*)(returned));
+			if(obj)
+			{
+				LogHandle->Write("try get position");
+				_vector3<float> pos = obj->Position();
+				LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+			/*
+			LogHandle->Write("try create my own wpn");
+			
+			DWORD game = (DWORD)(HookHandle->GameOffset);
+			LogHandle->Write("addr 0x%X",game);
+
+			lua_alife = reinterpret_cast<type_lua_alife>(game + 0x97700);
+			lua_alife__create = reinterpret_cast<type_lua_alife__create>(game + 0x99410);
+
+			DWORD alife = lua_alife();
+			LogHandle->Write("alife pointer [0x%X]",alife);
+
+			if(alife)
+			{
+				float pos[3];
+				pos[0] = 0.0;
+				pos[1] = 0.0;
+				pos[2] = 0.0;
+				DWORD item = lua_alife__create(alife,"wpn_gauss",pos,0,0,-1);
+				LogHandle->Write("item pointer [0x%X]",item);
+			}
+
+
+			//type_xrFactory_Create xrFactory_Create = reinterpret_cast<type_xrFactory_Create>(GetProcAddress(HookHandle->GameOffset,"xrFactory_Create"));
+			
+			// 0x480 - size of created actor
+
+//			int obj = xrFactory_Create(,0);
+
+//			LogHandle->Write("actor created [0x%X]",(int)obj);
+			
+			//actor = (CActorMP*)CActorMP_CreateClass();
+			//actor->SetPosition(5.0,0.0,5.0);
+			//LogHandle->Write("position set");
+			/*
+			CObject * obj = (CObject*)(*(DWORD*)(actor));
+			if(obj)
+			{
+				LogHandle->Write("try get position");
+				_vector3<float> pos = obj->Position();
+				LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+______________________________________________________________________________
+/*
+			LogHandle->Write("try create my own car");
+			int returned = HookHandle->Create_CCar();
+			LogHandle->Write("car created [0x%X] (RELLY????)",returned);
+			CObject * obj = (CObject*)(*(DWORD*)(returned));
+			if(obj)
+			{
+				LogHandle->Write("try get position");
+				_vector3<float> pos = obj->Position();
+				LogHandle->Write("pos %f,%f,%f",pos.x,pos.y,pos.z);
+			}
+			*/
+			/*
+			LogHandle->Write("CGameFont class needed on address 0x%X",(int)(HookHandle->pApp->pFont));
+			if(HookHandle)
+			{
+				if(HookHandle->pApp)
+				{
+					if(HookHandle->pApp->pFont)
+					{
+						HookHandle->pApp->pFont->Out(10.0,500.0,"Character position [%f,%f,%f]",*(FLOAT*)(0x494B90),*(FLOAT*)(0x494B94),*(FLOAT*)(0x494B98));
+						LogHandle->Write("Character position [%f,%f,%f]",*(FLOAT*)(0x494B90),*(FLOAT*)(0x494B94),*(FLOAT*)(0x494B98));
+					}
+				}
+			}
+			*/
+			/*
+			LogHandle->Write("try create my own [mp_actor]");
+			
+			unsigned short object_id = GetEmptyObjectSlot();
+			LogHandle->Write("empty slot: %d",object_id);
+
+			CObject* obj = (CObject*)SpawnObject("mp_actor","BOT",object_id,128.488358f,-0.583647f,372.461487f);
+			LogHandle->Write("Object spawned, result: 0x%X",(unsigned long)(obj));
+			*/
+________________________________________________________________________________---
+/*
+		if(GetAsyncKeyState(VK_NUMPAD9))
+		{
+			while(GetAsyncKeyState(VK_NUMPAD9)) Sleep(10);
+			LogHandle->Write("check objects exist");
+			for(int i = 0;i < 65535;i++)
+			{
+				if((int)HookHandle->g_pGameLevel->ObjectList.objects[i] > 0x400000)
+				{
+					LogHandle->Write("object id %d exist.addr 0x%X",i,(int)HookHandle->g_pGameLevel->ObjectList.objects[i]);
+					CObject * obj = HookHandle->g_pGameLevel->ObjectList.objects[i];
+					LogHandle->Write("CObject handle 0x%x",(DWORD)(obj));
+
+					LogHandle->Write("Try get position of object");
+					_vector3<float> pos = obj->Position();
+					LogHandle->Write("Position take [%f,%f,%f]",pos.x,pos.y,pos.z);
+					
+					/*
+					LogHandle->Write("try get packet");
+					NET_Packet* pack = new NET_Packet();
+					if(pack)
+					{
+						for(int j = 0;j < 0x4000;j += 0x1) pack->packet_buffer[j] = 0;
+						LogHandle->Write("Try export object");
+						obj->net_Export(*pack);
+						LogHandle->Write("Object exported");
+							
+						if(pack->r_eof()) LogHandle->Write("end of packet");
+
+						for(int j = 0;j < 0x4000;j += 0x1)
+						{
+							if(pack->packet_buffer[j] == 0) continue;
+							LogHandle->Write("offset 0x%X: %8d | %4.4f",j,(DWORD)(pack->packet_buffer[j]),(FLOAT)(pack->packet_buffer[j]));
+						}
+					}
+					else LogHandle->Write("Packet not created");
+					/
+				}
+			}
+			/*
+				int actor_id = 0;
+				while(true)
+				{
+					DWORD actor_class = *(DWORD*)(main_class + 4 * actor_id + 0x4C);
+					if(!actor_class)
+					{
+						LogHandle->Write("actor %d not exist",actor_id);
+						break;
+					}
+					LogHandle->Write("actor %d exist on address 0x%X",actor_id,actor_class);
+					/*
+					DWORD actor_mp_class = *(DWORD*)(actor_class);
+					if(!actor_mp_class)
+					{
+						LogHandle->Write("actor MP %d not exist",actor_id);
+						break;
+					}
+					LogHandle->Write("actor MP %d exist on address 0x%X",actor_id,actor_mp_class);
+					*/
+					/*
+					DWORD actor_sync = *(DWORD*)(actor_mp_class + 0x9D0);
+					if(actor_sync)
+					{
+						LogHandle->Write("actor sync on 0x%X",actor_sync);
+						for(int i = 0x0;i < 0x84;i+=0x4)
+						{
+							LogHandle->Write("offset 0x%X: %8d | %4.4f",i,*(DWORD*)(actor_sync + i),*(FLOAT*)(actor_sync + i));
+						}
+					}
+					*/
+					/*
+					DWORD actor_pos = *(DWORD*)(actor_class + 0xA1C);
+					if(actor_pos)
+					{
+						LogHandle->Write("actor pos on 0x%X",actor_pos);
+						LogHandle->Write("actor pos: %f,%f,%f",*(FLOAT*)(actor_pos + 0x0),*(FLOAT*)(actor_pos + 0x4),*(FLOAT*)(actor_pos + 0x8));
+					}
+					*
+					//LogHandle->Write("actor %d pos: %f,%f,%f",actor_id,*(FLOAT*)(actor_class + 0x9D0 + 0x40),*(FLOAT*)(actor_class + 0x9D0 + 0x44),*(FLOAT*)(actor_class + 0x9D0 + 0x48));
+					actor_id++;
+				}
+			
+			}
+			
+		}
+		*/
+________________________________________________________________________________
+/*
+			*(WORD*)(class_addr + 0x30) = 0;
+			*(WORD*)(class_addr + 0x32) = -1;
+			*(WORD*)(class_addr + 0x34) = -1; // parentid
+			*(WORD*)(class_addr + 0x36) = -1;
+
+			*(DWORD*)(class_addr + 0x3C) = (DWORD)str;
+
+			*(BYTE*)(class_addr + 0x42) = -1;
+
+			*(FLOAT*)(class_addr + 0x54) = position[0];
+			*(FLOAT*)(class_addr + 0x58) = position[1];
+			*(FLOAT*)(class_addr + 0x5C) = position[2];
+
+			*(DWORD*)(class_addr + 0xA8) = level_vertex_id;
+			*/

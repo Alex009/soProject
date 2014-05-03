@@ -1,0 +1,184 @@
+В IPureServer::Connect убрана проверка на сингл, теперь даже при сингле не прямое соединение и создаётся всё необходимое для сети...но при запуске сингла выдаётся ошибка...
+FATAL ERROR
+ 
+[error]Expression    : assertion failed
+[error]Function      : game_sv_GameState::CheckNewPlayer
+[error]File          : D:\prog_repository\sources\trunk\xrGame\game_sv_base.cpp
+[error]Line          : 823
+[error]Description   : gs_server
+
+ищемс и убираем проверку на коннект сервера:)
+
+едем дальше... клиенту разрешается коннект, но вот уровень он создаёт странный - all и качать пытается оО втф....в итоге видим: 
+
+! Level (name:all), (version:1.0), not found, try to download from:
+! Failed to start client. Check the connection or level existance.
+
+ошибка в том что считая соединение удалённым карта под названием "all" ищется в мп картах...и разумеется пролёт и слёт...делаем вид в этом случае что у нас директ коннект
+
+добрались до загрузки уровня...тоесть CLevel::Load...но небольшие проблемы (совсем мелкие - вылет без внятного лога и ида пиздит не известно на что...)
+
+загрузка проходит, подключается успешно, можно играть без проблем...
+
+при подключении второго игрока:
+
+FATAL ERROR
+ 
+[error]Expression    : assertion failed
+[error]Function      : game_sv_GameState::CheckNewPlayer
+[error]File          : D:\prog_repository\sources\trunk\xrGame\game_sv_base.cpp
+[error]Line          : 823
+[error]Description   : gs_server
+
+хи хи...
+
+192.168.1.5:5446
+
+xrServer::OnMessage - case 47 (0x2F) при подключении 2 игрока...
+
+3B50000
+
+3F843A0 -> 3E8BDF0
+
+3767DA при подключении нового игрока....
+
+103750B0 - ошибка у второго игрока, втф? второй аргумент функции равен нулю хотя должен быть указатель...пилядь...
+
+путь к этой хрени...:
+CLevel::net_start_client3 -> 10348600 -> 103750B0
+
+ошибка при получении версии карты...ммм...попробуем такес: прыганём в поле мп режима и заберём версию там...
+23B93E прыгаем туда: 23B9A1
+и потом прыгаем с 23B9A7 на 23B9D3
+
+не проканало..инфа о уровне не вся (название уровня берется из командной строки сервака...т.е. - all)
+
+тупой флаг директ коннекта...маскируем пару функций под директ
+0x10348480
+
+CLevel__net_start_client3 - тупо притвориться директ коннектом не получится..там используются переменные сервера коих нету у клиентов:( выёбываемся с картами (ёбаный CLevel)
+
+значит...вместо проверки на директ мы сразу прыгаем к установке параметров на Level_ID...ну а там пуш наших данных :) тупо адреса от наших строк
+
+
+1 шаг:
+CRenderDevice::on_idle(void) (loading events...) -> 1023B620 -> 102395C0(Client_Update)
+2 шаг:
+CRenderDevice::on_idle(void) (loading events...) -> 1023B8F0(CLevel__net_start_client3)
+
+а вернуться в рендер девайс он идле...хуй тебе...кидается в 494B60
+
+в начале фукнции esp = 0x0012F978
+в конце функции esp = 0x0012F974
+
+хопана...не хватает 4...добавляемс при завершении функции не 8 а 0xC
+
+и так, коннект первого игрока снова нормально, второй игрок коннектится, но на самом конце перед появлением надписи "тыкните блять любую клавишу" получаем вылет...мы дисконнектимся и там в пучине дисконнекта находится функция которая падает...да похуй на неё...дисконнект почему?
+причина в 10255940...
+
+и так делаем паузу со вторым игроком, соберём дедик запускающий сингл...
+
+обращения к g_dedicated_server при запуске дедика:
+w: 0x4611BE
+r: 0x282A6C0 xrRender_R2
+r: 0x1B3AD30 xrRender_R1
+r: 0x1B3B06D xrRender_R1
+r: 0x1B3AF88 xrRender_R1
+r: 0x1B3B759 xrRender_R1
+r: 0x1B3B7EB xrRneder_R1
+r: 0x1B3B895 xrRender_R1
+r: 0x1B3C1F6 xrRender_R1
+r: xrRender_R1
+r: 0x1B3F868 xrRender_R1
+r: 0x1B6ECD0 xrRender_R1
+много много в xrRender_R1 (при каждом обновлении проверяет...)
+
+trace:
+xrGame.dll - 1034487A xrFactory_Initialyze (тупо дополнительные реги для дедика, не трогаемс)
+xrGame.dll - 10344DB8 sub_10344DB0 (если не дедик то создаёт класс, нопим прыжок (размер = 2)
+xrGame.dll - 1033B9D2 sub_1033B9C0 (если не дедик выполняет 2 функции... нопим прыжок (размер = 2)
+xrGame.dll - 1043A765 sub_1043A710 (если не дедик то регит 2 доп. класса...нопим прыжок (размер = 2)
+xrGame.dll - 1045DB0E sub_1045D930 (если не дедик то тварит кучу всякой шняги...нопим прыжок (размер = 6)
+00000D68 .text:CConsole::Hide(void)+1C          jnz     short loc_441D0A           .data:bool g_dedicated_server: 01
+xrGame.dll - 102365A5 CLevel::Create (если не дедик то регит классы...ноп прыжок (размер = 2)
+xrGame.dll - 10236670 CLevel::Create (если не дедик то регит классы...ноп прыжок (размер = 6)
+00000D68 .text:CApplication::LoadStage(void)+DA jz      short loc_45FE3A           .data:bool g_dedicated_server: 01
+xrGame.dll - 10280EA1 sub_10280E00 (если не дедик то выполняет функцию...ноп прыжок (размер = 2)
+
+modules:
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\dedicated\xrEngine.exe                                           00400000 1085440 
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\xrCore.dll                                                       00510000 1392640
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\xrRender_R1.dll                                                  01AF0000 819200 
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\xrGame.dll                                                       034B0000 7245824
+
+слёт в префетче...итакс шо там пилядь не такес...а мы возьмем без префетча запустим (хуй знает что получится...)
+
+OnGameStart()
+start: 0x0012F7E4
+end: 0x0012F7E4
+
+1022FAE0
+call IGame_Persistent::OnGameStart() and return game type id
+
+и так вспоминаем проблемы с которыми встретились при сборке мп дедика с алайфом...инициализация виртуальной скрипт машины - снова ебашка...палим что спасло от этой хуйни...
+
+trace:
+00000438 xrGame.dll:03A8487D                    jz      near ptr unk_3A84C94       .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03A84DB8                    nop                                .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03967849                    push    edi                        .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03A7B9D2                    nop                                .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03B7A765                    nop                                .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03B9DB0E                    nop                                .data:bool g_dedicated_server: 01
+00000438 .text:CConsole::Hide(void)+1C          jnz     short loc_441D0A           .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:039765A5                    nop                                .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03976670                    nop                                .data:bool g_dedicated_server: 01
+00000438 .text:CApplication::LoadStage(void)+DA jz      short loc_45FE3A           .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03971F22                    jnz     short near ptr unk_3971F7C .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03A8B808                    push    edx                        .data:bool g_dedicated_server: 01
+00000438 .text:CRenderDevice::on_idle(void)+B3  jz      short loc_439FDB           .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03AB7167                    jnz     near ptr unk_3AB7315       .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03A8487D                    jz      near ptr unk_3A84C94       .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03A84DB8                    nop                                .data:bool g_dedicated_server: 01
+00000438 .text:CApplication::LoadStage(void)+DA jz      short loc_45FE3A           .data:bool g_dedicated_server: 01
+00000438 .text:CApplication::LoadStage(void)+DA jz      short loc_45FE3A           .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:0396679A                    push    esi                        .data:bool g_dedicated_server: 01
+00000438 xrGame.dll:03967968                    push    esi                        .data:bool g_dedicated_server: 01
+
+modules:
+xrEngine.exe                                                                                                                00400000 1085440 
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\xrGame.dll                                                       03740000 7245824 
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\S.T.A.L.K.E.R. Online\server.dll                                     6CC80000 94208   
+
+новый trace:
+00000C2C xrGame.dll:03A2BB29                    jnz     short near ptr unk_3A2BB48 .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A3B046                    jnz     near ptr unk_3A3B4ED       .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A21F22                    jnz     short near ptr unk_3A21F7C .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A20F3F                    jnz     loc_3A217F6                .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A7075F                    jnz     short loc_3A70784          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A6FAE2                    push    esi                        .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A70796                    jnz     short loc_3A7079F          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A2B01C                    jnz     short loc_3A2B02A          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A54F2E                    jnz     short near ptr unk_3A54F48 .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A53FEF                    jnz     near ptr unk_3A54341       .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A4EC8C                    jnz     short near ptr unk_3A4EC9C .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A7075F                    jnz     short loc_3A70784          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A70796                    jnz     short loc_3A7079F          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A2B01C                    jnz     short loc_3A2B02A          .data:bool g_dedicated_server: 01
+00000C2C xrGame.dll:03A241C0                    jnz     short near ptr unk_3A2422B .data:bool g_dedicated_server: 01
+
+modules:
+xrEngine.exe                                                                                                                00400000 1085440 
+C:\Games for projects\S.T.A.L.K.E.R. - Call of Pripyat\bin\xrGame.dll                                                       037F0000 7245824 
+
+просмотрим запуск серверного клиента и сравним с запуском второго клиента...
+
+функции запуска клиента:
+1023B7E0 CLevel__net_start_client1
+1023B620 CLevel__net_start_client2
+1023B8F0 CLevel__net_start_client3
+1023BBF0 CLevel__net_start_client4
+1023B710 CLevel__net_start_client5
+1023BAF0 CLevel__net_start_client6
+
+
+серверный клиент:

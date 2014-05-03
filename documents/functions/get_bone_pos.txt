@@ -1,0 +1,87 @@
+.text:10079A66 get_bone_position proc near             ; CODE XREF: get_head_position+14p
+.text:10079A66                                         ; CStateBurerAttackTele_CBurer___ExecuteTeleFire+2Cp
+.text:10079A66
+.text:10079A66 var_10          = dword ptr -10h
+.text:10079A66 var_C           = dword ptr -0Ch
+.text:10079A66 var_8           = dword ptr -8
+.text:10079A66 arg_0           = dword ptr  8
+.text:10079A66 arg_4           = dword ptr  0Ch
+.text:10079A66 arg_8           = dword ptr  10h
+.text:10079A66
+.text:10079A66                 push    ebp
+.text:10079A67                 mov     ebp, esp
+.text:10079A69                 sub     esp, 40h
+.text:10079A6C                 push    esi
+.text:10079A6D                 mov     esi, [ebp+arg_4]
+.text:10079A70                 mov     eax, [esi+90h]
+.text:10079A76                 test    eax, eax
+.text:10079A78                 push    edi
+.text:10079A79                 jz      short loc_10079A82
+.text:10079A7B                 push    eax
+.text:10079A7C                 call    SmartDynamicCast__smart_cast_CKinematics_IRender_Visual_
+.text:10079A81                 pop     ecx
+.text:10079A82
+.text:10079A82 loc_10079A82:                           ; CODE XREF: get_bone_position+13j
+.text:10079A82                 push    [ebp+arg_8]
+.text:10079A85                 mov     ecx, eax
+.text:10079A87                 call    ds:__imp_?LL_BoneID@CKinematics@@QAEGPBD@Z ; CKinematics::LL_BoneID(char const *)
+.text:10079A8D                 mov     edi, eax
+.text:10079A8F                 mov     eax, [esi+90h]
+.text:10079A95                 test    eax, eax
+.text:10079A97                 jz      short loc_10079AA0
+.text:10079A99                 push    eax
+.text:10079A9A                 call    SmartDynamicCast__smart_cast_CKinematics_IRender_Visual_
+.text:10079A9F                 pop     ecx
+.text:10079AA0
+.text:10079AA0 loc_10079AA0:                           ; CODE XREF: get_bone_position+31j
+.text:10079AA0                 movss   xmm0, dword ptr [esi+80h]
+.text:10079AA8                 movss   xmm1, dword ptr [esi+70h]
+.text:10079AAD                 movzx   ecx, di
+.text:10079AB0                 imul    ecx, 0A0h
+.text:10079AB6                 add     ecx, [eax+84h]
+.text:10079ABC                 mov     eax, [ebp+arg_0]
+.text:10079ABF                 mulss   xmm1, dword ptr [ecx+38h]
+.text:10079AC4                 mulss   xmm0, dword ptr [ecx+3Ch]
+.text:10079AC9                 addss   xmm0, xmm1
+.text:10079ACD                 movss   xmm1, dword ptr [esi+60h]
+.text:10079AD2                 mulss   xmm1, dword ptr [ecx+34h]
+.text:10079AD7                 addss   xmm0, xmm1
+.text:10079ADB                 movss   xmm1, dword ptr [ecx+30h]
+.text:10079AE0                 mulss   xmm1, dword ptr [esi+50h]
+.text:10079AE5                 addss   xmm0, xmm1
+.text:10079AE9                 movss   xmm1, dword ptr [esi+54h]
+.text:10079AEE                 mulss   xmm1, dword ptr [ecx+30h]
+.text:10079AF3                 movss   [ebp+var_10], xmm0
+.text:10079AF8                 movss   xmm0, dword ptr [esi+84h]
+.text:10079B00                 mulss   xmm0, dword ptr [ecx+3Ch]
+.text:10079B05                 addss   xmm0, xmm1
+.text:10079B09                 movss   xmm1, dword ptr [esi+74h]
+.text:10079B0E                 mulss   xmm1, dword ptr [ecx+38h]
+.text:10079B13                 addss   xmm0, xmm1
+.text:10079B17                 movss   xmm1, dword ptr [esi+64h]
+.text:10079B1C                 mulss   xmm1, dword ptr [ecx+34h]
+.text:10079B21                 addss   xmm0, xmm1
+.text:10079B25                 movss   xmm1, dword ptr [esi+58h]
+.text:10079B2A                 mulss   xmm1, dword ptr [ecx+30h]
+.text:10079B2F                 movss   [ebp+var_C], xmm0
+.text:10079B34                 movss   xmm0, dword ptr [esi+88h]
+.text:10079B3C                 mulss   xmm0, dword ptr [ecx+3Ch]
+.text:10079B41                 addss   xmm0, xmm1
+.text:10079B45                 movss   xmm1, dword ptr [esi+78h]
+.text:10079B4A                 mulss   xmm1, dword ptr [ecx+38h]
+.text:10079B4F                 addss   xmm0, xmm1
+.text:10079B53                 movss   xmm1, dword ptr [esi+68h]
+.text:10079B58                 mulss   xmm1, dword ptr [ecx+34h]
+.text:10079B5D                 addss   xmm0, xmm1
+.text:10079B61                 movss   [ebp+var_8], xmm0
+.text:10079B66                 lea     esi, [ebp+var_10]
+.text:10079B69                 mov     edi, eax
+.text:10079B6B                 movsd
+.text:10079B6C                 movsd
+.text:10079B6D                 movsd
+.text:10079B6E                 pop     edi
+.text:10079B6F                 pop     esi
+.text:10079B70                 leave
+.text:10079B71                 retn
+.text:10079B71 get_bone_position endp
+

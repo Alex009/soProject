@@ -1,0 +1,40 @@
+09.04.2012: нужно собрать девбилд для призрака со скриптовой поддержкой, чтобы не халявил...вот этим и займусь...для начала составлю список что нужно:
+
+калбеки game_sv_mp:
+OnPlayerConnect
+OnPlayerDisconnect
+OnPlayerReady
+OnPlayerEnteredGame
+OnPlayerConnectFinished
+OnPlayerFire
+OnPlayer_Sell_Item
+OnRoundStart
+OnRoundEnd
+OnNextMap
+OnPrevMap
+OnVoteStart
+OnVoteStop
+OnPreCreate
+OnCreate
+OnPostCreate
+OnTouch
+OnDetach
+OnDestroyObject
+OnHit
+OnPlayerHitPlayer
+OnDeath
+OnPlayerKillPlayer
+OnPlayerKilled
+OnPlayerHitted
+OnVoteYes
+OnVoteNo
+OnPlayerChangeName
+OnPlayerSpeechMessage
+OnPlayerGameMenu
+OnPlayerSelectSpecator
+OnPlayerSelectTeam
+OnPlayerSelectSkin
+OnPlayerChangeTeam
+OnPlayerChangeSkin
+
+так же нужно будет вынести мп акторов в скрипты...изза такого объема работ надо бы сначало доделать релизную 1.0.0 чтоб было без проблемсов...

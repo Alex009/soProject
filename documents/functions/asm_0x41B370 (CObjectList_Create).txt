@@ -1,0 +1,58 @@
+.text:0041B370 ; public: class CObject * __thiscall CObjectList::Create(char const *)
+.text:0041B370                 public ?Create@CObjectList@@QAEPAVCObject@@PBD@Z
+.text:0041B370 ?Create@CObjectList@@QAEPAVCObject@@PBD@Z proc near
+.text:0041B370
+.text:0041B370 arg_0           = dword ptr  4
+.text:0041B370
+.text:0041B370                 mov     eax, [esp+arg_0]
+.text:0041B374                 push    esi
+.text:0041B375                 mov     esi, ecx
+.text:0041B377                 mov     ecx, ds:?g_pGamePersistent@@3PAVIGame_Persistent@@A ; IGame_Persistent * g_pGamePersistent
+.text:0041B37D                 push    edi
+.text:0041B37E                 push    eax
+.text:0041B37F                 add     ecx, 458h
+.text:0041B385                 call    ?create@IGame_ObjectPool@@QAEPAVCObject@@PBD@Z ; IGame_ObjectPool::create(char const *)
+.text:0041B38A                 lea     edi, [esi+40014h]
+.text:0041B390                 mov     [esp+8+arg_0], eax
+.text:0041B394                 mov     eax, [edi+4]
+.text:0041B397                 cmp     eax, [edi+8]
+.text:0041B39A                 jz      short loc_41B3B7
+.text:0041B39C                 lea     ecx, [esp+8+arg_0]
+.text:0041B3A0                 push    ecx
+.text:0041B3A1                 push    eax
+.text:0041B3A2                 call    sub_4105C0
+.text:0041B3A7                 mov     eax, [esp+10h+arg_0]
+.text:0041B3AB                 add     esp, 8
+.text:0041B3AE                 add     dword ptr [edi+4], 4
+.text:0041B3B2                 pop     edi
+.text:0041B3B3                 pop     esi
+.text:0041B3B4                 retn    4
+.text:0041B3B7 ; ---------------------------------------------------------------------------
+.text:0041B3B7
+.text:0041B3B7 loc_41B3B7:                             ; CODE XREF: CObjectList::Create(char const *)+2Aj
+.text:0041B3B7                 push    1
+.text:0041B3B9                 push    1
+.text:0041B3BB                 push    eax
+.text:0041B3BC                 lea     eax, [esp+14h+arg_0]
+.text:0041B3C0                 call    sub_412780
+.text:0041B3C5                 mov     eax, [esp+8+arg_0]
+.text:0041B3C9                 pop     edi
+.text:0041B3CA                 pop     esi
+.text:0041B3CB                 retn    4
+.text:0041B3CB ?Create@CObjectList@@QAEPAVCObject@@PBD@Z endp
+
+CObject * CObjectList::Create(char const * name)
+{
+	var1; // 8+arg0 = 0xC
+	var2; // 10+arg0 = 0x14
+
+	IGame_ObjectPool* pool = g_pGamePersistent->0x458;
+	var1 = pool->create(name,<EDI>);
+	if(this->0x4001C != this->0x40018)
+	{
+		sub_4105C0(this->0x40018,var1);
+		return var2;
+	}
+	sub_412780(this->0x40018,1,1);
+	return var1;
+}

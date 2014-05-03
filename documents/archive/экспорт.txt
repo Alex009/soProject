@@ -1,0 +1,3 @@
+dumpbin /exports /out:C:\file.txt
+
+lib /def:C:\input.txt /out:C:output.lib

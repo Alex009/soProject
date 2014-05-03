@@ -1,0 +1,60 @@
+0x104363F0 - ClientNetwork_Process_Update - вызывается чаще всего при 1 игроке на сервере.
+При присоединении ещё 1 игрока начинается вызов блока 10 свича пакетов, адрес 0x1034AB04
+при задержки ответа блока 10 клиент вылетает в меню
+
+0x1023A670 - Client Update sync - при одном игроке на сервере (хосте) в свиче проходят: 1 и дефолтный кейс.
+при втором игроке вызывается 10 свич
+при попытке второго игрока стрелять вызывается 8,36,45
+
+0x1025E310 - write update actor
+0x1025E3A0 - read update actor
+
+main_class - 0x376CBD0 - GameLevel
+
+main_class + 0x4C - CObjectList (указатели на классы различных объектов)
+
+*(DWORD*)(main_class + 4 * actor_id + 0x4C) - указатель на класс персонажа
+
+main_class = 0x4949B0 - 0x400000 (xrEngine) = 0x383CBD0 - 0x3330000 (xrGame = 0x50CBD0 + 0x10000000)
+
+CLIENT:
+actor_class size = 0x230 WTF
+actor_class + 0x3C - function with 2 params its 0x1025D820
+actor_class + 0x98 - function...need for check...
+
+actor_class + 0x9D0 - read sync buffer (r_s_b)
+actor_class + 0xA1C - position => r_s_b + 0x4C
+
+SERVER:
+actor_class + 0x670 - send sync buffer (s_s_b)
+actor_class + 0x6BC - position => s_s_b + 0x4C - position => actor_class + 0x54 - position (or 0x54 + 0x8 = 0x5C)
+s_s_b + 0x
+
+Intresting:
+0x102781D0 - Deattach Vehicle
+
+0x1023BBF0 - CLIENT CONNECT
+
+101C2160 SetActorPosition
+
+101D7890 Lua_register_functions
+
+10219012 lua_register_class_CGameObject
+
+ЭКСПОРТ ИДЁТ! нужно расписать класс NET_packet для работы
+
+клиент получает 11 пакеты
+
+1470BCE0
+
+5D6FF4
+
+10231AE0
+
+102348F0 CLevel__Destroy
+
+При спавне персонажа в мультиплеере используется функция 1033C3E0 - CActorMP::CActorMP - ТОЛЬКО НА СЕРВЕРЕ
+
+1024AF70 StartClient
+
+написать скрипт спавна сталкера, поставить брикпоинт неподалёку и просмотреть все функции которые будут вызваны для создания и спавна

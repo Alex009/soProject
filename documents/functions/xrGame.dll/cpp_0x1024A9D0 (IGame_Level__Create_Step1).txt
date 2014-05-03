@@ -1,0 +1,142 @@
+int IGame_Level__Create_step1(IGame_Level* level)
+{
+	if(level->0x487AC)
+	{
+		if(level->0x487AC->0x4)
+		{
+			
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+char __stdcall IGame_Level__Create_Step1(int a1)
+{
+  int v1; // eax@1
+  int v2; // ebx@1
+  char v3; // zf@3
+  signed int v4; // ecx@3
+  int v5; // edi@3
+  char *v6; // esi@3
+  int v7; // eax@8
+  int v8; // eax@11
+  int v9; // eax@12
+  char v10; // zf@15
+  signed int v11; // ecx@15
+  int v12; // edi@15
+  char *v13; // esi@15
+  int v14; // ecx@20
+  int v15; // esi@20
+  int v16; // eax@25
+  char v17; // zf@25
+  int v18; // ecx@30
+  int v19; // eax@33
+  _DWORD *v20; // esi@36
+  const char *v21; // eax@37
+  bool v23; // [sp+4h] [bp-1Ch]@28
+  int v24; // [sp+18h] [bp-8h]@20
+  int v25; // [sp+1Ch] [bp-4h]@20
+
+  v1 = *(_DWORD *)(a1 + 0x487AC);
+  v2 = a1 + 0x487AC;
+  if ( v1 )
+  {
+    if ( *(_DWORD *)(v1 + 4) )
+    {
+      v5 = (int)"single";
+      v6 = (char *)g_pGamePersistent + 292;
+      v4 = 7;
+      v3 = 1;
+      do
+      {
+        if ( !v4 )
+          break;
+        v3 = *v6++ == *(_BYTE *)v5++;
+        --v4;
+      }
+      while ( v3 );
+      if ( v3 )
+      {
+        v7 = xrMemory__mem_alloc(Memory, 0x98D10u);
+        if ( v7 )
+          *(_DWORD *)(a1 + 0x48728) = UnknownClassInit_single(v7);
+        else
+          *(_DWORD *)(a1 + 0x48728) = 0;
+      }
+      else
+      {
+        v8 = xrMemory__mem_alloc(Memory, 0x98D90u);
+        if ( v8 )
+          v9 = UnknownClassInit_mp(v8);
+        else
+          v9 = 0;
+        *(_DWORD *)(a1 + 0x48728) = v9;
+      }
+      v12 = (int)"alife";
+      v13 = (char *)g_pGamePersistent + 548;
+      v11 = 6;
+      v10 = 1;
+      do
+      {
+        if ( !v11 )
+          break;
+        v10 = *v13++ == *(_BYTE *)v12++;
+        --v11;
+      }
+      while ( v10 );
+      if ( !v10 )
+      {
+        sub_103750B0(&v24, v2);
+        v14 = *(_DWORD *)sub_10375190(&v25, v2);
+        v15 = a1 + 0x48788;
+        if ( v14 )
+          ++*(_DWORD *)v14;
+        if ( *(_DWORD *)v15 )
+        {
+          --**(_DWORD **)v15;
+          if ( !**(_DWORD **)v15 )
+            *(_DWORD *)v15 = 0;
+        }
+        v16 = v25;
+        v17 = v25 == 0;
+        *(_DWORD *)v15 = v14;
+        if ( !v17 )
+          --*(_DWORD *)v16;
+        if ( !g_dedicated_server )
+        {
+          v23 = g_dedicated_server;
+          sub_10058D70(&v23, v15);
+          ((void (__thiscall *)(void *, signed int, bool))*(&g_pGamePersistent + 18))(g_pGamePersistent, 1, v23);
+        }
+        if ( v24 )
+          v18 = v24 + 16;
+        else
+          v18 = 0;
+        if ( *(_DWORD *)v15 )
+          v19 = *(_DWORD *)v15 + 16;
+        else
+          v19 = 0;
+        if ( CApplication__Level_ID(pApp, v19, v18, 1) < 0 )
+        {
+          v20 = *(_DWORD **)v15;
+          if ( v20 )
+            v21 = (const char *)(v20 + 4);
+          else
+            v21 = 0;
+          Log("Can't find level: ", v21);
+          *(_DWORD *)(a1 + 296820) = 0;
+        }
+        if ( v24 )
+          --*(_DWORD *)v24;
+      }
+    }
+  }
+  return 1;
+}

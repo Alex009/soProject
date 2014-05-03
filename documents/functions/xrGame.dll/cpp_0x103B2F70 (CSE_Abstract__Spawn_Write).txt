@@ -1,0 +1,61 @@
+int CSE_Abstract::Spawn_Write(NET_Packet* pack,bool arg8)
+{
+	char* string1;
+	unsigned short u16_1;
+	unsigned short u16_2;
+
+	pack->w_begin(1);
+	pack->w_stringZ(this->0x3C);
+	
+	string1 = this->0x20;
+	if(!string1) string1 = Src;
+	
+	pack->w_stringZ(string1);
+	pack->w_u8(0);
+	pack->w_u8(this->0x42);
+	pack->w_vec3(&(this->0x54));
+	pack->w_vec3(&(this->0x60));
+	pack->w_u16(this->0x30);
+	pack->w_u16(this->0x32);
+	pack->w_u16(this->0x34);
+	pack->w_u16(this->0x36);
+
+	this->0x43 |= 0x20;
+
+	if(arg8) u16_1 = this->0x43 | 1;
+	else u16_1 = this->0x43 & 0xFFF6;
+
+	pack->w_u16(u16_1);
+	pack->w_u16(0x80);
+	pack->w_u16(this->0x40);
+	pack->w_u16(sub_103B2DC0());
+
+	u_16_2 = this->0x90 - this->0x8C;
+	pack->w_u16(u_16_2);
+	
+	if(u_16_2) pack->w(this->0x8C,u_16_2);
+
+	pack->w_u16(this->0x86);
+	pack->w_tell();
+	pack->w_u16(0);
+	
+	func = (this->0x8)->0x4;
+	(this->0x8)->(func)(pack + 2);
+
+	pack = (pack->w_tell() - func);
+
+	if(!byte_196491FF)
+	{
+		if(this->0x70 != 0x54202020 || this->0x74 != 0x53504543)
+		{
+			if(func <= 2)
+			{
+				this->(this->0x10)("D:\\prog_repository\\sources\\trunk\\xrServerEntities\\xrServer_Object_Base.cpp",241,"CSE_Abstract::Spawn_Write",&byte_106491FF);
+				Debug->fail("(m_tClassID == CLSID_SPECTATOR) || (size > sizeof(size))","object isn't successfully saved, get your backup :(",this);
+			}
+		}
+	}
+	
+	pack->w_seek(func,pack + 2,2);
+	return 0xC;
+}

@@ -1,0 +1,22 @@
+1037FEF0     payMoneyForKill
+ecx - game_sv_mp
+arg0 - killer game_PlayerState
+arg1 - dead game_PlayerState
+arg2 - 0
+arg3 - type
+arg4 - weapon
+
+game_sv_Deathmatch + 0x98
+ecx - game_sv_mp
+arg0 - 2B00??? playerid?
+return game_PlayerState
+
+
+403BC0 - cse abstract death
+
+
+1034AAE0     syncPlayer
+
+
+
+Player_AddMoney			(game_PlayerState* ps, s32 MoneyAmount)
