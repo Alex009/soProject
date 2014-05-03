@@ -1,0 +1,7 @@
+/Release/*
+soCore/Release/*
+soLauncher/Release/*
+soNetwork/Release/*
+*.sdf
+*.suo
+*.tlog

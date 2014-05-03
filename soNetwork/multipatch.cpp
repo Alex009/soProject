@@ -121,6 +121,11 @@ char* LevelDirectory = "$level$";
 void* CustomSyncData_Entity[0xFFFF];	// 0xFFFF - max of Entitys in game
 DWORD g_actor;
 
+DWORD pCSE_ALifeMonsterBase__on_death;
+DWORD pgame_sv_mp__Player_AddMoney;
+DWORD pgame_sv_mp__getPlayerGameState;
+DWORD pgame_sv_mp;
+
 // headers
 void game_sv_mp__Create_fix(DWORD pClass,DWORD a2);
 void CLevel__Load_GameSpecific_Before_fix();
@@ -132,6 +137,8 @@ DWORD CActor__net_Destroy_fix(DWORD CObject);
 DWORD CActor__UpdateCL(DWORD pClass);
 bool bind_object_fix();
 DWORD CALifeGraphRegistry__update_fix(DWORD pClass);
+int CSE_Abstract__on_death_fix(DWORD pClass, DWORD pKillerClass);
+void CSE_ALifeMonsterBase__on_death(DWORD pClass, DWORD pKillerClass);
 
 // patch 1.6.0.0
 
@@ -227,10 +234,10 @@ CHook_Patch_02::CHook_Patch_02()
 	for(int i = 0;i < 0xFFFF;i++) CustomSyncData_Entity[i] = NULL;
 
 	// wait modules load
-	while((EngineOffset = GetModuleHandle(L"xrEngine.exe")) == NULL) {}
-	while((CoreOffset = GetModuleHandle(L"xrCore.dll")) == NULL) {}
-	while((GameOffset = GetModuleHandle(L"xrGame.dll")) == NULL) {}
-	while((NetServerOffset = GetModuleHandle(L"xrNetServer.dll")) == NULL) {}
+	while((EngineOffset = GetModuleHandle(L"xrEngine.exe")) == NULL) Sleep(5);
+	while((CoreOffset = GetModuleHandle(L"xrCore.dll")) == NULL) Sleep(5);
+	while((GameOffset = GetModuleHandle(L"xrGame.dll")) == NULL) Sleep(5);
+	while((NetServerOffset = GetModuleHandle(L"xrNetServer.dll")) == NULL) Sleep(5);
 	while(true)
 	{
 		if((RenderOffset = GetModuleHandle(L"xrRender_R1.dll")) != NULL)
@@ -253,8 +260,9 @@ CHook_Patch_02::CHook_Patch_02()
 			RenderVersion = 4;
 			break;
 		}
+		Sleep(5);
 	}
-	while((PhysicsOffset = GetModuleHandle(L"xrPhysics.dll")) == NULL) {}
+	while((PhysicsOffset = GetModuleHandle(L"xrPhysics.dll")) == NULL) Sleep(5);
 
 	PatchVersion = 2;
 }
@@ -447,6 +455,12 @@ void CHook_Patch_02::InstallHooks()
 	Jmp(((DWORD)GameOffset + 0x3B4B1F + 6),end_of_func);
 	// fix CPsyDog::Think (disable CPsyDogAura::update_schedule)
 	Byte(((DWORD)GameOffset + 0x1581F2),5,0x90);
+	// fix CMonsterEnemyMemory::update (disable Sound detection)
+	//Jmp(((DWORD)GameOffset + 0xD36F3),((DWORD)GameOffset + 0xD388A));
+	// fix CBaseMonster::UpdateMemory (disable Sound detection)
+	//Byte(((DWORD)GameOffset + 0xCA7D8),1,0xEB);
+	// fix CScriptGameObject::GetSoundInfo (disable Sound detection)
+	//Jmp(((DWORD)GameOffset + 0x1F0057),((DWORD)GameOffset + 0x1F011C));	
 	// fix xrServer::Process_event_destroy (crash c_dest == c_from)
 	Byte(((DWORD)GameOffset + 0x437836),1,0xEB);
 	// fix CPHMovementControl::AllocateCharacterObject (create mp_actor with singleplayer physics)
@@ -580,6 +594,8 @@ void CHook_Patch_02::InstallHooks()
 	Byte(((DWORD)GameOffset + 0x280243),2,0x90);
 	
 	// correct classes ftables
+	// CControlDirection::update_frame
+	JoinInClassFtable(((DWORD)GameOffset + 0x51D950),(DWORD)&CControlDirection__update_frame,0x0);
 	// CAI_Bloodsucker
 	// CAI_Bloodsucker::NET_Export
 	JoinInClassFtable((CAI_Bloodsucker__ftable + 0x38),(DWORD)&CAI_Bloodsucker__NET_Export,0x4);
@@ -598,6 +614,11 @@ void CHook_Patch_02::InstallHooks()
 	Address((CAI_Boar__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CAI_Boar::TimePassedAfterDeath
 	Address((CAI_Boar__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CAI_Crow
+	// CAI_Crow::NET_Export
+	//JoinInClassFtable((CAI_Crow__ftable + 0x38),(DWORD)&CAI_Crow__NET_Export,0x4);
+	// CAI_Crow::NET_Import
+	//JoinInClassFtable((CAI_Crow__ftable + 0x3C),(DWORD)&CAI_Crow__NET_Import,0x4);
 	// CAI_Dog
 	// CAI_Dog::NET_Export
 	JoinInClassFtable((CAI_Dog__ftable + 0x38),(DWORD)&CAI_Dog__NET_Export,0x4);
@@ -625,6 +646,15 @@ void CHook_Patch_02::InstallHooks()
 	Address((CAI_PseudoDog__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CAI_PseudoDog::TimePassedAfterDeath
 	Address((CAI_PseudoDog__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CAI_Rat
+	// CAI_Rat::NET_Export
+	JoinInClassFtable((CAI_Rat__ftable + 0x38),(DWORD)&CAI_Rat__NET_Export,0x4);
+	// CAI_Rat::NET_Import
+	JoinInClassFtable((CAI_Rat__ftable + 0x3C),(DWORD)&CAI_Rat__NET_Import,0x4);
+	// CAI_Rat::NeedToDestroyObject
+	Address((CAI_Rat__ftable + 0xFC),pCActor__NeedToDestroyObject);
+	// CAI_Rat::TimePassedAfterDeath
+	Address((CAI_Rat__ftable + 0x290),pCActor__TimePassedAfterDeath);
 	// CAI_Stalker
 	// CAI_Stalker::NET_Export
 	JoinInClassFtable((CAI_Stalker__ftable + 0x38),(DWORD)&CAI_Stalker__NET_Export,0x4);
@@ -634,6 +664,15 @@ void CHook_Patch_02::InstallHooks()
 	Address((CAI_Stalker__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CAI_Stalker::TimePassedAfterDeath
 	Address((CAI_Stalker__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CAI_Trader
+	// CAI_Trader::NET_Export
+	JoinInClassFtable((CAI_Trader__ftable + 0x38),(DWORD)&CAI_Trader__NET_Export,0x4);
+	// CAI_Trader::NET_Import
+	JoinInClassFtable((CAI_Trader__ftable + 0x3C),(DWORD)&CAI_Trader__NET_Import,0x4);
+	// CAI_Trader::NeedToDestroyObject
+	Address((CAI_Trader__ftable + 0xFC),pCActor__NeedToDestroyObject);
+	// CAI_Trader::TimePassedAfterDeath
+	Address((CAI_Trader__ftable + 0x290),pCActor__TimePassedAfterDeath);
 	// CBurer
 	// CBurer::NET_Export
 	JoinInClassFtable((CBurer__ftable + 0x38),(DWORD)&CBurer__NET_Export,0x4);
@@ -643,6 +682,15 @@ void CHook_Patch_02::InstallHooks()
 	Address((CBurer__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CBurer::TimePassedAfterDeath
 	Address((CBurer__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CCat
+	// CCat::NET_Export
+	JoinInClassFtable((CCat__ftable + 0x38),(DWORD)&CCat__NET_Export,0x4);
+	// CCat::NET_Import
+	JoinInClassFtable((CCat__ftable + 0x3C),(DWORD)&CCat__NET_Import,0x4);
+	// CCat::NeedToDestroyObject
+	Address((CCat__ftable + 0xFC),pCActor__NeedToDestroyObject);
+	// CCat::TimePassedAfterDeath
+	Address((CCat__ftable + 0x290),pCActor__TimePassedAfterDeath);
 	// CChimera
 	// CChimera::NET_Export
 	JoinInClassFtable((CChimera__ftable + 0x38),(DWORD)&CChimera__NET_Export,0x4);
@@ -661,6 +709,15 @@ void CHook_Patch_02::InstallHooks()
 	Address((CController__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CController::TimePassedAfterDeath
 	Address((CController__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CFracture
+	// CFracture::NET_Export
+	JoinInClassFtable((CFracture__ftable + 0x38),(DWORD)&CFracture__NET_Export,0x4);
+	// CFracture::NET_Import
+	JoinInClassFtable((CFracture__ftable + 0x3C),(DWORD)&CFracture__NET_Import,0x4);
+	// CFracture::NeedToDestroyObject
+	Address((CFracture__ftable + 0xFC),pCActor__NeedToDestroyObject);
+	// CFracture::TimePassedAfterDeath
+	Address((CFracture__ftable + 0x290),pCActor__TimePassedAfterDeath);
 	// CPhantom
 	// CPhantom::NET_Export
 	JoinInClassFtable((CPhantom__ftable + 0x38),(DWORD)&CPhantom__NET_Export,0x4);
@@ -724,11 +781,28 @@ void CHook_Patch_02::InstallHooks()
 	Address((CTushkano__ftable + 0xFC),pCActor__NeedToDestroyObject);
 	// CTushkano::TimePassedAfterDeath
 	Address((CTushkano__ftable + 0x290),pCActor__TimePassedAfterDeath);
+	// CZombie
+	// CZombie::NET_Export
+	JoinInClassFtable((CZombie__ftable + 0x38),(DWORD)&CZombie__NET_Export,0x4);
+	// CZombie::NET_Import
+	JoinInClassFtable((CZombie__ftable + 0x3C),(DWORD)&CZombie__NET_Import,0x4);
+	// CZombie::NeedToDestroyObject
+	Address((CZombie__ftable + 0xFC),pCActor__NeedToDestroyObject);
+	// CZombie::TimePassedAfterDeath
+	Address((CZombie__ftable + 0x290),pCActor__TimePassedAfterDeath);
 	// CWrapper
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureCrow>::UPDATE_Write
+	//JoinInClassFtable(((DWORD)GameOffset + 0x596DE8),(DWORD)&CSE_ALifeCreatureCrow__UPDATE_Write,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureCrow>::UPDATE_Read
+	//JoinInClassFtable(((DWORD)GameOffset + 0x596DEC),(DWORD)&CSE_ALifeCreatureCrow__UPDATE_Read,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifeCreaturePhantom>::UPDATE_Write
 	JoinInClassFtable(((DWORD)GameOffset + 0x597A48),(DWORD)&CSE_ALifeCreaturePhantom__UPDATE_Write,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifeCreaturePhantom>::UPDATE_Read
 	JoinInClassFtable(((DWORD)GameOffset + 0x597A4C),(DWORD)&CSE_ALifeCreaturePhantom__UPDATE_Read,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureRat>::UPDATE_Write
+	JoinInClassFtable(((DWORD)GameOffset + 0x5953D8),(DWORD)&CSE_ALifeCreatureRat__UPDATE_Write,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureRat>::UPDATE_Read
+	JoinInClassFtable(((DWORD)GameOffset + 0x5953DC),(DWORD)&CSE_ALifeCreatureRat__UPDATE_Read,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifeHumanStalker>::UPDATE_Write
 	JoinInClassFtable(((DWORD)GameOffset + 0x5973B0),(DWORD)&CSE_ALifeHumanStalker__UPDATE_Write,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifeHumanStalker>::UPDATE_Read
@@ -737,16 +811,26 @@ void CHook_Patch_02::InstallHooks()
 	JoinInClassFtable(((DWORD)GameOffset + 0x5971B0),(DWORD)&CSE_ALifeMonsterBase__UPDATE_Write,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifeMonsterBase>::UPDATE_Read
 	JoinInClassFtable(((DWORD)GameOffset + 0x5971B4),(DWORD)&CSE_ALifeMonsterBase__UPDATE_Read,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeTrader>::UPDATE_Write
+	JoinInClassFtable(((DWORD)GameOffset + 0x59674C),(DWORD)&CSE_ALifeTrader__UPDATE_Write,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeTrader>::UPDATE_Read
+	JoinInClassFtable(((DWORD)GameOffset + 0x596750),(DWORD)&CSE_ALifeTrader__UPDATE_Read,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifePsyDogPhantom>::UPDATE_Write
 	JoinInClassFtable(((DWORD)GameOffset + 0x598480),(DWORD)&CSE_ALifePsyDogPhantom__UPDATE_Write,0x4);
 	// CWrapperAbstractMonster<class CSE_ALifePsyDogPhantom>::UPDATE_Read
 	JoinInClassFtable(((DWORD)GameOffset + 0x598484),(DWORD)&CSE_ALifePsyDogPhantom__UPDATE_Read,0x4);
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureCrow>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
+	Address(((DWORD)GameOffset + 0x596E3C),((DWORD)GameOffset + 0xB1F50));
 	// CWrapperAbstractMonster<class CSE_ALifeCreaturePhantom>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
 	Address(((DWORD)GameOffset + 0x597A9C),((DWORD)GameOffset + 0xB1F50));
+	// CWrapperAbstractMonster<class CSE_ALifeCreatureRat>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
+	Address(((DWORD)GameOffset + 0x59542C),((DWORD)GameOffset + 0xB1F50));
 	// CWrapperAbstractMonster<class CSE_ALifeHumanStalker>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
 	Address(((DWORD)GameOffset + 0x597404),((DWORD)GameOffset + 0xB1F50));
 	// CWrapperAbstractMonster<class CSE_ALifeMonsterBase>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
 	Address(((DWORD)GameOffset + 0x597204),((DWORD)GameOffset + 0xB1F50));
+	// CWrapperAbstractMonster<class CSE_ALifeTrader>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
+	Address(((DWORD)GameOffset + 0x59679C),((DWORD)GameOffset + 0xB1F50));
 	// CWrapperAbstractMonster<class CSE_ALifePsyDogPhantom>::NeedUpdate (call CSE_ALifeCreatureAbstract::alive)
 	Address(((DWORD)GameOffset + 0x5984D4),((DWORD)GameOffset + 0xB1F50));
 	// CWrapperAbstractMonster<class CSE_ALifeCreatureActor>::NeedUpdate (call nullsub (return 0))
@@ -756,32 +840,71 @@ void CHook_Patch_02::InstallHooks()
 	Address(((DWORD)GameOffset + 0x54C818),((DWORD)GameOffset + 0x27F550));
 	// CActor::UpdateCL
 	JoinInClassFtable(((DWORD)GameOffset + 0x54C880),(DWORD)&CActor__UpdateCL,0x0);
+	// CActor::cam_Set
+	//Address(((DWORD)GameOffset + 0x54CAEC),((DWORD)GameOffset + 0x3EF59));
+	
+	// CWrapperAbstractMonster<class CSE_ALifeMonsterBase>::on_death
+	JoinInClassFtable(((DWORD)GameOffset + 0x5972D8),(DWORD)&CSE_ALifeMonsterBase__on_death,0x4);
+	
+	pCSE_ALifeMonsterBase__on_death = ((DWORD)GameOffset + 0x417CAD);
+	pgame_sv_mp__Player_AddMoney = ((DWORD)GameOffset + 0x38ECB0);
+	pgame_sv_mp__getPlayerGameState = ((DWORD)GameOffset + 0x378950);
+
+	// death money
+	/*
+	int len = 0x403C6C - 0x403BC0;
+
+	DWORD func_copy = (DWORD)malloc(len);
+	DWORD oldp;
+	if(VirtualProtect((LPVOID)((DWORD)GameOffset + 0x403BC0),len,PAGE_EXECUTE_READWRITE, &oldp))
+	{
+		LogHandle->Write("copy");
+		memcpy((void*)func_copy, (void*)((DWORD)GameOffset + 0x403BC0), len);
+	}
+	Jmp(((DWORD)GameOffset + 0x403BC0), (DWORD)&CSE_Abstract__on_death_fix);
+	*/
+	
+
+
+	
 
 	// Render hooks
 	switch(RenderVersion)
 	{
-		case 1:
+	case 1:
 		{
 			// CKinematicsAnimated::PlayCycle
 			JoinInClassFtableEx(((DWORD)RenderOffset + 0x9807C + 0x74),(DWORD)&CKinematicsAnimated__PlayCycle,0x14,pCKinematicsAnimated__PlayCycle);
+			// CKinematicsAnimated::PlayCycle_Ex
+			JoinInClassFtableEx(((DWORD)RenderOffset + 0x9807C + 0x70),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18,pCKinematicsAnimated__PlayCycleEx);
+			JoinInClassFtable(((DWORD)RenderOffset + 0x9807C + 0x48),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18);
 			break;
 		}
-		case 2:
+	case 2:
 		{
 			// CKinematicsAnimated::PlayCycle
 			JoinInClassFtableEx(((DWORD)RenderOffset + 0xBE7E4 + 0x74),(DWORD)&CKinematicsAnimated__PlayCycle,0x14,pCKinematicsAnimated__PlayCycle);
+			// CKinematicsAnimated::PlayCycle_Ex
+			JoinInClassFtableEx(((DWORD)RenderOffset + 0xBE7E4 + 0x70),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18,pCKinematicsAnimated__PlayCycleEx);
+			JoinInClassFtable(((DWORD)RenderOffset + 0xBE7E4 + 0x48),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18);
 			break;
 		}
-		case 3:
+	case 3:
 		{
 			// CKinematicsAnimated::PlayCycle
 			JoinInClassFtableEx(((DWORD)RenderOffset + 0xD9C34 + 0x74),(DWORD)&CKinematicsAnimated__PlayCycle,0x14,pCKinematicsAnimated__PlayCycle);
+			// CKinematicsAnimated::PlayCycle_Ex
+			JoinInClassFtableEx(((DWORD)RenderOffset + 0xD9C34 + 0x70),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18,pCKinematicsAnimated__PlayCycleEx);
+			JoinInClassFtable(((DWORD)RenderOffset + 0xD9C34 + 0x48),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18);
 			break;
 		}
-		case 4:
+	case 4:
 		{
 			// CKinematicsAnimated::PlayCycle
 			JoinInClassFtableEx(((DWORD)RenderOffset + 0xE6244 + 0x74),(DWORD)&CKinematicsAnimated__PlayCycle,0x14,pCKinematicsAnimated__PlayCycle);
+			// CKinematicsAnimated::PlayCycle_Ex
+			JoinInClassFtableEx(((DWORD)RenderOffset + 0xE6244 + 0x70),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18,pCKinematicsAnimated__PlayCycleEx);
+			JoinInClassFtable(((DWORD)RenderOffset + 0xE6244 + 0x48),(DWORD)&CKinematicsAnimated__PlayCycleEx,0x18);
 			break;
 		}
 	}
@@ -1122,6 +1245,8 @@ void game_sv_mp__Create_fix(DWORD pClass,DWORD a2)
 {
 	PUSH_REG(ecx)
 
+	pgame_sv_mp = pClass;
+
 	// vars
 	void* pCALifeSimulator = NULL;
 	DWORD param_1 = 0;	
@@ -1159,6 +1284,22 @@ void CLevel__Load_GameSpecific_Before_fix()
 	}
 	// load map script
 	HookHandle->LoadMapScript();
+
+	POP_REG(ecx)
+}
+
+void CControlDirection__update_frame(DWORD pClass)
+{
+	PUSH_REG(ecx)
+	
+	if(HookHandle->IsServer())
+	{
+		_asm
+		{
+			mov ecx, pClass
+			call pCControlDirection__update_frame
+		};
+	}
 
 	POP_REG(ecx)
 }
@@ -1237,4 +1378,45 @@ DWORD CALifeGraphRegistry__update_fix(DWORD pClass)
 {
 	if(*(DWORD*)(pClass) == CSE_ALifeCreatureActor__ftable) return 1;
 	return 0;
+}
+
+int CSE_Abstract__on_death_fix(DWORD pClass, DWORD pKillerClass) 
+{
+	LogHandle->Write("on_death: 0x%X, 0x%X",pClass,pKillerClass);
+	return 5;
+}
+
+void CSE_ALifeMonsterBase__on_death(DWORD pClass, DWORD pKillerClass)
+{
+	PUSH_REG(ecx)
+
+	DWORD pKillerFtable = (*(DWORD*)pKillerClass - (DWORD)gGameOffset);
+	DWORD pDeadFtable = (*(DWORD*)pClass - (DWORD)gGameOffset);
+
+	if((pKillerFtable == 0x54C134) && (pDeadFtable != 0x54C134)) {
+		DWORD pClient = *(DWORD*)(pKillerClass + 0x38);
+		LogHandle->Write("Player client 0x%X", pClient);
+
+		DWORD playerState = *(DWORD*)(pClient + 0x8178);
+		LogHandle->Write("Player state 0x%X", playerState);
+
+		_asm
+		{
+			push 50
+			push playerState
+			mov ecx, pgame_sv_mp
+			call pgame_sv_mp__Player_AddMoney
+		}
+
+		LogHandle->Write("sended...");
+	}
+
+	_asm
+	{
+		push pKillerClass
+		mov ecx, pClass
+		call pCSE_ALifeMonsterBase__on_death
+	}
+
+	POP_REG(ecx)
 }
